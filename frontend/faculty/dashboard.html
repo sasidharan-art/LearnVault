@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Dashboard | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body class="faculty-page commercial-role-page" data-commercial-role="faculty">
+
+<div class="site student-site faculty-site commercial-role-site">
+
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+aria-label="Toggle navigation" aria-controls="primaryNavigation"
+aria-expanded="false"><span></span><span></span><span></span></button>
+
+<a href="../index.html" class="brand-link" aria-label="LearnVault home">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+</a>
+
+<div class="top-search dashboard-search">
+<span>⌕</span>
+<input id="commercialDashboardSearch" type="search"
+placeholder="Search LearnVault..." aria-label="Search LearnVault">
+</div>
+
+<nav class="top-actions student-account-actions">
+<a class="commercial-header-activity" href="activity.html" title="Activity">◫</a>
+<div class="student-head-identity">
+<span class="student-head-label">FACULTY</span>
+<strong id="headerFacultyName">Faculty</strong>
+</div>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</nav>
+</header>
+
+<div class="page-shell commercial-role-shell">
+
+<aside class="icon-rail commercial-role-rail" id="primaryNavigation" aria-label="FACULTY navigation">
+<a href="dashboard.html" class="rail-item active" title="Dashboard" aria-label="Dashboard">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+<span class="rail-label">Dashboard</span>
+</a>
+<a href="search.html" class="rail-item" title="Search" aria-label="Search">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></span>
+<span class="rail-label">Search</span>
+</a>
+<a href="activity.html" class="rail-item" title="Activity" aria-label="Activity">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
+<span class="rail-label">Activity</span>
+</a>
+<a href="resources.html" class="rail-item" title="Resources" aria-label="Resources">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+<span class="rail-label">Resources</span>
+</a>
+<a href="questions.html" class="rail-item" title="Question Bank" aria-label="Question Bank">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7a4 4 0 1 1 6 3.5c-1.4.8-2 1.7-2 3"/><circle cx="12" cy="18" r=".8"/></svg></span>
+<span class="rail-label">Question Bank</span>
+</a>
+<a href="quizzes.html" class="rail-item" title="Quizzes" aria-label="Quizzes">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+<span class="rail-label">Quizzes</span>
+</a>
+<a href="assignments.html" class="rail-item" title="Assignments" aria-label="Assignments">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10v3h2v15H5V6h2z"/><path d="M9 3h6v5H9zM8 12h8M8 16h6"/></svg></span>
+<span class="rail-label">Assignments</span>
+</a>
+<a href="progress.html" class="rail-item" title="Progress" aria-label="Progress">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span>
+<span class="rail-label">Progress</span>
+</a>
+<a href="skills.html" class="rail-item" title="Skills" aria-label="Skills">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg></span>
+<span class="rail-label">Skills</span>
+</a>
+<a href="peer-groups.html" class="rail-item" title="Peer Groups" aria-label="Peer Groups">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20c.4-4 2.2-6 5.5-6s5.1 2 5.5 6M10.5 20c.4-3.5 2-5.3 5.5-5.3s5.1 1.8 5.5 5.3"/></svg></span>
+<span class="rail-label">Peer Groups</span>
+</a>
+<a href="profile.html" class="rail-item" title="Profile" aria-label="Profile">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.7-5 3.2-7 7.5-7s6.8 2 7.5 7"/></svg></span>
+<span class="rail-label">Profile</span>
+</a>
+</aside>
+
+<main class="main dashboard-main commercial-dashboard-main">
+
+<div id="commercialDashboardLoading" class="dashboard-loading">
+<div class="loading-mark">LV</div>
+<strong>Preparing your Faculty workspace...</strong>
+</div>
+
+<div id="commercialDashboardContent" hidden>
+
+<section class="commercial-dashboard-hero faculty-commercial-hero">
+
+<div class="commercial-dashboard-hero-copy">
+<div class="dashboard-welcome-chip">Faculty workspace • <strong id="commercialWelcomeName">Faculty</strong></div>
+<span class="eyebrow">TEACH • PUBLISH • EVALUATE</span>
+<h1>Run your Subjects from one place.</h1>
+<p>
+Create learning content directly, evaluate Students and use analytics to decide what needs more teaching attention.
+</p>
+<div class="commercial-dashboard-actions">
+<a href="resources.html" class="button button-primary large">Publish Resource</a>
+<a href="assignments.html" class="button button-soft large">Create Assignment</a>
+<a href="questions.html" class="button button-soft large">Build Question Bank</a>
+</div>
+</div>
+
+<div class="commercial-dashboard-highlight">
+<div class="dashboard-highlight-head">
+<div>
+<span class="mini-label">TEACHING OVERVIEW</span>
+<strong id="facultyLearnersHero">0 learners</strong>
+</div>
+<a href="progress.html">Analytics →</a>
+</div>
+<div class="commercial-mini-metrics four">
+<div><span>Subjects</span><strong id="facultySubjectCount">0</strong></div>
+<div><span>Quiz Attempts</span><strong id="facultyAttemptCount">0</strong></div>
+<div><span>Avg Score</span><strong id="facultyAverageScore">0%</strong></div>
+<div><span>Awaiting Grade</span><strong id="facultyAwaitingGrade">0</strong></div>
+</div>
+</div>
+
+</section>
+
+
+<section class="commercial-dashboard-grid faculty-dashboard-grid">
+
+<div class="commercial-dashboard-main-column">
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<div>
+<span class="eyebrow">FACULTY CONTROL CENTER</span>
+<h2>Create and manage learning</h2>
+<p>No repetitive Admin approval is required inside your assigned Subjects.</p>
+</div>
+</div>
+
+<div class="commercial-control-grid">
+<a href="resources.html"><span>▣</span><div><strong>Resources & Videos</strong><small>Publish files, links and learning media</small></div><b>→</b></a>
+<a href="questions.html"><span>?</span><div><strong>Question Bank</strong><small>Create Units, MCQ, True/False and Short Answer</small></div><b>→</b></a>
+<a href="quizzes.html"><span>✓</span><div><strong>Quiz Builder</strong><small>Create questions and publish assessments</small></div><b>→</b></a>
+<a href="assignments.html"><span>▤</span><div><strong>Assignments & Grading</strong><small>Publish work, review submissions and feedback</small></div><b>→</b></a>
+<a href="skills.html"><span>◎</span><div><strong>Skills</strong><small>Define Subject skills and monitor progress</small></div><b>→</b></a>
+<a href="peer-groups.html"><span>◉</span><div><strong>Peer Groups</strong><small>Create guided collaborative learning spaces</small></div><b>→</b></a>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">GRADING WORKLOAD</span>
+<h2>Assignments needing review</h2>
+</div>
+<a href="assignments.html">Open Assignments →</a>
+</div>
+<div id="facultyGradingList" class="commercial-list-stack">
+<div class="integration-empty">Loading grading workload...</div>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">RECENT STUDENT ACTIVITY</span>
+<h2>What learners are doing</h2>
+</div>
+<a href="activity.html">View all →</a>
+</div>
+<div id="commercialRecentActivity" class="commercial-activity-list">
+<div class="integration-empty">Loading activity...</div>
+</div>
+</section>
+
+</div>
+
+
+<aside class="commercial-dashboard-side-column">
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">LEARNING SIGNALS</span>
+<h2>Subjects needing attention</h2>
+<p>Low mastery areas from Student quiz activity.</p>
+</div>
+<div id="facultyWeakAreas" class="commercial-focus-list">
+<div class="integration-empty">No weak areas detected yet.</div>
+</div>
+</section>
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">ASSIGNED SUBJECTS</span>
+<h2>Your teaching access</h2>
+<p>Admin controls assignment. You control learning inside it.</p>
+</div>
+<div id="facultyAssignedSubjects" class="commercial-subject-stack">
+<div class="integration-empty">Loading Subjects...</div>
+</div>
+</section>
+
+<section class="commercial-dashboard-panel commercial-discover-card">
+<span class="eyebrow light">FASTER WORKFLOW</span>
+<h2>Search your assigned Subjects.</h2>
+<p>Find your Resources, Questions, Quizzes, Assignments, Skills and Peer Groups instantly.</p>
+<a href="search.html" class="button button-white">Open Search</a>
+</section>
+
+</aside>
+
+</section>
+
+</div>
+
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified commercial-footer">
+<div class="footer-inner">
+<a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="search.html">Search</a>
+<a href="activity.html">Activity</a>
+<a href="profile.html">Profile</a>
+</nav>
+<span>Learn • Practice • Grow</span>
+</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/commercial-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body class="admin-page commercial-role-page" data-commercial-role="admin">
+
+<div class="site student-site admin-site commercial-role-site">
+
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+aria-label="Toggle navigation" aria-controls="primaryNavigation"
+aria-expanded="false"><span></span><span></span><span></span></button>
+
+<a href="../index.html" class="brand-link" aria-label="LearnVault home">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+</a>
+
+<div class="top-search dashboard-search">
+<span>⌕</span>
+<input id="commercialDashboardSearch" type="search"
+placeholder="Search LearnVault..." aria-label="Search LearnVault">
+</div>
+
+<nav class="top-actions student-account-actions">
+<a class="commercial-header-activity" href="activity.html" title="Activity">◫</a>
+<div class="student-head-identity">
+<span class="student-head-label">ADMIN</span>
+<strong id="headerAdminName">Administrator</strong>
+</div>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</nav>
+</header>
+
+<div class="page-shell commercial-role-shell">
+
+<aside class="icon-rail commercial-role-rail" id="primaryNavigation" aria-label="ADMIN navigation">
+<a href="dashboard.html" class="rail-item active" title="Dashboard" aria-label="Dashboard">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+<span class="rail-label">Dashboard</span>
+</a>
+<a href="search.html" class="rail-item" title="Search" aria-label="Search">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></span>
+<span class="rail-label">Search</span>
+</a>
+<a href="activity.html" class="rail-item" title="Activity" aria-label="Activity">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
+<span class="rail-label">Activity</span>
+</a>
+<a href="academic.html" class="rail-item" title="Academic Structure" aria-label="Academic Structure">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span>
+<span class="rail-label">Academic Structure</span>
+</a>
+<a href="users.html" class="rail-item" title="Users & Faculty" aria-label="Users & Faculty">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.2 14c3.2-.4 5.1 1.3 5.3 5"/></svg></span>
+<span class="rail-label">Users & Faculty</span>
+</a>
+<a href="resources.html" class="rail-item" title="Resources" aria-label="Resources">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+<span class="rail-label">Resources</span>
+</a>
+<a href="questions.html" class="rail-item" title="Question Bank" aria-label="Question Bank">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7a4 4 0 1 1 6 3.5c-1.4.8-2 1.7-2 3"/><circle cx="12" cy="18" r=".8"/></svg></span>
+<span class="rail-label">Question Bank</span>
+</a>
+<a href="quizzes.html" class="rail-item" title="Quizzes" aria-label="Quizzes">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+<span class="rail-label">Quizzes</span>
+</a>
+<a href="assignments.html" class="rail-item" title="Assignments" aria-label="Assignments">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10v3h2v15H5V6h2z"/><path d="M9 3h6v5H9zM8 12h8M8 16h6"/></svg></span>
+<span class="rail-label">Assignments</span>
+</a>
+<a href="progress.html" class="rail-item" title="Progress" aria-label="Progress">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span>
+<span class="rail-label">Progress</span>
+</a>
+<a href="reports.html" class="rail-item" title="Reports" aria-label="Reports">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h14v18H5z"/><path d="M8 16v-3M12 16V9M16 16v-6"/></svg></span>
+<span class="rail-label">Reports</span>
+</a>
+<a href="skills.html" class="rail-item" title="Skills" aria-label="Skills">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg></span>
+<span class="rail-label">Skills</span>
+</a>
+<a href="peer-groups.html" class="rail-item" title="Peer Groups" aria-label="Peer Groups">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20c.4-4 2.2-6 5.5-6s5.1 2 5.5 6M10.5 20c.4-3.5 2-5.3 5.5-5.3s5.1 1.8 5.5 5.3"/></svg></span>
+<span class="rail-label">Peer Groups</span>
+</a>
+<a href="approvals.html" class="rail-item" title="Oversight" aria-label="Oversight">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v5c0 5-2.6 8.4-7 10-4.4-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg></span>
+<span class="rail-label">Oversight</span>
+</a>
+<a href="profile.html" class="rail-item" title="Profile" aria-label="Profile">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.7-5 3.2-7 7.5-7s6.8 2 7.5 7"/></svg></span>
+<span class="rail-label">Profile</span>
+</a>
+</aside>
+
+<main class="main dashboard-main commercial-dashboard-main">
+
+<div id="commercialDashboardLoading" class="dashboard-loading">
+<div class="loading-mark">LV</div>
+<strong>Preparing the Admin control center...</strong>
+</div>
+
+<div id="commercialDashboardContent" hidden>
+
+<section class="commercial-dashboard-hero admin-commercial-hero">
+
+<div class="commercial-dashboard-hero-copy">
+<div class="dashboard-welcome-chip">Platform control • <strong id="commercialWelcomeName">Administrator</strong></div>
+<span class="eyebrow">MONITOR • GOVERN • CONTROL</span>
+<h1>See the whole LearnVault system at once.</h1>
+<p>
+Manage academic structure, users, Faculty access, learning content, reports and platform health from one control center.
+</p>
+<div class="commercial-dashboard-actions">
+<a href="users.html" class="button button-primary large">Manage Users</a>
+<a href="academic.html" class="button button-soft large">Academic Structure</a>
+<a href="reports.html" class="button button-soft large">Open Reports</a>
+</div>
+</div>
+
+<div class="commercial-dashboard-highlight admin-health-highlight">
+<div class="dashboard-highlight-head">
+<div>
+<span class="mini-label">SYSTEM HEALTH</span>
+<strong id="adminSystemHealth">Checking...</strong>
+</div>
+<a href="reports.html">System Check →</a>
+</div>
+<div class="commercial-system-health-track"><span id="adminHealthBar"></span></div>
+<div class="commercial-mini-metrics four">
+<div><span>Students</span><strong id="adminStudentCount">0</strong></div>
+<div><span>Faculty</span><strong id="adminFacultyCount">0</strong></div>
+<div><span>Active Users</span><strong id="adminActiveUsers">0</strong></div>
+<div><span>DB Tables</span><strong id="adminTableCount">0/28</strong></div>
+</div>
+</div>
+
+</section>
+
+
+<section class="commercial-dashboard-grid admin-dashboard-grid">
+
+<div class="commercial-dashboard-main-column">
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<div>
+<span class="eyebrow">ADMIN CONTROL CENTER</span>
+<h2>Control every major part of the platform</h2>
+<p>Operational shortcuts for the tasks Admin performs most often.</p>
+</div>
+</div>
+
+<div class="commercial-control-grid admin-control-commercial">
+<a href="academic.html"><span>▦</span><div><strong>Academic Structure</strong><small>Domains, Courses, Levels and Subjects</small></div><b>→</b></a>
+<a href="users.html"><span>◇</span><div><strong>Users & Faculty</strong><small>Create Faculty, monitor accounts, suspend or reactivate</small></div><b>→</b></a>
+<a href="resources.html"><span>▣</span><div><strong>Resource Control</strong><small>Inspect, hide or restore learning Resources</small></div><b>→</b></a>
+<a href="questions.html"><span>?</span><div><strong>Question Oversight</strong><small>Monitor all Question Bank content</small></div><b>→</b></a>
+<a href="quizzes.html"><span>✓</span><div><strong>Quiz Control</strong><small>Monitor publication and assessment activity</small></div><b>→</b></a>
+<a href="assignments.html"><span>▤</span><div><strong>Assignment Oversight</strong><small>See Faculty ownership and grading workload</small></div><b>→</b></a>
+<a href="peer-groups.html"><span>◉</span><div><strong>Peer Moderation</strong><small>Open, close, archive and moderate discussions</small></div><b>→</b></a>
+<a href="reports.html"><span>▥</span><div><strong>Reports & DB Health</strong><small>Course reports, Faculty contribution and CSV export</small></div><b>→</b></a>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<div>
+<span class="eyebrow">PLATFORM MONITOR</span>
+<h2>Live learning inventory</h2>
+<p>Published content and assessment activity from MySQL.</p>
+</div>
+</div>
+
+<div class="commercial-inventory-grid">
+<article><span>Resources</span><strong id="adminResourcesCount">0</strong></article>
+<article><span>Questions</span><strong id="adminQuestionsCount">0</strong></article>
+<article><span>Quizzes</span><strong id="adminQuizzesCount">0</strong></article>
+<article><span>Assignments</span><strong id="adminAssignmentsCount">0</strong></article>
+<article><span>Skills</span><strong id="adminSkillsCount">0</strong></article>
+<article><span>Peer Groups</span><strong id="adminPeerCount">0</strong></article>
+<article><span>Quiz Attempts</span><strong id="adminQuizAttempts">0</strong></article>
+<article><span>Pending Grading</span><strong id="adminPendingGrading">0</strong></article>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">RECENT SYSTEM ACTIVITY</span>
+<h2>Monitor what is changing</h2>
+</div>
+<a href="activity.html">Full Activity →</a>
+</div>
+<div id="commercialRecentActivity" class="commercial-activity-list">
+<div class="integration-empty">Loading system activity...</div>
+</div>
+</section>
+
+</div>
+
+
+<aside class="commercial-dashboard-side-column">
+
+<section class="commercial-dashboard-panel commercial-admin-danger">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">ACCOUNT CONTROL</span>
+<h2>Monitor & suspend users</h2>
+<p>Use User Management to disable Student or Faculty access immediately and reactivate when required.</p>
+</div>
+<a href="users.html" class="commercial-admin-action danger"><span>⊘</span><div><strong>Suspend / Reactivate Users</strong><small>Control account access</small></div></a>
+<a href="users.html" class="commercial-admin-action"><span>＋</span><div><strong>Create Faculty</strong><small>Generate Faculty credentials</small></div></a>
+<a href="users.html" class="commercial-admin-action"><span>↔</span><div><strong>Faculty Subject Access</strong><small>Assign or remove Subjects</small></div></a>
+</section>
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">CONTENT CONTROL</span>
+<h2>Moderate platform content</h2>
+<p>Admin can hide, restore, archive or remove content using the relevant management module.</p>
+</div>
+<div class="commercial-admin-link-list">
+<a href="resources.html">Resources <span>Control →</span></a>
+<a href="questions.html">Questions <span>Control →</span></a>
+<a href="quizzes.html">Quizzes <span>Control →</span></a>
+<a href="assignments.html">Assignments <span>Control →</span></a>
+<a href="peer-groups.html">Peer Groups <span>Moderate →</span></a>
+</div>
+</section>
+
+<section class="commercial-dashboard-panel commercial-discover-card admin-discover-card">
+<span class="eyebrow light">SYSTEM INTELLIGENCE</span>
+<h2>Reports that make the project feel complete.</h2>
+<p>Course performance, Faculty contribution, CSV exports and a live database-table health check.</p>
+<a href="reports.html" class="button button-white">Open Reports</a>
+</section>
+
+</aside>
+
+</section>
+
+</div>
+
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified commercial-footer">
+<div class="footer-inner">
+<a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="search.html">Search</a>
+<a href="activity.html">Activity</a>
+<a href="profile.html">Profile</a>
+</nav>
+<span>Learn • Practice • Grow</span>
+</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/commercial-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="faculty-page assignment-page">
+<div class="site student-site faculty-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="assignmentTopSearch" type="search" placeholder="Search assignments..." aria-label="Search assignments"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">FACULTY</span><strong id="headerFacultyName">Faculty</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="faculty navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item active"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a></aside>
+<main class="main dashboard-main assignment-main">
+<section class="assignment-hero">
+<div><span class="eyebrow">FACULTY • ASSIGNMENTS</span><h1>Create work that turns learning into practice.</h1><p>Publish assignments directly for assigned subjects, review submissions and give marks with actionable feedback. Admin has oversight but no routine approval step.</p></div>
+<div class="assignment-hero-card"><span class="mini-label">FACULTY FLOW</span><strong>Create → Publish → Review → Grade</strong><small>Students see only assignments matching their academic path.</small></div>
+</section>
+
+<section class="assignment-layout faculty-assignment-layout">
+<article class="assignment-panel">
+<div class="assignment-panel-head"><span class="eyebrow">CREATE ASSIGNMENT</span><h2>Publish student work</h2><p>Assignments are student-visible immediately after creation.</p></div>
+<form id="facultyAssignmentForm" class="learning-form">
+<label><span>Assigned Subject</span><select id="facultyAssignmentSubject" required><option value="">Loading assigned subjects...</option></select></label>
+<label><span>Title</span><input id="facultyAssignmentTitle" required placeholder="e.g. DBMS SQL Practice Assignment"></label>
+<label><span>Description</span><textarea id="facultyAssignmentDescription" rows="3" placeholder="Short overview for students"></textarea></label>
+<label><span>Instructions</span><textarea id="facultyAssignmentInstructions" rows="5" placeholder="Detailed task, requirements and submission expectations"></textarea></label>
+<div class="assignment-form-grid"><label><span>Due Date & Time</span><input id="facultyAssignmentDue" type="datetime-local"></label><label><span>Total Marks</span><input id="facultyAssignmentMarks" type="number" min="1" step="0.5" value="100" required></label></div>
+<label class="assignment-check"><input id="facultyAssignmentLate" type="checkbox"><span>Allow late submission</span></label>
+<button type="submit" class="button button-primary">Create & Publish Assignment</button>
+</form>
+</article>
+
+<article class="assignment-panel assignment-list-panel">
+<div class="assignment-panel-head"><span class="eyebrow">YOUR ASSIGNMENTS</span><h2>Published work</h2><p>Open an assignment to review and grade submissions.</p></div>
+<div id="facultyAssignmentList" class="assignment-card-list"></div>
+</article>
+</section>
+
+<section class="assignment-panel assignment-wide-panel">
+<div id="facultySubmissionEmpty" class="progress-empty"><strong>Select an assignment</strong><span>Submission and grading controls will appear here.</span></div>
+<div id="facultySubmissionWorkspace" hidden>
+<div class="assignment-panel-head assignment-row-head"><div><span class="eyebrow" id="facultySubmissionSubject">SUBMISSIONS</span><h2 id="facultySubmissionTitle">Assignment</h2></div><span id="facultySubmissionSummary" class="assignment-summary-chip">0 submissions</span></div>
+<div id="facultySubmissionList" class="submission-list"></div>
+</div>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="assignments.html">Assignments</a><a href="progress.html">Progress</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/faculty-common.js"></script>
+<script src="../js/faculty-assignments.js"></script>
+</body>
+</html>

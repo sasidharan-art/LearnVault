@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Management | LearnVault</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page">
+
+<div class="site student-site admin-site">
+
+<header class="topbar student-topbar">
+    <button
+        type="button"
+        class="mobile-nav-toggle"
+        id="mobileNavToggle"
+        aria-label="Toggle navigation"
+        aria-controls="primaryNavigation"
+        aria-expanded="false"
+    >
+        <span></span><span></span><span></span>
+    </button>
+
+    <a href="../index.html" class="brand-link" aria-label="LearnVault home">
+        <img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+    </a>
+
+    <div class="top-search dashboard-search">
+        <span>⌕</span>
+        <input type="search" placeholder="Search LearnVault Admin..." aria-label="Search LearnVault Admin">
+    </div>
+
+    <nav class="top-actions student-account-actions">
+        <div class="student-head-identity">
+            <span class="student-head-label">ADMIN</span>
+            <strong id="headerAdminName">Administrator</strong>
+        </div>
+
+        <button type="button" class="button button-ghost" id="logoutButton">
+            Logout
+        </button>
+    </nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="Admin navigation">
+<a href="dashboard.html" class="rail-item" title="Dashboard" aria-label="Dashboard">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+    <span class="rail-label">Dashboard</span>
+</a>
+<a href="academic.html" class="rail-item" title="Academic Structure" aria-label="Academic Structure">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span>
+    <span class="rail-label">Academic Structure</span>
+</a>
+<a href="users.html" class="rail-item" title="Users & Faculty" aria-label="Users & Faculty">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.2 14c3.2-.4 5.1 1.3 5.3 5"/></svg></span>
+    <span class="rail-label">Users & Faculty</span>
+</a>
+<a href="resources.html" class="rail-item active" title="Resources" aria-label="Resources">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+    <span class="rail-label">Resources</span>
+</a>
+<a href="approvals.html" class="rail-item" title="Content Oversight" aria-label="Content Oversight">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+    <span class="rail-label">Oversight</span>
+</a>
+</aside>
+
+<main class="main dashboard-main">
+
+<section class="admin-page-hero">
+    <div>
+        <span class="eyebrow">ADMIN • RESOURCE MANAGEMENT</span>
+        <h1>See every learning resource in LearnVault.</h1>
+        <p>
+            Faculty publishes directly inside assigned subjects. Admin sees
+            every resource and may hide or restore content when necessary.
+        </p>
+    </div>
+</section>
+
+
+<section class="section dashboard-section" id="adminUploadResource">
+    <div class="faculty-upload-panel admin-upload-panel">
+        <div class="section-heading dashboard-section-heading"><span class="eyebrow">ADMIN RESOURCE UPLOAD</span><h2>Publish a resource directly</h2><p>Admin and Faculty content publish immediately. This page is for system-wide visibility and moderation.</p></div>
+        <form id="adminResourceUploadForm" class="resource-upload-form" enctype="multipart/form-data">
+            <label>Subject<select name="subjectId" id="adminUploadSubject" required><option value="">Loading subjects...</option></select></label>
+            <label>Resource Type<select name="resourceTypeId" id="adminUploadType" required><option value="">Loading types...</option></select></label>
+            <label class="wide">Title<input name="title" required placeholder="Resource title"></label>
+            <label class="wide">Description<textarea name="description" rows="3" placeholder="Description"></textarea></label>
+            <label>File<input name="file" type="file" accept=".pdf,.ppt,.pptx,.doc,.docx,.png,.jpg,.jpeg,.webp"></label>
+            <label>External Link<input name="externalUrl" type="url" placeholder="https://..."></label>
+            <button type="submit" class="button button-primary" id="adminUploadResourceButton">Add Resource</button>
+        </form>
+    </div>
+</section>
+
+<section class="section dashboard-section">
+    <div class="resource-state-grid">
+        <article>
+            <span>All Resources</span>
+            <strong id="resourceCountAll">0</strong>
+        </article>
+
+        <article>
+            <span>Legacy Pending</span>
+            <strong id="resourceCountPending">0</strong>
+        </article>
+
+        <article>
+            <span>Published</span>
+            <strong id="resourceCountApproved">0</strong>
+        </article>
+
+        <article>
+            <span>Hidden</span>
+            <strong id="resourceCountRejected">0</strong>
+        </article>
+    </div>
+</section>
+
+<section class="section surface-section dashboard-section">
+    <div class="section-heading dashboard-section-heading">
+        <span class="eyebrow">RESOURCE DIRECTORY</span>
+        <h2>All uploaded resources</h2>
+    </div>
+
+    <div class="admin-filter-bar">
+        <input id="resourceSearch" type="search" placeholder="Search title, subject, course, uploader...">
+
+        <select id="resourceStatusFilter">
+            <option value="">All status</option>
+            <option value="pending">Legacy Pending</option>
+            <option value="approved">Published</option>
+            <option value="rejected">Hidden</option>
+        </select>
+
+        <button class="button button-soft" id="refreshResources" type="button">
+            Refresh
+        </button>
+    </div>
+
+    <div class="admin-table-wrap">
+        <table class="admin-data-table">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Academic Context</th>
+                    <th>Uploader</th>
+                    <th>Status</th>
+                    <th>Uploaded</th>
+                    <th>Control</th>
+                </tr>
+            </thead>
+            <tbody id="resourcesTableBody">
+                <tr><td colspan="6">Loading resources...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</main>
+
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified admin-full-footer">
+    <div class="footer-inner">
+        <a href="../index.html" class="footer-brand">
+            <img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="academic.html">Academic</a>
+            <a href="users.html">Users</a>
+            <a href="resources.html">Resources</a>
+            <a href="approvals.html">Oversight</a>
+        </nav>
+
+        <span>Learn • Practice • Grow</span>
+    </div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/admin-resources.js"></script>
+<script src="../js/admin-resource-upload.js"></script>
+</body>
+</html>

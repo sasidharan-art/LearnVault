@@ -1,0 +1,2235 @@
+/* ==========================================================
+   LEARNVAULT PUBLIC HOMEPAGE
+   Commercial landing-page structure inspired by the user's
+   HomeServe reference, adapted into an original LearnVault UI.
+========================================================== */
+
+:root {
+    --lvh-bg: #f4f5ff;
+    --lvh-panel: #ffffff;
+    --lvh-panel-soft: #f8f8ff;
+
+    --lvh-text: #11182b;
+    --lvh-muted: #626d87;
+    --lvh-border: rgba(79, 71, 184, .12);
+
+    --lvh-primary: #5b42ed;
+    --lvh-primary-dark: #4731d9;
+    --lvh-violet: #7646ef;
+    --lvh-blue: #2778e9;
+
+    --lvh-green: #0a9f6f;
+    --lvh-dark: #15152d;
+
+    --lvh-shadow:
+        0 24px 70px rgba(45, 41, 110, .10);
+
+    --lvh-radius-lg: 24px;
+    --lvh-radius-md: 16px;
+    --lvh-radius-sm: 11px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.lv-public-home {
+    margin: 0;
+
+    background:
+        radial-gradient(circle at 88% 9%, rgba(86, 67, 238, .10), transparent 27%),
+        radial-gradient(circle at 3% 42%, rgba(36, 124, 229, .07), transparent 24%),
+        var(--lvh-bg);
+
+    color: var(--lvh-text);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.5;
+}
+
+body.lv-public-home.no-scroll {
+    overflow: hidden;
+}
+
+body.lv-public-home a {
+    color: inherit;
+}
+
+.lv-home-header {
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    background: rgba(244, 245, 255, .89);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid transparent;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.lv-home-header.is-scrolled {
+    border-bottom-color: rgba(79, 71, 184, .08);
+
+    box-shadow:
+        0 8px 30px rgba(36, 31, 95, .045);
+
+    background: rgba(248, 248, 255, .96);
+}
+
+.lv-home-header-inner {
+    width: min(1240px, calc(100% - 44px));
+    min-height: 76px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns:
+        178px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 28px;
+}
+
+.lv-home-brand {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+}
+
+.lv-home-brand img {
+    width: 112px;
+    height: auto;
+
+    display: block;
+}
+
+.lv-home-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(18px, 2.8vw, 34px);
+}
+
+.lv-home-nav a {
+    position: relative;
+
+    color: #454d67;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+.lv-home-nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    margin: auto;
+
+    border-radius: 999px;
+
+    background: var(--lvh-primary);
+
+    transition: width .18s ease;
+}
+
+.lv-home-nav a:hover {
+    color: var(--lvh-primary);
+}
+
+.lv-home-nav a:hover::after {
+    width: 100%;
+}
+
+.lv-home-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.lv-home-link-button,
+.lv-home-primary-button,
+.lv-home-secondary-button,
+.lv-home-white-button,
+.lv-home-outline-light-button {
+    min-height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border-radius: 11px;
+
+    font-size: 13px;
+    font-weight: 850;
+
+    text-decoration: none;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+}
+
+.lv-home-link-button {
+    border: 1px solid var(--lvh-border);
+
+    background: rgba(255, 255, 255, .62);
+
+    color: var(--lvh-primary);
+}
+
+.lv-home-primary-button {
+    border: 1px solid transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--lvh-primary),
+            var(--lvh-violet)
+        );
+
+    color: #fff;
+
+    box-shadow:
+        0 12px 28px rgba(91, 66, 237, .18);
+}
+
+.lv-home-secondary-button {
+    border: 1px solid var(--lvh-border);
+
+    background: rgba(255, 255, 255, .64);
+
+    color: #4237ba;
+}
+
+.lv-home-primary-button:hover,
+.lv-home-secondary-button:hover,
+.lv-home-link-button:hover,
+.lv-home-white-button:hover,
+.lv-home-outline-light-button:hover {
+    transform: translateY(-2px);
+}
+
+.lv-home-primary-button:hover {
+    box-shadow:
+        0 16px 34px rgba(91, 66, 237, .25);
+}
+
+.lv-home-menu-button {
+    width: 42px;
+    height: 42px;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 4px;
+
+    border: 1px solid var(--lvh-border);
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, .68);
+
+    cursor: pointer;
+}
+
+.lv-home-menu-button span {
+    width: 17px;
+    height: 2px;
+
+    border-radius: 999px;
+
+    background: var(--lvh-primary);
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.lv-home-hero {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.lv-home-hero-inner {
+    width: min(1240px, calc(100% - 44px));
+
+    min-height: 680px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(440px, .95fr);
+
+    align-items: center;
+
+    gap: clamp(44px, 6vw, 82px);
+
+    padding:
+        68px 0 78px;
+}
+
+.lv-home-kicker,
+.lv-home-section-heading > span,
+.lv-home-commercial-label,
+.lv-home-role-badge {
+    display: inline-block;
+
+    color: var(--lvh-primary);
+
+    font-size: 11px;
+    font-weight: 900;
+
+    letter-spacing: .09em;
+
+    text-transform: uppercase;
+}
+
+.lv-home-hero-copy h1 {
+    max-width: 700px;
+
+    margin:
+        14px 0 20px;
+
+    color: var(--lvh-text);
+
+    font-size:
+        clamp(52px, 6.1vw, 82px);
+
+    line-height: .96;
+
+    letter-spacing: -.06em;
+}
+
+.lv-home-hero-copy h1 span {
+    display: block;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--lvh-primary),
+            var(--lvh-blue)
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.lv-home-hero-copy > p {
+    max-width: 690px;
+
+    margin:
+        0 0 26px;
+
+    color: var(--lvh-muted);
+
+    font-size: 15px;
+    line-height: 1.72;
+}
+
+.lv-home-search {
+    width: min(670px, 100%);
+
+    min-height: 58px;
+
+    display: grid;
+
+    grid-template-columns:
+        34px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 7px 7px 14px;
+
+    border: 1px solid rgba(79, 71, 184, .12);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, .78);
+
+    box-shadow:
+        0 16px 44px rgba(50, 46, 122, .07);
+}
+
+.lv-home-search-icon {
+    color: var(--lvh-primary);
+
+    font-size: 18px;
+}
+
+.lv-home-search input {
+    width: 100%;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--lvh-text);
+
+    font: inherit;
+    font-size: 13px;
+}
+
+.lv-home-search input::placeholder {
+    color: #7b839a;
+}
+
+.lv-home-search button {
+    min-width: 105px;
+    min-height: 44px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--lvh-primary),
+            var(--lvh-violet)
+        );
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+.lv-home-hero-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 14px;
+}
+
+.lv-home-large-button {
+    min-height: 47px;
+
+    padding:
+        0 22px;
+}
+
+.lv-home-trust-row {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.lv-home-trust-row > div {
+    min-width: 126px;
+
+    padding:
+        10px 13px;
+
+    border: 1px solid rgba(79, 71, 184, .08);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .48);
+}
+
+.lv-home-trust-row strong,
+.lv-home-trust-row span {
+    display: block;
+}
+
+.lv-home-trust-row strong {
+    color: var(--lvh-primary);
+
+    font-size: 17px;
+}
+
+.lv-home-trust-row span {
+    margin-top: 1px;
+
+    color: var(--lvh-muted);
+
+    font-size: 8px;
+    font-weight: 750;
+}
+
+
+/* Hero Visual */
+
+.lv-home-hero-visual {
+    position: relative;
+
+    min-height: 535px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lv-home-visual-glow {
+    position: absolute;
+
+    inset: 8% 8% 8% 8%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(91, 66, 237, .18),
+            rgba(39, 120, 233, .07) 45%,
+            transparent 72%
+        );
+
+    filter: blur(20px);
+}
+
+.lv-home-command-card {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(500px, 100%);
+
+    padding: 24px;
+
+    border: 1px solid rgba(79, 71, 184, .13);
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .93),
+            rgba(249, 249, 255, .82)
+        );
+
+    box-shadow: var(--lvh-shadow);
+}
+
+.lv-home-command-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.lv-home-command-top span:first-child {
+    color: var(--lvh-primary);
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: .08em;
+}
+
+.lv-home-command-top h2 {
+    max-width: 310px;
+
+    margin:
+        6px 0 0;
+
+    color: var(--lvh-text);
+
+    font-size: 22px;
+    line-height: 1.15;
+}
+
+.lv-home-live-badge {
+    flex: 0 0 auto;
+
+    padding:
+        6px 8px;
+
+    border-radius: 999px;
+
+    background: rgba(10, 159, 111, .08);
+
+    color: var(--lvh-green);
+
+    font-size: 8px;
+    font-weight: 900;
+}
+
+.lv-home-flow-card {
+    display: grid;
+
+    grid-template-columns:
+        52px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(91, 66, 237, .08),
+            rgba(39, 120, 233, .045)
+        );
+}
+
+.lv-home-flow-mark {
+    width: 52px;
+    height: 52px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--lvh-primary),
+            var(--lvh-violet)
+        );
+
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.lv-home-flow-card small,
+.lv-home-flow-card strong,
+.lv-home-flow-card div > span {
+    display: block;
+}
+
+.lv-home-flow-card small {
+    color: var(--lvh-primary);
+
+    font-size: 7px;
+    font-weight: 900;
+}
+
+.lv-home-flow-card strong {
+    margin:
+        3px 0;
+
+    color: var(--lvh-text);
+
+    font-size: 10px;
+}
+
+.lv-home-flow-card div > span {
+    color: var(--lvh-muted);
+
+    font-size: 7px;
+}
+
+.lv-home-feature-mini-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 9px;
+
+    margin-top: 12px;
+}
+
+.lv-home-feature-mini-grid a {
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        38px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 62px;
+
+    padding: 10px;
+
+    border: 1px solid rgba(79, 71, 184, .08);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .70);
+
+    text-decoration: none;
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+}
+
+.lv-home-feature-mini-grid a:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(91, 66, 237, .18);
+
+    background: #fff;
+}
+
+.lv-home-mini-icon {
+    width: 38px;
+    height: 38px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(91, 66, 237, .07);
+
+    color: var(--lvh-primary);
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.lv-home-feature-mini-grid strong,
+.lv-home-feature-mini-grid small {
+    display: block;
+}
+
+.lv-home-feature-mini-grid strong {
+    color: var(--lvh-text);
+
+    font-size: 9px;
+}
+
+.lv-home-feature-mini-grid small {
+    margin-top: 2px;
+
+    color: var(--lvh-muted);
+
+    font-size: 7px;
+}
+
+.lv-home-floating-card {
+    position: absolute;
+
+    z-index: 3;
+
+    width: 190px;
+
+    padding: 12px;
+
+    border: 1px solid rgba(79, 71, 184, .10);
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, .93);
+
+    box-shadow:
+        0 16px 45px rgba(47, 42, 116, .10);
+}
+
+.lv-home-floating-card span,
+.lv-home-floating-card strong,
+.lv-home-floating-card small {
+    display: block;
+}
+
+.lv-home-floating-card span {
+    color: var(--lvh-primary);
+
+    font-size: 7px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.lv-home-floating-card strong {
+    margin:
+        4px 0 2px;
+
+    color: var(--lvh-text);
+
+    font-size: 9px;
+}
+
+.lv-home-floating-card small {
+    color: var(--lvh-muted);
+
+    font-size: 7px;
+}
+
+.lv-home-floating-card-one {
+    left: -18px;
+    bottom: 55px;
+}
+
+.lv-home-floating-card-two {
+    right: -14px;
+    top: 54px;
+}
+
+
+/* ==========================================================
+   GENERIC SECTIONS
+========================================================== */
+
+.lv-home-section {
+    padding:
+        82px 0;
+}
+
+.lv-home-section-soft {
+    background: rgba(255, 255, 255, .44);
+}
+
+.lv-home-section-inner {
+    width: min(1180px, calc(100% - 44px));
+
+    margin: 0 auto;
+}
+
+.lv-home-section-heading {
+    max-width: 760px;
+
+    margin-bottom: 34px;
+}
+
+.lv-home-heading-centered {
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+}
+
+.lv-home-section-heading h2,
+.lv-home-education-layout h2,
+.lv-home-faq-copy h2 {
+    margin:
+        9px 0 10px;
+
+    color: var(--lvh-text);
+
+    font-size:
+        clamp(34px, 4vw, 52px);
+
+    line-height: 1.02;
+
+    letter-spacing: -.045em;
+}
+
+.lv-home-section-heading p,
+.lv-home-education-layout > div:first-child > p,
+.lv-home-faq-copy p {
+    margin: 0;
+
+    color: var(--lvh-muted);
+
+    font-size: 13px;
+    line-height: 1.68;
+}
+
+
+/* Category Grid */
+
+.lv-home-category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.lv-home-category-card {
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid var(--lvh-border);
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, .74);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+.lv-home-category-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(91, 66, 237, .20);
+
+    box-shadow:
+        0 18px 50px rgba(47, 42, 116, .08);
+}
+
+.lv-home-category-icon {
+    width: 46px;
+    height: 46px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91, 66, 237, .11),
+            rgba(39, 120, 233, .07)
+        );
+
+    color: var(--lvh-primary);
+
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.lv-home-category-card h3 {
+    margin:
+        15px 0 6px;
+
+    color: var(--lvh-text);
+
+    font-size: 18px;
+}
+
+.lv-home-category-card p {
+    min-height: 63px;
+
+    margin:
+        0 0 14px;
+
+    color: var(--lvh-muted);
+
+    font-size: 11px;
+    line-height: 1.62;
+}
+
+.lv-home-category-card a {
+    color: var(--lvh-primary);
+
+    font-size: 10px;
+    font-weight: 900;
+
+    text-decoration: none;
+}
+
+
+/* How It Works */
+
+.lv-home-process {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.lv-home-process::before {
+    content: "";
+
+    position: absolute;
+
+    left: 11%;
+    right: 11%;
+    top: 36px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(91, 66, 237, .15),
+            rgba(39, 120, 233, .24),
+            rgba(91, 66, 237, .15)
+        );
+}
+
+.lv-home-process article {
+    position: relative;
+
+    z-index: 1;
+
+    text-align: center;
+}
+
+.lv-home-step-number {
+    position: absolute;
+
+    right: calc(50% - 38px);
+    top: -7px;
+
+    min-width: 23px;
+    height: 23px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 999px;
+
+    background: var(--lvh-bg);
+
+    color: var(--lvh-primary);
+
+    font-size: 7px;
+    font-weight: 900;
+}
+
+.lv-home-step-icon {
+    width: 70px;
+    height: 70px;
+
+    margin:
+        0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(91, 66, 237, .13);
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, .95),
+            rgba(247, 247, 255, .80)
+        );
+
+    box-shadow:
+        0 12px 32px rgba(47, 42, 116, .065);
+
+    color: var(--lvh-primary);
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.lv-home-process h3 {
+    margin:
+        0 0 6px;
+
+    color: var(--lvh-text);
+
+    font-size: 14px;
+}
+
+.lv-home-process p {
+    max-width: 240px;
+
+    margin: 0 auto;
+
+    color: var(--lvh-muted);
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+/* Dark commercial section */
+
+.lv-home-section-dark {
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 14% 8%, rgba(91, 66, 237, .28), transparent 31%),
+        radial-gradient(circle at 90% 70%, rgba(39, 120, 233, .17), transparent 26%),
+        var(--lvh-dark);
+
+    color: #fff;
+}
+
+.lv-home-heading-light h2 {
+    color: #fff;
+}
+
+.lv-home-heading-light > span {
+    color: #aca4ff;
+}
+
+.lv-home-commercial-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.lv-home-commercial-feature {
+    min-width: 0;
+
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: 19px;
+
+    background: rgba(255, 255, 255, .055);
+}
+
+.lv-home-commercial-feature-large {
+    grid-row: span 2;
+}
+
+.lv-home-commercial-label {
+    color: #a9a0ff;
+}
+
+.lv-home-commercial-feature h3 {
+    margin:
+        9px 0 7px;
+
+    color: #fff;
+
+    font-size: 22px;
+}
+
+.lv-home-commercial-feature p {
+    margin: 0;
+
+    color: #bfc2d7;
+
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.lv-home-study-preview {
+    display: grid;
+
+    gap: 8px;
+
+    margin-top: 23px;
+}
+
+.lv-home-study-preview > div {
+    display: grid;
+
+    grid-template-columns:
+        34px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px;
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, .055);
+}
+
+.lv-home-study-preview > div > span {
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: rgba(118, 70, 239, .20);
+
+    color: #c9c3ff;
+
+    font-size: 8px;
+    font-weight: 900;
+}
+
+.lv-home-study-preview strong,
+.lv-home-study-preview small {
+    display: block;
+}
+
+.lv-home-study-preview strong {
+    color: #fff;
+
+    font-size: 9px;
+}
+
+.lv-home-study-preview small {
+    margin-top: 2px;
+
+    color: #aeb3ca;
+
+    font-size: 7px;
+}
+
+
+/* Roles */
+
+.lv-home-role-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.lv-home-role-card {
+    min-width: 0;
+
+    padding: 24px;
+
+    border: 1px solid var(--lvh-border);
+    border-radius: 19px;
+
+    background: rgba(255, 255, 255, .72);
+}
+
+.lv-home-role-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.lv-home-role-icon {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(91, 66, 237, .08);
+
+    color: var(--lvh-primary);
+
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.lv-home-role-card h3 {
+    margin:
+        16px 0 6px;
+
+    color: var(--lvh-text);
+
+    font-size: 20px;
+}
+
+.lv-home-role-card > p {
+    min-height: 52px;
+
+    margin: 0;
+
+    color: var(--lvh-muted);
+
+    font-size: 10px;
+    line-height: 1.62;
+}
+
+.lv-home-role-card ul {
+    display: grid;
+
+    gap: 7px;
+
+    margin:
+        18px 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+.lv-home-role-card li {
+    position: relative;
+
+    padding-left: 19px;
+
+    color: #4d566e;
+
+    font-size: 9px;
+    font-weight: 720;
+}
+
+.lv-home-role-card li::before {
+    content: "✓";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    color: var(--lvh-primary);
+
+    font-weight: 900;
+}
+
+.lv-home-role-card > a {
+    color: var(--lvh-primary);
+
+    font-size: 10px;
+    font-weight: 900;
+
+    text-decoration: none;
+}
+
+.lv-home-role-admin {
+    border-color: rgba(39, 120, 233, .15);
+}
+
+
+/* Education Paths */
+
+.lv-home-education-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(380px, .86fr);
+
+    align-items: center;
+
+    gap: 64px;
+}
+
+.lv-home-domain-chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 20px;
+}
+
+.lv-home-domain-chips span {
+    padding:
+        7px 10px;
+
+    border: 1px solid rgba(91, 66, 237, .09);
+    border-radius: 999px;
+
+    background: rgba(91, 66, 237, .045);
+
+    color: #4c46a6;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.lv-home-academic-map {
+    min-width: 0;
+
+    padding: 24px;
+
+    border: 1px solid rgba(91, 66, 237, .10);
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, .76);
+
+    box-shadow:
+        0 22px 58px rgba(47, 42, 116, .07);
+}
+
+.lv-home-map-node {
+    padding: 12px;
+
+    border-radius: 11px;
+
+    background: rgba(91, 66, 237, .05);
+
+    text-align: center;
+}
+
+.lv-home-map-node small,
+.lv-home-map-node strong {
+    display: block;
+}
+
+.lv-home-map-node small {
+    color: var(--lvh-primary);
+
+    font-size: 7px;
+    font-weight: 900;
+}
+
+.lv-home-map-node strong {
+    margin-top: 2px;
+
+    color: var(--lvh-text);
+
+    font-size: 11px;
+}
+
+.lv-home-map-domain {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(91, 66, 237, .12),
+            rgba(39, 120, 233, .08)
+        );
+}
+
+.lv-home-map-content {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 159, 111, .07),
+            rgba(39, 120, 233, .06)
+        );
+}
+
+.lv-home-map-line {
+    width: 1px;
+    height: 13px;
+
+    display: block;
+
+    margin: 0 auto;
+
+    background: rgba(91, 66, 237, .19);
+}
+
+
+/* Benefits */
+
+.lv-home-benefit-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.lv-home-benefit-grid article {
+    min-width: 0;
+
+    padding:
+        19px;
+
+    border-top:
+        2px solid rgba(91, 66, 237, .17);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, .58),
+            rgba(255, 255, 255, .18)
+        );
+}
+
+.lv-home-benefit-grid span {
+    color: var(--lvh-primary);
+
+    font-size: 9px;
+    font-weight: 900;
+}
+
+.lv-home-benefit-grid h3 {
+    margin:
+        10px 0 6px;
+
+    color: var(--lvh-text);
+
+    font-size: 15px;
+}
+
+.lv-home-benefit-grid p {
+    margin: 0;
+
+    color: var(--lvh-muted);
+
+    font-size: 9px;
+    line-height: 1.62;
+}
+
+
+/* FAQ */
+
+.lv-home-faq-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, .65fr)
+        minmax(0, 1.35fr);
+
+    align-items: start;
+
+    gap: 60px;
+}
+
+.lv-home-faq-list {
+    display: grid;
+
+    gap: 8px;
+}
+
+.lv-home-faq-list details {
+    border: 1px solid rgba(91, 66, 237, .09);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .66);
+
+    overflow: hidden;
+}
+
+.lv-home-faq-list summary {
+    position: relative;
+
+    padding:
+        15px 42px 15px 16px;
+
+    color: var(--lvh-text);
+
+    font-size: 10px;
+    font-weight: 850;
+
+    cursor: pointer;
+
+    list-style: none;
+}
+
+.lv-home-faq-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.lv-home-faq-list summary::after {
+    content: "+";
+
+    position: absolute;
+
+    right: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--lvh-primary);
+
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.lv-home-faq-list details[open] summary::after {
+    content: "−";
+}
+
+.lv-home-faq-list details p {
+    margin:
+        0;
+
+    padding:
+        0 16px 16px;
+
+    color: var(--lvh-muted);
+
+    font-size: 9px;
+    line-height: 1.62;
+}
+
+
+/* CTA */
+
+.lv-home-final-cta {
+    padding:
+        28px 22px 78px;
+
+    background: rgba(255, 255, 255, .44);
+}
+
+.lv-home-final-cta-inner {
+    width: min(1180px, 100%);
+
+    margin: 0 auto;
+
+    padding:
+        54px 44px;
+
+    border-radius: 24px;
+
+    background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,.13), transparent 23%),
+        linear-gradient(
+            135deg,
+            #5138e4,
+            #6a42ee 56%,
+            #2f78e8
+        );
+
+    text-align: center;
+
+    color: #fff;
+
+    box-shadow:
+        0 24px 64px rgba(63, 52, 184, .20);
+}
+
+.lv-home-final-cta-inner > span {
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: .12em;
+}
+
+.lv-home-final-cta-inner h2 {
+    max-width: 780px;
+
+    margin:
+        10px auto 12px;
+
+    font-size:
+        clamp(34px, 4vw, 52px);
+
+    line-height: 1.02;
+
+    letter-spacing: -.045em;
+}
+
+.lv-home-final-cta-inner p {
+    max-width: 680px;
+
+    margin:
+        0 auto;
+
+    color: rgba(255, 255, 255, .82);
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.lv-home-final-cta-inner > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 21px;
+}
+
+.lv-home-white-button {
+    background: #fff;
+
+    color: #4f38d9;
+}
+
+.lv-home-outline-light-button {
+    border: 1px solid rgba(255, 255, 255, .28);
+
+    background: rgba(255, 255, 255, .08);
+
+    color: #fff;
+}
+
+
+/* Footer */
+
+.lv-home-footer {
+    padding:
+        52px 22px 20px;
+
+    background: #101124;
+
+    color: #fff;
+}
+
+.lv-home-footer-inner {
+    width: min(1180px, 100%);
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 1.5fr)
+        repeat(3, minmax(130px, .6fr));
+
+    gap: 42px;
+}
+
+.lv-home-footer-brand img {
+    width: 118px;
+
+    display: block;
+
+    filter:
+        brightness(0)
+        invert(1);
+}
+
+.lv-home-footer-brand p {
+    max-width: 350px;
+
+    margin:
+        13px 0 0;
+
+    color: #9fa5bb;
+
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.lv-home-footer-inner > div:not(:first-child) {
+    display: grid;
+
+    align-content: start;
+
+    gap: 8px;
+}
+
+.lv-home-footer-inner strong {
+    margin-bottom: 4px;
+
+    color: #fff;
+
+    font-size: 10px;
+}
+
+.lv-home-footer-inner a {
+    color: #aab0c5;
+
+    font-size: 8px;
+
+    text-decoration: none;
+}
+
+.lv-home-footer-inner a:hover {
+    color: #fff;
+}
+
+.lv-home-footer-bottom {
+    width: min(1180px, 100%);
+
+    margin:
+        34px auto 0;
+
+    padding-top: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    border-top: 1px solid rgba(255, 255, 255, .08);
+
+    color: #7f869f;
+
+    font-size: 8px;
+}
+
+.lv-home-mobile-overlay {
+    position: fixed;
+
+    inset: 76px 0 0;
+
+    z-index: 980;
+
+    background: rgba(16, 17, 36, .18);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity .18s ease,
+        visibility .18s ease;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 1080px) {
+
+    .lv-home-header-inner {
+        grid-template-columns:
+            150px
+            minmax(0, 1fr)
+            auto;
+
+        gap: 16px;
+    }
+
+    .lv-home-nav {
+        gap: 17px;
+    }
+
+    .lv-home-nav a {
+        font-size: 11px;
+    }
+
+    .lv-home-hero-inner {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(380px, .88fr);
+
+        gap: 38px;
+    }
+
+    .lv-home-floating-card-one {
+        left: 2px;
+    }
+
+    .lv-home-floating-card-two {
+        right: 2px;
+    }
+
+    .lv-home-category-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .lv-home-benefit-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .lv-home-header-inner {
+        grid-template-columns:
+            1fr
+            auto;
+    }
+
+    .lv-home-nav {
+        position: fixed;
+
+        left: 14px;
+        right: 14px;
+        top: 84px;
+
+        z-index: 990;
+
+        display: grid;
+
+        justify-content: stretch;
+
+        gap: 3px;
+
+        padding: 10px;
+
+        border: 1px solid rgba(79, 71, 184, .10);
+        border-radius: 16px;
+
+        background: rgba(250, 250, 255, .98);
+
+        box-shadow:
+            0 24px 60px rgba(31, 28, 77, .15);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transform: translateY(-10px);
+
+        transition:
+            opacity .18s ease,
+            visibility .18s ease,
+            transform .18s ease;
+    }
+
+    .lv-home-nav a {
+        padding:
+            11px 12px;
+
+        border-radius: 9px;
+
+        font-size: 11px;
+    }
+
+    .lv-home-nav a:hover {
+        background: rgba(91, 66, 237, .06);
+    }
+
+    .lv-home-nav a::after {
+        display: none;
+    }
+
+    body.lv-home-menu-open .lv-home-nav {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        transform: translateY(0);
+    }
+
+    body.lv-home-menu-open .lv-home-mobile-overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .lv-home-menu-button {
+        display: inline-flex;
+    }
+
+    .lv-home-hero-inner {
+        grid-template-columns: 1fr;
+
+        padding-top: 46px;
+    }
+
+    .lv-home-hero-copy {
+        text-align: center;
+    }
+
+    .lv-home-hero-copy > p,
+    .lv-home-search {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .lv-home-hero-actions,
+    .lv-home-trust-row {
+        justify-content: center;
+    }
+
+    .lv-home-hero-visual {
+        width: min(610px, 100%);
+
+        margin: 0 auto;
+    }
+
+    .lv-home-process {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap:
+            28px 16px;
+    }
+
+    .lv-home-process::before {
+        display: none;
+    }
+
+    .lv-home-role-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lv-home-role-card > p {
+        min-height: 0;
+    }
+
+    .lv-home-education-layout,
+    .lv-home-faq-layout {
+        grid-template-columns: 1fr;
+
+        gap: 32px;
+    }
+
+    .lv-home-commercial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lv-home-commercial-feature-large {
+        grid-row: auto;
+    }
+
+    .lv-home-footer-inner {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .lv-home-footer-brand {
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+
+    .lv-home-header-inner,
+    .lv-home-hero-inner,
+    .lv-home-section-inner {
+        width:
+            calc(100% - 26px);
+    }
+
+    .lv-home-header-inner {
+        min-height: 70px;
+    }
+
+    .lv-home-brand img {
+        width: 99px;
+    }
+
+    .lv-home-actions .lv-home-link-button {
+        display: none;
+    }
+
+    .lv-home-actions .lv-home-primary-button {
+        min-height: 39px;
+
+        padding:
+            0 13px;
+
+        font-size: 10px;
+    }
+
+    .lv-home-nav {
+        top: 76px;
+    }
+
+    .lv-home-mobile-overlay {
+        inset: 70px 0 0;
+    }
+
+    .lv-home-hero-inner {
+        min-height: 0;
+
+        padding:
+            38px 0 52px;
+    }
+
+    .lv-home-hero-copy h1 {
+        font-size:
+            clamp(45px, 13vw, 64px);
+    }
+
+    .lv-home-hero-copy > p {
+        font-size: 12px;
+    }
+
+    .lv-home-search {
+        grid-template-columns:
+            27px
+            minmax(0, 1fr);
+
+        padding:
+            9px 12px;
+    }
+
+    .lv-home-search button {
+        grid-column:
+            1 / -1;
+
+        width: 100%;
+    }
+
+    .lv-home-hero-actions {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .lv-home-hero-actions a {
+        width: 100%;
+    }
+
+    .lv-home-trust-row {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        width: 100%;
+    }
+
+    .lv-home-trust-row > div {
+        min-width: 0;
+
+        padding:
+            9px 7px;
+    }
+
+    .lv-home-trust-row span {
+        font-size: 7px;
+    }
+
+    .lv-home-hero-visual {
+        min-height: 475px;
+    }
+
+    .lv-home-command-card {
+        padding: 15px;
+    }
+
+    .lv-home-command-top {
+        display: block;
+    }
+
+    .lv-home-live-badge {
+        display: inline-block;
+
+        margin-top: 8px;
+    }
+
+    .lv-home-command-top h2 {
+        max-width: none;
+
+        font-size: 19px;
+    }
+
+    .lv-home-feature-mini-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lv-home-floating-card {
+        display: none;
+    }
+
+    .lv-home-section {
+        padding:
+            58px 0;
+    }
+
+    .lv-home-section-heading h2,
+    .lv-home-education-layout h2,
+    .lv-home-faq-copy h2 {
+        font-size: 36px;
+    }
+
+    .lv-home-category-grid,
+    .lv-home-process,
+    .lv-home-benefit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lv-home-category-card p {
+        min-height: 0;
+    }
+
+    .lv-home-education-layout {
+        gap: 25px;
+    }
+
+    .lv-home-academic-map {
+        padding: 16px;
+    }
+
+    .lv-home-final-cta {
+        padding:
+            12px 13px 54px;
+    }
+
+    .lv-home-final-cta-inner {
+        padding:
+            40px 18px;
+    }
+
+    .lv-home-final-cta-inner h2 {
+        font-size: 36px;
+    }
+
+    .lv-home-final-cta-inner > div {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .lv-home-final-cta-inner a {
+        width: 100%;
+    }
+
+    .lv-home-footer {
+        padding:
+            42px 16px 18px;
+    }
+
+    .lv-home-footer-inner {
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 26px 18px;
+    }
+
+    .lv-home-footer-bottom {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 390px) {
+
+    .lv-home-actions .lv-home-primary-button {
+        display: none;
+    }
+
+    .lv-home-trust-row {
+        grid-template-columns: 1fr;
+    }
+
+    .lv-home-footer-inner {
+        grid-template-columns: 1fr;
+    }
+
+}
+\n\n/* ==========================================================\n   LEARNVAULT COMMERCIAL POLISH — LOGO + AUTH ACTIONS\n========================================================== */\n\n.lv-home-header-inner {\n    grid-template-columns: 132px minmax(0, 1fr) auto;\n}\n\n.lv-home-brand {\n    min-width: 0;\n    padding: 0;\n    background: transparent !important;\n}\n\n.lv-home-brand img {\n    width: 92px !important;\n    height: 58px !important;\n    max-width: 92px !important;\n    object-fit: contain !important;\n    object-position: left center !important;\n    background: transparent !important;\n}\n\n.lv-home-dashboard-button {\n    min-height: 42px;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0 15px;\n    border: 1px solid rgba(91, 66, 237, .14);\n    border-radius: 11px;\n    background: rgba(91, 66, 237, .065);\n    color: var(--lvh-primary);\n    font-size: 12px;\n    font-weight: 850;\n    text-decoration: none;\n}\n\n.lv-home-dashboard-button[hidden] {\n    display: none !important;\n}\n\n.lv-home-footer-brand img {\n    width: 112px !important;\n    height: 78px !important;\n    object-fit: contain !important;\n    object-position: left center !important;\n    background: transparent !important;\n    filter: brightness(0) invert(1) !important;\n}\n\n@media (max-width: 1080px) {\n    .lv-home-header-inner {\n        grid-template-columns: 118px minmax(0, 1fr) auto;\n    }\n}\n\n@media (max-width: 900px) {\n    .lv-home-header-inner {\n        grid-template-columns: 1fr auto;\n    }\n}\n\n@media (max-width: 700px) {\n    .lv-home-dashboard-button {\n        display: none !important;\n    }\n}\n\n@media (max-width: 620px) {\n    .lv-home-brand img {\n        width: 82px !important;\n        height: 52px !important;\n    }\n\n    .lv-home-actions .lv-home-link-button,\n    .lv-home-actions .lv-home-primary-button {\n        display: inline-flex !important;\n    }\n\n    .lv-home-actions .lv-home-link-button {\n        min-height: 38px;\n        padding: 0 11px;\n        font-size: 9px;\n    }\n}\n\n@media (max-width: 430px) {\n    .lv-home-actions .lv-home-link-button {\n        display: none !important;\n    }\n}\n

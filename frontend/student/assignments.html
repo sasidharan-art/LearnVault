@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-page assignment-page">
+<div class="site student-site student-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="assignmentTopSearch" type="search" placeholder="Search assignments..." aria-label="Search assignments"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">STUDENT</span><strong id="headerStudentName">Student</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="student navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item active"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a></aside>
+<main class="main dashboard-main assignment-main">
+<section class="assignment-hero">
+<div>
+<span class="eyebrow">ASSIGNMENTS • YOUR COURSE</span>
+<h1>Apply what you learn, then get Faculty feedback.</h1>
+<p>Assignments connect subject learning to real work. Submit text, a link, or a supported file and review your marks and feedback after grading.</p>
+</div>
+<div class="assignment-hero-card">
+<span class="mini-label">LEARNING LOOP</span>
+<strong>Learn → Submit → Feedback → Improve</strong>
+<small>Only assignments matching your Course, Level and Subjects are shown.</small>
+</div>
+</section>
+
+<section class="assignment-stat-grid">
+<article><span>Available</span><strong id="studentAssignmentTotal">0</strong><small>Published assignments</small></article>
+<article><span>Submitted</span><strong id="studentAssignmentSubmitted">0</strong><small>Awaiting or completed grading</small></article>
+<article><span>Graded</span><strong id="studentAssignmentGraded">0</strong><small>Feedback available</small></article>
+<article><span>Due Soon</span><strong id="studentAssignmentDueSoon">0</strong><small>Next 7 days</small></article>
+</section>
+
+<section class="assignment-layout student-assignment-layout">
+<aside class="assignment-panel assignment-list-panel">
+<div class="assignment-panel-head assignment-row-head"><div><span class="eyebrow">YOUR WORK</span><h2>Assignments</h2></div><select id="studentAssignmentFilter" class="learning-filter-select"><option value="">All Subjects</option></select></div>
+<div id="studentAssignmentList" class="assignment-card-list"></div>
+</aside>
+
+<section class="assignment-panel assignment-detail-panel">
+<div id="studentAssignmentEmpty" class="progress-empty"><strong>Select an assignment</strong><span>Open an assignment to read instructions, submit work and view feedback.</span></div>
+<div id="studentAssignmentDetail" hidden>
+<div class="assignment-detail-head"><div><span class="eyebrow" id="studentAssignmentSubject">ASSIGNMENT</span><h2 id="studentAssignmentTitle">Assignment</h2><p id="studentAssignmentDescription"></p></div><span id="studentAssignmentState" class="status-pill approved">Open</span></div>
+<div class="assignment-info-grid"><article><span>Due</span><strong id="studentAssignmentDue">-</strong></article><article><span>Total Marks</span><strong id="studentAssignmentMarks">-</strong></article><article><span>Faculty</span><strong id="studentAssignmentFaculty">-</strong></article><article><span>Late Submission</span><strong id="studentAssignmentLate">-</strong></article></div>
+<div class="assignment-instructions"><span>INSTRUCTIONS</span><p id="studentAssignmentInstructions">-</p></div>
+
+<form id="studentAssignmentSubmitForm" class="assignment-submit-form" enctype="multipart/form-data">
+<label><span>Submission Notes / Answer</span><textarea id="studentSubmissionText" rows="5" placeholder="Write your answer, explanation or submission notes..."></textarea></label>
+<label><span>Submission Link</span><input id="studentSubmissionUrl" type="url" placeholder="GitHub, Google Drive, portfolio or other link"></label>
+<label><span>Upload File <small>(optional, max 20 MB)</small></span><input id="studentSubmissionFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.c,.cpp,.java,.py"></label>
+<div class="assignment-submit-actions"><span id="studentSubmissionExisting"></span><button type="submit" class="button button-primary">Submit Assignment</button></div>
+</form>
+
+<div id="studentGradePanel" class="assignment-grade-panel" hidden>
+<span class="eyebrow">FACULTY FEEDBACK</span>
+<div class="assignment-grade-score"><strong id="studentGradeScore">-</strong><span id="studentGradeTotal">/ -</span></div>
+<p id="studentGradeFeedback">-</p>
+</div>
+</div>
+</section>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="assignments.html">Assignments</a><a href="progress.html">Progress</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+
+<script src="../js/student-assignments.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Center | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-page commercial-role-page" data-role="student">
+<div class="site student-site commercial-role-site">
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="universalHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">STUDENT</span><strong id="headerStudentName">Student</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="STUDENT navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="study-hub.html" class="rail-item"><span class="rail-icon">★</span><span class="rail-label">Study Hub</span></a>
+<a href="focus-center.html" class="rail-item active"><span class="rail-icon">◴</span><span class="rail-label">Focus Center</span></a>
+<a href="search.html" class="rail-item"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="notifications.html" class="rail-item"><span class="rail-icon">◔</span><span class="rail-label">Notifications</span></a>
+<a href="calendar.html" class="rail-item"><span class="rail-icon">▦</span><span class="rail-label">Calendar</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="academic-progress.html" class="rail-item"><span class="rail-icon">↟</span><span class="rail-label">Academic Progress</span></a>
+<a href="profile.html" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a></aside>
+<main class="main dashboard-main commercial-dashboard-main lv-productivity-main">
+<section class="lv-productivity-hero">
+<div><span class="eyebrow">LEARNVAULT • STUDENT FOCUS CENTER</span><h1>Plan the day. <span>Study with intent.</span></h1><p>Turn your learning goals into a small daily plan, protect focused study time, keep revision notes, and jump quickly into Resources, Quizzes, Assignments and Progress.</p></div>
+<div class="lv-productivity-hero-card"><span>TODAY</span><strong id="lvProductivityGreeting">Loading...</strong><small id="lvProductivityHeroDetail">Your focused workspace is being prepared.</small></div>
+</section>
+<section class="lv-productivity-stat-grid">
+<article><span>Open Priorities</span><strong id="lvOpenTaskCount">0</strong><small>Tasks still requiring action</small></article>
+<article><span>Completed Today</span><strong id="lvCompletedTaskCount">0</strong><small>Items finished in this workspace</small></article>
+<article><span>Focus Sessions</span><strong id="lvFocusSessionCount">0</strong><small>Completed focus blocks today</small></article>
+<article><span>Unread Updates</span><strong id="lvUnreadNotificationCount">0</strong><small>Role-aware LearnVault notifications</small></article>
+</section>
+<section class="lv-productivity-layout">
+<div class="lv-productivity-column">
+<section class="lv-productivity-panel">
+<div class="lv-productivity-panel-head"><div><span class="lv-productivity-eyebrow" id="lvTaskEyebrow">TODAY BOARD</span><h2 id="lvTaskHeading">Priorities</h2><p id="lvTaskDescription">Create a short list of work that deserves attention today.</p></div></div>
+<form class="lv-task-form" id="lvTaskForm"><input id="lvTaskInput" maxlength="160" placeholder="Add a priority..." required><select id="lvTaskPriority"><option value="normal">Normal</option><option value="medium">Important</option><option value="high">Urgent</option></select><button class="lv-task-add" type="submit">Add</button></form>
+<div class="lv-task-list" id="lvTaskList"></div>
+</section>
+<section class="lv-productivity-panel">
+<div class="lv-productivity-panel-head"><div><span class="lv-productivity-eyebrow">QUICK ACTIONS</span><h2 id="lvQuickHeading">Continue your workflow</h2><p>Jump directly to the tools that matter for your role.</p></div></div>
+<div class="lv-quick-action-grid" id="lvQuickActions"></div>
+</section>
+</div>
+<aside class="lv-productivity-column">
+<section class="lv-productivity-panel lv-focus-timer">
+<div class="lv-productivity-panel-head"><div><span class="lv-productivity-eyebrow">FOCUS MODE</span><h2 id="lvFocusHeading">25-minute focus block</h2><p>Use a short distraction-free block for one important task.</p></div></div>
+<div class="lv-focus-ring"><strong id="lvTimerDisplay">25:00</strong><span id="lvTimerMode">Focus</span></div>
+<div class="lv-focus-actions"><button type="button" class="lv-focus-primary" id="lvTimerStart">Start</button><button type="button" class="lv-focus-secondary" id="lvTimerModeButton">Break 5m</button><button type="button" class="lv-focus-secondary" id="lvTimerReset">Reset</button></div>
+</section>
+<section class="lv-productivity-panel">
+<div class="lv-productivity-panel-head"><div><span class="lv-productivity-eyebrow">LIVE SIGNALS</span><h2>What needs attention</h2><p>Useful live signals from your current LearnVault account.</p></div></div>
+<div class="lv-live-signal-list" id="lvLiveSignals"><div class="lv-live-signal"><span>Loading account signals...</span><strong>—</strong></div></div>
+</section>
+<section class="lv-productivity-panel">
+<div class="lv-productivity-panel-head"><div><span class="lv-productivity-eyebrow">QUICK NOTES</span><h2 id="lvNotesHeading">Workspace notes</h2><p>Autosaved only in this browser for your signed-in account.</p></div></div>
+<textarea class="lv-productivity-note" id="lvQuickNote" maxlength="5000" placeholder="Write a quick note, revision point, class plan, or admin reminder..."></textarea><div class="lv-note-status" id="lvNoteStatus">Ready.</div>
+</section>
+</aside>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified commercial-footer"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="notifications.html">Notifications</a><a href="calendar.html">Calendar</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/productivity-center.js"></script>
+</body>
+</html>

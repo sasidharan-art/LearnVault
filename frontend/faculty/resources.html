@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Resources | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="faculty-page">
+<div class="site student-site faculty-site">
+<header class="topbar student-topbar">
+    <button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+    <div class="top-search dashboard-search"><span>⌕</span><input type="search" placeholder="Search your subjects and resources..." aria-label="Search faculty workspace"></div>
+    <nav class="top-actions student-account-actions">
+        <div class="student-head-identity"><span class="student-head-label">FACULTY</span><strong id="headerFacultyName">Faculty</strong></div>
+        <button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+    </nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="Faculty navigation"><a href="dashboard.html" class="rail-item" title="Dashboard" aria-label="Dashboard">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+    <span class="rail-label">Dashboard</span>
+</a>
+<a href="dashboard.html#subjects" class="rail-item" title="Assigned Subjects" aria-label="Assigned Subjects">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+    <span class="rail-label">Assigned Subjects</span>
+</a>
+<a href="resources.html#upload" class="rail-item" title="Upload Resource" aria-label="Upload Resource">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 20h14"/></svg></span>
+    <span class="rail-label">Upload Resource</span>
+</a>
+<a href="resources.html#myResources" class="rail-item active" title="My Resources" aria-label="My Resources">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+    <span class="rail-label">My Resources</span>
+</a>
+<a href="dashboard.html#account" class="rail-item" title="Account" aria-label="Account">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.7-5 3.2-7 7.5-7s6.8 2 7.5 7"/></svg></span>
+    <span class="rail-label">Account</span>
+</a></aside>
+<main class="main dashboard-main">
+<section class="faculty-hero compact-faculty-hero">
+    <div><span class="eyebrow">FACULTY • RESOURCE MANAGEMENT</span><h1>Upload learning material to your assigned subjects.</h1><p>PDF, PPT/PPTX, DOC/DOCX and image files are supported up to 15 MB. External learning links are also supported.</p></div>
+</section>
+
+<section class="section dashboard-section" id="upload">
+    <div class="faculty-upload-panel">
+        <div class="section-heading dashboard-section-heading"><span class="eyebrow">UPLOAD RESOURCE</span><h2>Add learning material</h2><p>Publish resources directly to students in your assigned subjects. Admin can see and moderate all content.</p></div>
+        <form id="facultyResourceForm" class="resource-upload-form" enctype="multipart/form-data">
+            <label>Assigned Subject<select name="subjectId" id="facultySubjectSelect" required><option value="">Loading subjects...</option></select></label>
+            <label>Resource Type<select name="resourceTypeId" id="facultyResourceTypeSelect" required><option value="">Loading types...</option></select></label>
+            <label class="wide">Title<input name="title" required placeholder="e.g. DBMS Unit 1 Notes"></label>
+            <label class="wide">Description<textarea name="description" rows="4" placeholder="Short description of this resource"></textarea></label>
+            <label>File<input name="file" type="file" accept=".pdf,.ppt,.pptx,.doc,.docx,.png,.jpg,.jpeg,.webp"></label>
+            <label>External Link<input name="externalUrl" type="url" placeholder="https://..."></label>
+            <div class="wide resource-upload-note">Choose a file or provide an external link. You can also provide both when useful.</div>
+            <button class="button button-primary" type="submit" id="facultyUploadButton">Publish Resource</button>
+        </form>
+    </div>
+</section>
+
+<section class="section surface-section dashboard-section" id="myResources">
+    <div class="section-heading dashboard-section-heading"><span class="eyebrow">YOUR CONTENT</span><h2>My resources</h2><p>Edit, publish/unpublish, or delete your own learning resources.</p></div>
+    <div id="facultyResourceList" class="faculty-resource-list"><div class="admin-empty-state">Loading resources...</div></div>
+</section>
+
+<section class="section dashboard-section faculty-edit-section" id="editResourceSection" hidden>
+    <div class="faculty-upload-panel">
+        <div class="section-heading dashboard-section-heading"><span class="eyebrow">EDIT RESOURCE</span><h2>Update resource details</h2></div>
+        <form id="facultyEditResourceForm" class="resource-upload-form">
+            <input type="hidden" id="editResourceId">
+            <label class="wide">Title<input id="editResourceTitle" required></label>
+            <label class="wide">Description<textarea id="editResourceDescription" rows="4"></textarea></label>
+            <label class="wide">External Link<input id="editResourceUrl" type="url" placeholder="https://..."></label>
+            <div class="faculty-edit-actions wide"><button class="button button-primary" type="submit">Save Changes</button><button class="button button-soft" type="button" id="cancelEditResource">Cancel</button></div>
+        </form>
+    </div>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner">
+    <a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a>
+    <nav><a href="dashboard.html">Dashboard</a><a href="dashboard.html#subjects">Subjects</a><a href="resources.html">Resources</a></nav>
+    <span>Learn • Practice • Grow</span>
+</div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/faculty-common.js"></script>
+<script src="../js/faculty-resources.js"></script>
+</body>
+</html>

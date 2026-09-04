@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LearnVault - Learn, practice and grow through one connected academic workspace.">
+<title>LearnVault | Learn • Practice • Grow</title>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/home-reference.css">
+</head>
+
+<body class="lv-public-home">
+
+<header class="lv-home-header" id="homeHeader">
+    <div class="lv-home-header-inner">
+
+        <a href="index.html" class="lv-home-brand" aria-label="LearnVault home">
+            <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+
+        <nav class="lv-home-nav" id="homeNavigation" aria-label="Primary navigation">
+            <a href="#platform">Platform</a>
+            <a href="#learning">Learning</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#roles">For Everyone</a>
+            <a href="#why-learnvault">Why LearnVault</a>
+            <a href="help.html">Help Center</a>
+            <a href="help.html">Help</a>
+        </nav>
+
+        <div class="lv-home-actions">
+            <a href="login.html" class="lv-home-link-button" id="homeLoginButton">Login</a>
+            <a href="register.html" class="lv-home-primary-button" id="homeCreateButton">Create Account</a>
+            <a href="student/dashboard.html" class="lv-home-dashboard-button" id="homeDashboardButton" hidden>Dashboard</a>
+
+            <button
+                type="button"
+                class="lv-home-menu-button"
+                id="homeMenuButton"
+                aria-label="Open navigation"
+                aria-controls="homeNavigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </div>
+</header>
+
+
+<main>
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="lv-home-hero" id="platform">
+
+    <div class="lv-home-hero-inner">
+
+        <div class="lv-home-hero-copy">
+
+            <span class="lv-home-kicker">
+                ONE CONNECTED LEARNING WORKSPACE
+            </span>
+
+            <h1>
+                Learn what matters.
+                <span>Practice with purpose.</span>
+                Grow with clarity.
+            </h1>
+
+            <p>
+                LearnVault brings course resources, videos, question banks, quizzes,
+                assignments, skills, progress tracking, academic updates and peer
+                learning into one organised education platform.
+            </p>
+
+            <form class="lv-home-search" id="homeSearchForm">
+                <span class="lv-home-search-icon" aria-hidden="true">⌕</span>
+
+                <input
+                    id="homeSearchInput"
+                    type="search"
+                    placeholder="Search DBMS, DSA, networks, aptitude..."
+                    aria-label="Search LearnVault"
+                    autocomplete="off"
+                >
+
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="lv-home-hero-actions">
+                <a href="register.html" class="lv-home-primary-button lv-home-large-button">
+                    Start Learning
+                </a>
+
+                <a href="#how-it-works" class="lv-home-secondary-button lv-home-large-button">
+                    See How It Works
+                </a>
+            </div>
+
+            <div class="lv-home-trust-row">
+                <div>
+                    <strong>3</strong>
+                    <span>Connected Roles</span>
+                </div>
+
+                <div>
+                    <strong>1</strong>
+                    <span>Unified Learning Flow</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Academic Focus</span>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="lv-home-hero-visual" aria-label="LearnVault learning workspace preview">
+
+            <div class="lv-home-visual-glow"></div>
+
+            <article class="lv-home-command-card">
+
+                <div class="lv-home-command-top">
+                    <div>
+                        <span>YOUR LEARNING COMMAND CENTER</span>
+                        <h2>Everything important stays one click away.</h2>
+                    </div>
+
+                    <span class="lv-home-live-badge">Live Platform</span>
+                </div>
+
+                <div class="lv-home-flow-card">
+                    <span class="lv-home-flow-mark">LV</span>
+
+                    <div>
+                        <small>One connected learning flow</small>
+                        <strong>Learn → Practice → Assess → Improve</strong>
+                        <span>Resources, assessments and progress work together.</span>
+                    </div>
+                </div>
+
+                <div class="lv-home-feature-mini-grid">
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">▣</span>
+                        <div>
+                            <strong>Resources</strong>
+                            <small>Notes, files & videos</small>
+                        </div>
+                    </a>
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">?</span>
+                        <div>
+                            <strong>Question Bank</strong>
+                            <small>Topic-wise practice</small>
+                        </div>
+                    </a>
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">✓</span>
+                        <div>
+                            <strong>Quizzes</strong>
+                            <small>Scores & review</small>
+                        </div>
+                    </a>
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">▤</span>
+                        <div>
+                            <strong>Assignments</strong>
+                            <small>Submit & feedback</small>
+                        </div>
+                    </a>
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">↗</span>
+                        <div>
+                            <strong>Progress</strong>
+                            <small>Mastery & weak areas</small>
+                        </div>
+                    </a>
+
+                    <a href="#learning">
+                        <span class="lv-home-mini-icon">◉</span>
+                        <div>
+                            <strong>Peer Learning</strong>
+                            <small>Discuss & collaborate</small>
+                        </div>
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="lv-home-floating-card lv-home-floating-card-one">
+                <span>Recommended next</span>
+                <strong>Complete DBMS Quiz</strong>
+                <small>Based on your recent learning activity</small>
+            </article>
+
+            <article class="lv-home-floating-card lv-home-floating-card-two">
+                <span>Academic update</span>
+                <strong>2nd Year progression ready</strong>
+                <small>Track Course and Level changes</small>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     QUICK LEARNING CATEGORIES
+====================================================== -->
+
+<section class="lv-home-section lv-home-section-soft" id="learning">
+
+    <div class="lv-home-section-inner">
+
+        <div class="lv-home-section-heading">
+            <span>EXPLORE LEARNING</span>
+            <h2>Everything students need to move from studying to understanding.</h2>
+            <p>
+                Each learning tool is connected to the same Course, Level and Subject structure.
+            </p>
+        </div>
+
+        <div class="lv-home-category-grid">
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">▣</span>
+                <h3>Resources & Videos</h3>
+                <p>Access approved notes, PDFs, presentations, documents, links and learning videos.</p>
+                <a href="login.html">Explore Resources →</a>
+            </article>
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">?</span>
+                <h3>Question Bank</h3>
+                <p>Practice topic-wise and unit-wise questions created by Faculty for assigned Subjects.</p>
+                <a href="login.html">Start Practice →</a>
+            </article>
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">✓</span>
+                <h3>Quizzes</h3>
+                <p>Attempt structured quizzes, review answers and understand performance over time.</p>
+                <a href="login.html">Take a Quiz →</a>
+            </article>
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">▤</span>
+                <h3>Assignments</h3>
+                <p>View deadlines, submit work, receive marks and keep Faculty feedback in one place.</p>
+                <a href="login.html">View Assignments →</a>
+            </article>
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">◎</span>
+                <h3>Skills</h3>
+                <p>Track practical and academic skills with measurable Student progress.</p>
+                <a href="login.html">Build Skills →</a>
+            </article>
+
+            <article class="lv-home-category-card">
+                <span class="lv-home-category-icon">◉</span>
+                <h3>Peer Learning</h3>
+                <p>Join Subject-based learning groups, discuss concepts and learn collaboratively.</p>
+                <a href="login.html">Join Discussions →</a>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     HOW IT WORKS
+====================================================== -->
+
+<section class="lv-home-section" id="how-it-works">
+
+    <div class="lv-home-section-inner">
+
+        <div class="lv-home-section-heading lv-home-heading-centered">
+            <span>HOW LEARNVAULT WORKS</span>
+            <h2>A simple learning journey from registration to academic growth.</h2>
+        </div>
+
+        <div class="lv-home-process">
+
+            <article>
+                <span class="lv-home-step-number">01</span>
+                <div class="lv-home-step-icon">◇</div>
+                <h3>Create Your Learning Profile</h3>
+                <p>Select your Course / Program and Current Level / Year during registration.</p>
+            </article>
+
+            <article>
+                <span class="lv-home-step-number">02</span>
+                <div class="lv-home-step-icon">▣</div>
+                <h3>Learn From the Right Content</h3>
+                <p>LearnVault automatically connects you with relevant Subjects, Resources and Videos.</p>
+            </article>
+
+            <article>
+                <span class="lv-home-step-number">03</span>
+                <div class="lv-home-step-icon">✓</div>
+                <h3>Practice & Get Assessed</h3>
+                <p>Use Question Banks, Quizzes and Assignments to strengthen understanding.</p>
+            </article>
+
+            <article>
+                <span class="lv-home-step-number">04</span>
+                <div class="lv-home-step-icon">↗</div>
+                <h3>Track Progress & Improve</h3>
+                <p>Review mastery, weak areas, Skill progress, grades and recommended next actions.</p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     COMMERCIAL FEATURES
+====================================================== -->
+
+<section class="lv-home-section lv-home-section-dark" id="why-learnvault">
+
+    <div class="lv-home-section-inner">
+
+        <div class="lv-home-section-heading lv-home-heading-light">
+            <span>BUILT FOR CONTINUOUS LEARNING</span>
+            <h2>More than content storage. LearnVault helps manage the complete learning journey.</h2>
+        </div>
+
+        <div class="lv-home-commercial-grid">
+
+            <article class="lv-home-commercial-feature lv-home-commercial-feature-large">
+                <span class="lv-home-commercial-label">PERSONALIZED</span>
+                <h3>Study Hub</h3>
+                <p>
+                    Students receive a prioritized learning feed based on upcoming work,
+                    Quiz performance, incomplete Skills, new Resources and Peer activity.
+                </p>
+
+                <div class="lv-home-study-preview">
+                    <div>
+                        <span>1</span>
+                        <div>
+                            <strong>Assignment due tomorrow</strong>
+                            <small>Database Management Systems</small>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>2</span>
+                        <div>
+                            <strong>Practice weak Quiz topic</strong>
+                            <small>Normalization & SQL</small>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span>3</span>
+                        <div>
+                            <strong>Continue Skill progress</strong>
+                            <small>Query Design • 68%</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">STAY UPDATED</span>
+                <h3>Smart Notifications</h3>
+                <p>
+                    Students, Faculty and Admin receive role-aware updates with unread,
+                    important and urgent states.
+                </p>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">PLAN AHEAD</span>
+                <h3>Learning Calendar</h3>
+                <p>
+                    See Assignments, Quiz activity, announcements and academic events in one timeline.
+                </p>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">KEEP HISTORY</span>
+                <h3>Academic Progression</h3>
+                <p>
+                    Move from one Year, Grade or Stream to the next without losing previous academic history.
+                </p>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">FIND FASTER</span>
+                <h3>Global Search</h3>
+                <p>
+                    Search across Resources, Subjects, Questions, Quizzes, Assignments and learning activity.
+                </p>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">MOVE FASTER</span>
+                <h3>Quick Access Command Center</h3>
+                <p>
+                    Open any major Student, Faculty or Admin tool instantly with Ctrl + K, without hunting through menus.
+                </p>
+            </article>
+
+            <article class="lv-home-commercial-feature">
+                <span class="lv-home-commercial-label">CONTINUE EASILY</span>
+                <h3>Recently Visited Tools</h3>
+                <p>
+                    LearnVault remembers recently opened role pages in the browser so users can resume work with fewer clicks.
+                </p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     ROLE MODULES
+====================================================== -->
+
+<section class="lv-home-section" id="roles">
+
+    <div class="lv-home-section-inner">
+
+        <div class="lv-home-section-heading lv-home-heading-centered">
+            <span>ONE PLATFORM • THREE CONNECTED ROLES</span>
+            <h2>Simple for Students. Powerful for Faculty. Controlled by Admin.</h2>
+        </div>
+
+        <div class="lv-home-role-grid">
+
+            <article class="lv-home-role-card lv-home-role-student">
+
+                <div class="lv-home-role-top">
+                    <span class="lv-home-role-icon">S</span>
+                    <span class="lv-home-role-badge">STUDENT</span>
+                </div>
+
+                <h3>Learn with direction.</h3>
+
+                <p>
+                    Everything a Student needs is organised around the selected Course and Level.
+                </p>
+
+                <ul>
+                    <li>Personalized Study Hub</li>
+                    <li>Resources & Videos</li>
+                    <li>Question Bank & Quizzes</li>
+                    <li>Assignments & Feedback</li>
+                    <li>Progress & Weak Areas</li>
+                    <li>Skills & Peer Groups</li>
+                    <li>Academic Progression</li>
+                </ul>
+
+                <a href="register.html">Create Student Account →</a>
+
+            </article>
+
+
+            <article class="lv-home-role-card lv-home-role-faculty">
+
+                <div class="lv-home-role-top">
+                    <span class="lv-home-role-icon">F</span>
+                    <span class="lv-home-role-badge">FACULTY</span>
+                </div>
+
+                <h3>Teach with structure.</h3>
+
+                <p>
+                    Faculty control learning inside assigned Subjects without unnecessary approval steps.
+                </p>
+
+                <ul>
+                    <li>Assigned Subject access</li>
+                    <li>Resource & Video publishing</li>
+                    <li>Question Bank management</li>
+                    <li>Quiz Builder</li>
+                    <li>Assignments & Grading</li>
+                    <li>Skill tracking</li>
+                    <li>Subject announcements</li>
+                </ul>
+
+                <a href="login.html">Faculty Login →</a>
+
+            </article>
+
+
+            <article class="lv-home-role-card lv-home-role-admin">
+
+                <div class="lv-home-role-top">
+                    <span class="lv-home-role-icon">A</span>
+                    <span class="lv-home-role-badge">ADMIN</span>
+                </div>
+
+                <h3>Govern the whole platform.</h3>
+
+                <p>
+                    Admin controls academic structure, accounts, progression, moderation and monitoring.
+                </p>
+
+                <ul>
+                    <li>Academic Structure</li>
+                    <li>Users & Faculty</li>
+                    <li>Suspend / Reactivate Accounts</li>
+                    <li>Faculty Subject Assignment</li>
+                    <li>Student Advancement</li>
+                    <li>Platform Oversight</li>
+                    <li>Reports & Database Health</li>
+                </ul>
+
+                <a href="login.html">Admin Login →</a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     EDUCATION PATHS
+====================================================== -->
+
+<section class="lv-home-section lv-home-section-soft">
+
+    <div class="lv-home-section-inner lv-home-education-layout">
+
+        <div>
+            <span class="lv-home-kicker">FLEXIBLE ACADEMIC STRUCTURE</span>
+
+            <h2>
+                Built for more than one degree or education system.
+            </h2>
+
+            <p>
+                LearnVault can organise Courses, Levels and Subjects across different
+                education paths instead of being restricted to a single engineering structure.
+            </p>
+
+            <div class="lv-home-domain-chips">
+                <span>Engineering</span>
+                <span>Medical</span>
+                <span>Architecture</span>
+                <span>Design</span>
+                <span>Science</span>
+                <span>Commerce</span>
+                <span>Arts</span>
+                <span>Law</span>
+                <span>Management</span>
+                <span>School</span>
+                <span>Diploma</span>
+                <span>Competitive Exams</span>
+                <span>Certifications</span>
+            </div>
+        </div>
+
+        <div class="lv-home-academic-map">
+
+            <div class="lv-home-map-node lv-home-map-domain">
+                <small>DOMAIN</small>
+                <strong>Engineering</strong>
+            </div>
+
+            <span class="lv-home-map-line"></span>
+
+            <div class="lv-home-map-node">
+                <small>COURSE</small>
+                <strong>B.Tech CSE</strong>
+            </div>
+
+            <span class="lv-home-map-line"></span>
+
+            <div class="lv-home-map-node">
+                <small>LEVEL</small>
+                <strong>2nd Year</strong>
+            </div>
+
+            <span class="lv-home-map-line"></span>
+
+            <div class="lv-home-map-node">
+                <small>SUBJECT</small>
+                <strong>DBMS</strong>
+            </div>
+
+            <span class="lv-home-map-line"></span>
+
+            <div class="lv-home-map-node lv-home-map-content">
+                <small>LEARNING</small>
+                <strong>Resources • Quiz • Assignment • Skills</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     WHY CHOOSE
+====================================================== -->
+
+<section class="lv-home-section">
+
+    <div class="lv-home-section-inner">
+
+        <div class="lv-home-section-heading lv-home-heading-centered">
+            <span>WHY LEARNVAULT</span>
+            <h2>Designed to reduce friction between learning, teaching and administration.</h2>
+        </div>
+
+        <div class="lv-home-benefit-grid">
+
+            <article>
+                <span>01</span>
+                <h3>Relevant by default</h3>
+                <p>Students see learning content based on their Course and Level instead of searching through unrelated material.</p>
+            </article>
+
+            <article>
+                <span>02</span>
+                <h3>Faculty-owned learning</h3>
+                <p>Faculty can create Questions, Quizzes, Assignments and Skills for assigned Subjects through one structured workflow.</p>
+            </article>
+
+            <article>
+                <span>03</span>
+                <h3>Centralized Admin control</h3>
+                <p>Admin can monitor accounts, academic structure, progression, content, peer activity and platform reports.</p>
+            </article>
+
+            <article>
+                <span>04</span>
+                <h3>Connected learning data</h3>
+                <p>Assessments, Skills, Resources, academic progression and notifications work as one platform instead of isolated modules.</p>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FAQ
+====================================================== -->
+
+<section class="lv-home-section lv-home-section-soft">
+
+    <div class="lv-home-section-inner lv-home-faq-layout">
+
+        <div class="lv-home-faq-copy">
+            <span class="lv-home-kicker">COMMON QUESTIONS</span>
+            <h2>Built to be simple from the first login.</h2>
+            <p>
+                LearnVault keeps the public experience clear while giving each role a
+                focused workspace after authentication.
+            </p>
+        </div>
+
+        <div class="lv-home-faq-list">
+
+            <details>
+                <summary>Who can create a LearnVault account?</summary>
+                <p>Students can self-register. Faculty accounts are created by Admin. Admin accounts are not publicly registered.</p>
+            </details>
+
+            <details>
+                <summary>How does LearnVault know which content a Student should see?</summary>
+                <p>The Student's selected Course / Program and Current Level / Year determine the matching Subjects and learning content.</p>
+            </details>
+
+            <details>
+                <summary>What happens when a Student moves to the next Year or Grade?</summary>
+                <p>The Student can request academic progression. Admin approves the change, and LearnVault preserves previous academic history.</p>
+            </details>
+
+            <details>
+                <summary>Can Faculty manage their own learning content?</summary>
+                <p>Yes. Faculty can manage Resources, Questions, Quizzes, Assignments, Skills and Subject announcements for assigned Subjects.</p>
+            </details>
+
+            <details>
+                <summary>What can Admin monitor?</summary>
+                <p>Admin can manage academic structure, accounts, Faculty assignments, Student progression, learning modules, Peer activity, announcements and reports.</p>
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     FINAL CTA
+====================================================== -->
+
+<section class="lv-home-final-cta">
+
+    <div class="lv-home-final-cta-inner">
+
+        <span>LEARN • PRACTICE • GROW</span>
+
+        <h2>
+            Turn scattered academic work into one connected learning journey.
+        </h2>
+
+        <p>
+            Create your Student account and let LearnVault organise your learning around
+            the Course and Level that matter to you.
+        </p>
+
+        <div>
+            <a href="register.html" class="lv-home-white-button">Create Account</a>
+            <a href="login.html" class="lv-home-outline-light-button">Login</a>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="lv-home-footer">
+
+    <div class="lv-home-footer-inner">
+
+        <div class="lv-home-footer-brand">
+            <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+            <p>
+                One organised workspace for learning, practice, assessment,
+                progress and academic growth.
+            </p>
+        </div>
+
+        <div>
+            <strong>Platform</strong>
+            <a href="#learning">Learning Tools</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#roles">Roles</a>
+            <a href="#why-learnvault">Why LearnVault</a>
+        </div>
+
+        <div>
+            <strong>Students</strong>
+            <a href="register.html">Create Account</a>
+            <a href="login.html">Login</a>
+            <a href="login.html">Resources</a>
+            <a href="login.html">Quizzes</a>
+        </div>
+
+        <div>
+            <strong>Access</strong>
+            <a href="login.html">Faculty Login</a>
+            <a href="login.html">Admin Login</a>
+            <a href="forgot-password.html">Forgot Password</a>
+        </div>
+
+    </div>
+
+    <div class="lv-home-footer-bottom">
+        <span>LearnVault</span>
+        <span>Learn • Practice • Grow</span>
+    </div>
+
+</footer>
+
+
+<div class="lv-home-mobile-overlay" id="homeMobileOverlay"></div>
+
+<script src="js/home-reference.js"></script>
+</body>
+</html>

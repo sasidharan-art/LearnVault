@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Library | LearnVault</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-resource-page">
+
+<div class="site student-site">
+
+    <header class="topbar student-topbar">
+
+        <button
+            type="button"
+            class="mobile-nav-toggle"
+            id="mobileNavToggle"
+            aria-label="Open navigation"
+            aria-controls="primaryNavigation"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a
+            href="../index.html"
+            class="brand-link"
+            aria-label="LearnVault home"
+        >
+            <img
+                src="../assets/logo/learnvault-logo.png"
+                alt="LearnVault"
+                class="brand-logo"
+            >
+        </a>
+
+        <div class="top-search dashboard-search">
+            <span>⌕</span>
+            <input
+                id="topResourceSearch"
+                type="search"
+                placeholder="Search your course resources..."
+                aria-label="Search resources"
+            >
+        </div>
+
+        <nav class="top-actions student-account-actions">
+            <div class="student-head-identity">
+                <span class="student-head-label">STUDENT</span>
+                <strong id="headerStudentName">Student</strong>
+            </div>
+
+            <button
+                type="button"
+                class="button button-ghost"
+                id="logoutButton"
+            >
+                Logout
+            </button>
+        </nav>
+
+    </header>
+
+
+    <div class="page-shell">
+
+        <aside
+            class="icon-rail"
+            id="primaryNavigation"
+            aria-label="Student navigation"
+        >
+            <a
+                href="dashboard.html"
+                class="rail-item"
+                title="Dashboard"
+                aria-label="Dashboard"
+            >
+                <span class="rail-icon">⌂</span>
+                <span class="rail-label">Dashboard</span>
+            </a>
+
+            <a
+                href="resources.html"
+                class="rail-item active"
+                title="Resources"
+                aria-label="Resources"
+            >
+                <span class="rail-icon">▣</span>
+                <span class="rail-label">Resources</span>
+            </a>
+
+            <a
+                href="questions.html"
+                class="rail-item"
+                title="Question Bank"
+                aria-label="Question Bank"
+            >
+                <span class="rail-icon">?</span>
+                <span class="rail-label">Question Bank</span>
+            </a>
+
+            <a
+                href="quizzes.html"
+                class="rail-item"
+                title="Quizzes"
+                aria-label="Quizzes"
+            >
+                <span class="rail-icon">✓</span>
+                <span class="rail-label">Quizzes</span>
+            </a>
+
+            <a
+                href="#"
+                class="rail-item coming-student-resource-module"
+                title="Peer Groups"
+                aria-label="Peer Groups"
+            >
+                <span class="rail-icon">◉</span>
+                <span class="rail-label">Peer Groups</span>
+            </a>
+
+            <a
+                href="#"
+                class="rail-item coming-student-resource-module"
+                title="Skills"
+                aria-label="Skills"
+            >
+                <span class="rail-icon">◎</span>
+                <span class="rail-label">Skills</span>
+            </a>
+
+            <a
+                href="dashboard.html#account"
+                class="rail-item"
+                title="Account"
+                aria-label="Account"
+            >
+                <span class="rail-icon">◌</span>
+                <span class="rail-label">Account</span>
+            </a>
+        </aside>
+
+
+        <main class="main dashboard-main student-resource-main">
+
+            <div
+                class="dashboard-loading"
+                id="studentResourceLoading"
+            >
+                <div class="loading-mark">LV</div>
+                <strong>
+                    Loading your Resource Library...
+                </strong>
+            </div>
+
+
+            <div
+                id="studentResourceContent"
+                hidden
+            >
+
+                <section class="student-resource-hero">
+
+                    <div class="student-resource-hero-copy">
+
+                        <span class="eyebrow">
+                            YOUR COURSE • APPROVED CONTENT
+                        </span>
+
+                        <h1>
+                            Your Resource Library.
+                        </h1>
+
+                        <p>
+                            LearnVault automatically shows only approved
+                            resources belonging to your Course, Level and Subjects.
+                        </p>
+
+                        <div class="student-course-path">
+                            <span id="resourceDomain">-</span>
+                            <b>→</b>
+                            <span id="resourceCourse">-</span>
+                            <b>→</b>
+                            <span id="resourceLevel">-</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-resource-summary-card">
+
+                        <span class="mini-label">
+                            YOUR LIBRARY
+                        </span>
+
+                        <div class="student-resource-summary-grid">
+
+                            <article>
+                                <span>Approved</span>
+                                <strong id="resourceTotalCount">0</strong>
+                            </article>
+
+                            <article>
+                                <span>Subjects</span>
+                                <strong id="resourceSubjectCount">0</strong>
+                            </article>
+
+                            <article>
+                                <span>Videos</span>
+                                <strong id="resourceVideoCount">0</strong>
+                            </article>
+
+                        </div>
+
+                        <p>
+                            Faculty uploads appear here only after Admin approval.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <section class="student-resource-controls">
+
+                    <div class="student-resource-filter-head">
+                        <div>
+                            <span class="eyebrow">
+                                FIND LEARNING MATERIAL
+                            </span>
+
+                            <h2>
+                                Filter your resources
+                            </h2>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="button button-soft"
+                            id="clearResourceFilters"
+                        >
+                            Clear Filters
+                        </button>
+                    </div>
+
+
+                    <div class="student-resource-filter-grid">
+
+                        <label class="student-resource-search-field">
+                            <span>Search</span>
+
+                            <div>
+                                <span>⌕</span>
+
+                                <input
+                                    id="resourceSearch"
+                                    type="search"
+                                    placeholder="DBMS, architecture, notes, video..."
+                                >
+                            </div>
+                        </label>
+
+
+                        <label>
+                            <span>Subject</span>
+
+                            <select id="resourceSubjectFilter">
+                                <option value="">
+                                    All Subjects
+                                </option>
+                            </select>
+                        </label>
+
+
+                        <label>
+                            <span>Resource Type</span>
+
+                            <select id="resourceTypeFilter">
+                                <option value="">
+                                    All Types
+                                </option>
+                            </select>
+                        </label>
+
+                    </div>
+
+
+                    <div
+                        class="student-resource-type-chips"
+                        id="resourceTypeChips"
+                    ></div>
+
+                </section>
+
+
+                <section class="student-resource-results-section">
+
+                    <div class="student-resource-results-head">
+
+                        <div>
+                            <span class="eyebrow">
+                                APPROVED FOR YOUR COURSE
+                            </span>
+
+                            <h2 id="resourceResultsTitle">
+                                Learning Resources
+                            </h2>
+
+                            <p id="resourceResultsDescription">
+                                Loading approved course content...
+                            </p>
+                        </div>
+
+                        <span
+                            class="student-result-count"
+                            id="resourceResultCount"
+                        >
+                            0 items
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="student-resource-grid"
+                        id="studentResourceGrid"
+                    ></div>
+
+                </section>
+
+
+                <section class="student-learning-roadmap">
+
+                    <div>
+                        <span class="eyebrow">
+                            LEARNVAULT LEARNING SYSTEM
+                        </span>
+
+                        <h2>
+                            More than a file library.
+                        </h2>
+
+                        <p>
+                            Resources, videos, Question Bank and Quizzes are now live.
+                            Peer Groups, Skills and Progress connect to the
+                            same course-specific experience next.
+                        </p>
+                    </div>
+
+
+                    <div class="student-learning-roadmap-grid">
+
+                        <article class="live">
+                            <span>LIVE</span>
+                            <strong>Resources</strong>
+                            <small>Notes, PDFs, PPTs, Docs, Images, Links</small>
+                        </article>
+
+                        <article class="live">
+                            <span>LIVE</span>
+                            <strong>Videos</strong>
+                            <small>Approved external course videos</small>
+                        </article>
+
+                        <article class="live">
+                            <span>LIVE</span>
+                            <strong>Question Bank</strong>
+                            <small>Approved subject and unit questions</small>
+                        </article>
+
+                        <article>
+                            <span>LIVE</span>
+                            <strong>Quizzes</strong>
+                            <small>Attempts, scores and revision insights</small>
+                        </article>
+
+                        <article>
+                            <span>PLANNED</span>
+                            <strong>Peer Groups</strong>
+                            <small>Course discussions and collaborative learning</small>
+                        </article>
+
+                        <article>
+                            <span>PLANNED</span>
+                            <strong>Progress</strong>
+                            <small>Completion and learning growth</small>
+                        </article>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <div
+        class="nav-overlay"
+        id="navOverlay"
+    ></div>
+
+
+    <footer class="footer student-footer-unified">
+
+        <div class="footer-inner">
+
+            <a
+                href="../index.html"
+                class="footer-brand"
+            >
+                <img
+                    src="../assets/logo/learnvault-logo.png"
+                    alt="LearnVault"
+                >
+            </a>
+
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="resources.html">Resources</a>
+                <a href="dashboard.html#account">Account</a>
+            </nav>
+
+            <span>
+                Learn • Practice • Grow
+            </span>
+
+        </div>
+
+    </footer>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/student-resources.js"></script>
+
+</body>
+</html>

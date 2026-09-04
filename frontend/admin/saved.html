@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pinned Controls | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page commercial-role-page" data-role="admin">
+<div class="site admin-site commercial-role-site">
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="universalHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">ADMIN</span><strong id="headerAdminName">Admin</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="ADMIN navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="operations-center.html" class="rail-item"><span class="rail-icon">◴</span><span class="rail-label">Operations Center</span></a>
+<a href="saved.html" class="rail-item active"><span class="rail-icon">☆</span><span class="rail-label">Pinned Controls</span></a>
+<a href="search.html" class="rail-item"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="notifications.html" class="rail-item"><span class="rail-icon">◔</span><span class="rail-label">Notifications</span></a>
+<a href="calendar.html" class="rail-item"><span class="rail-icon">▦</span><span class="rail-label">Calendar</span></a>
+<a href="academic.html" class="rail-item"><span class="rail-icon">▥</span><span class="rail-label">Academic Structure</span></a>
+<a href="users.html" class="rail-item"><span class="rail-icon">◇</span><span class="rail-label">Users & Faculty</span></a>
+<a href="student-advancement.html" class="rail-item"><span class="rail-icon">↟</span><span class="rail-label">Student Advancement</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="reports.html" class="rail-item"><span class="rail-icon">▦</span><span class="rail-label">Reports</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="approvals.html" class="rail-item"><span class="rail-icon">◈</span><span class="rail-label">Oversight</span></a>
+<a href="profile.html" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a></aside>
+<main class="main dashboard-main commercial-dashboard-main lv-saved-main">
+<section class="lv-saved-hero">
+<div><span class="eyebrow">LEARNVAULT • SAVED WORKSPACE</span><h1>Keep critical platform controls <span>within immediate reach.</span></h1><p>Pin frequently used governance, monitoring, academic and reporting pages for faster administration.</p></div>
+<div class="lv-saved-hero-card"><span>PINNED</span><strong id="lvSavedCount">0</strong><small>Use the ☆ button in the header of any LearnVault role page to pin or unpin it.</small></div>
+</section>
+<section class="lv-saved-layout">
+<div class="lv-saved-column">
+<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">PINNED</span><h2>Pinned Controls</h2><p>Your frequently used LearnVault modules.</p></div><div class="lv-saved-grid" id="lvPinnedWorkspace"><div class="integration-empty">Loading pinned pages...</div></div></section>
+<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">CONTINUE</span><h2>Recently visited</h2><p>Jump back into the modules you used most recently.</p></div><div class="lv-saved-grid" id="lvRecentWorkspace"><div class="integration-empty">Loading recent pages...</div></div></section>
+</div>
+<aside class="lv-saved-column">
+<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">KEYBOARD</span><h2>Move faster</h2><p>These shortcuts work on authenticated LearnVault pages when you are not typing in a form.</p></div><div class="lv-shortcut-list"><article><strong>Quick Access</strong><kbd>Ctrl + K</kbd></article><article><strong>Dashboard</strong><kbd>Alt + 1</kbd></article><article><strong>Role Center</strong><kbd>Alt + 2</kbd></article><article><strong>Notifications</strong><kbd>Alt + N</kbd></article><article><strong>Calendar</strong><kbd>Alt + C</kbd></article><article><strong>Saved Workspace</strong><kbd>Alt + S</kbd></article></div></section>
+<section class="commercial-dashboard-panel commercial-discover-card"><span class="eyebrow light">TIP</span><h2>Pin only what you actually use.</h2><p>A smaller personalized workspace makes learning, teaching and administration faster than a crowded navigation list.</p><a href="dashboard.html" class="button button-white">Back to Dashboard</a></section>
+</aside>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified commercial-footer"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="notifications.html">Notifications</a><a href="calendar.html">Calendar</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/saved-workspace.js"></script>
+</body>
+</html>

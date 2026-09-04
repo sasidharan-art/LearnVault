@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Hub | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-page commercial-role-page">
+<div class="site student-site commercial-role-site">
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="studentFeatureSearch" type="search" placeholder="Search your learning space..."></div>
+<nav class="top-actions student-account-actions"><a href="notifications.html" class="commercial-header-activity" title="Notifications">◔</a><div class="student-head-identity"><span class="student-head-label">STUDENT</span><strong id="headerStudentName">Student</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="Student navigation">
+<a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="study-hub.html" class="rail-item active"><span class="rail-icon">★</span><span class="rail-label">Study Hub</span></a>
+<a href="search.html" class="rail-item"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="notifications.html" class="rail-item"><span class="rail-icon">◔</span><span class="rail-label">Notifications</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="profile.html" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a>
+</aside>
+<main class="main dashboard-main commercial-dashboard-main">
+<section class="student-feature-hero">
+<div><div class="dashboard-welcome-chip">PERSONALIZED LEARNING</div><span class="eyebrow">STUDENT • STUDY HUB</span><h1>Know exactly <span>what to do next.</span></h1><p>LearnVault combines Assignments, Quizzes, Skills, Resources and Peer Learning into a prioritized study feed instead of making you search page by page.</p></div>
+<div class="student-feature-hero-card"><span class="mini-label">TODAY'S LEARNING PATH</span><strong id="studyHubCount">Loading...</strong><small id="studyHubCourse">Building recommendations from your Course and Level.</small></div>
+</section>
+<section class="student-feature-stat-grid">
+<article><span>High Priority</span><strong id="studyHubHighPriority">0</strong><small>Assignments / Quiz work</small></article>
+<article><span>Learning Items</span><strong id="studyHubLearningItems">0</strong><small>Resources & Skill work</small></article>
+<article><span>Subjects</span><strong id="studyHubSubjects">0</strong><small>Available in your path</small></article>
+<article><span>Peer Actions</span><strong id="studyHubPeerItems">0</strong><small>Learning-group activity</small></article>
+</section>
+<section class="student-feature-layout">
+<div class="student-feature-main"><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head commercial-row-head"><div><span class="eyebrow">RECOMMENDED FOR YOU</span><h2>Next best learning actions</h2><p>Ordered automatically using deadlines, unfinished work and learning progress.</p></div><button type="button" class="button button-soft" id="refreshStudyHub">Refresh</button></div><div id="studyHubRecommendations" class="recommendation-grid"><div class="integration-empty">Building recommendations...</div></div></section></div>
+<aside class="student-feature-side">
+<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">QUICK START</span><h2>Jump into learning</h2></div><div class="commercial-admin-link-list"><a href="resources.html">Open Resources <span>→</span></a><a href="questions.html">Practice Questions <span>→</span></a><a href="quizzes.html">Take a Quiz <span>→</span></a><a href="assignments.html">Assignments <span>→</span></a><a href="skills.html">Skill Progress <span>→</span></a><a href="peer-groups.html">Peer Learning <span>→</span></a></div></section>
+<section class="commercial-dashboard-panel commercial-discover-card"><span class="eyebrow light">SMARTER STUDY</span><h2>Search the complete learning space.</h2><p>Use Global Search when you know the topic but not where the content is stored.</p><a href="search.html" class="button button-white">Open Search</a></section>
+</aside>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified commercial-footer"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="study-hub.html">Study Hub</a><a href="search.html">Search</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/student-study-hub.js"></script>
+</body>
+</html>

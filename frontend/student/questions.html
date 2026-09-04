@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Bank | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-question-page">
+
+<div class="site student-site">
+
+<header class="topbar student-topbar">
+    <button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+        aria-label="Toggle navigation" aria-controls="primaryNavigation"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+
+    <a href="../index.html" class="brand-link" aria-label="LearnVault home">
+        <img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+    </a>
+
+    <div class="top-search dashboard-search">
+        <span>⌕</span>
+        <input id="studentQuestionTopSearch" type="search"
+            placeholder="Search questions..." aria-label="Search questions">
+    </div>
+
+    <nav class="top-actions student-account-actions">
+        <div class="student-head-identity">
+            <span class="student-head-label">STUDENT</span>
+            <strong id="headerStudentName">Student</strong>
+        </div>
+        <button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+    </nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="Student navigation">
+    <a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+    <a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+    <a href="questions.html" class="rail-item active"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+    <a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+    <a href="#" class="rail-item coming-question-module"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+    <a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a>
+</aside>
+
+<main class="main dashboard-main question-bank-main">
+
+<div id="studentQuestionLoading" class="dashboard-loading">
+    <div class="loading-mark">LV</div>
+    <strong>Loading your Question Bank...</strong>
+</div>
+
+<div id="studentQuestionContent" hidden>
+
+<section class="question-page-hero">
+    <div>
+        <span class="eyebrow">PRACTICE • YOUR COURSE</span>
+        <h1>Question Bank.</h1>
+        <p>
+            Practice approved questions from your own Course, Level and Subjects.
+            Reveal answers only when you are ready to check your understanding.
+        </p>
+
+        <div class="student-course-path">
+            <span id="questionDomain">-</span>
+            <b>→</b>
+            <span id="questionCourse">-</span>
+            <b>→</b>
+            <span id="questionLevel">-</span>
+        </div>
+    </div>
+
+    <div class="question-workflow-card">
+        <span>PRACTICE MODE</span>
+        <strong id="studentQuestionCount">0 approved questions</strong>
+        <small>Answers load only after you click Reveal Answer.</small>
+    </div>
+</section>
+
+<section class="student-question-filters">
+    <div class="question-review-head">
+        <div>
+            <span class="eyebrow">FILTER PRACTICE</span>
+            <h2>Find the questions you need</h2>
+        </div>
+
+        <button id="studentQuestionClear" type="button" class="button button-soft">
+            Clear Filters
+        </button>
+    </div>
+
+    <div class="student-question-filter-grid">
+        <input id="studentQuestionSearch" type="search"
+            placeholder="Search question or topic...">
+
+        <select id="studentQuestionSubject">
+            <option value="">All Subjects</option>
+        </select>
+
+        <select id="studentQuestionUnit">
+            <option value="">All Units</option>
+        </select>
+
+        <select id="studentQuestionType">
+            <option value="">All Types</option>
+            <option value="mcq">MCQ</option>
+            <option value="true_false">True / False</option>
+            <option value="short_answer">Short Answer</option>
+        </select>
+
+        <select id="studentQuestionDifficulty">
+            <option value="">All Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
+</section>
+
+<section class="student-question-results">
+    <div class="question-review-head">
+        <div>
+            <span class="eyebrow">APPROVED QUESTION BANK</span>
+            <h2>Practice Questions</h2>
+            <p id="studentQuestionResultText">Loading questions...</p>
+        </div>
+    </div>
+
+    <div id="studentQuestionList" class="student-question-list">
+        <div class="admin-empty-state">Loading questions...</div>
+    </div>
+</section>
+
+<section class="student-question-roadmap">
+    <span class="eyebrow light">CONNECTED MODULE</span>
+    <h2>Question Bank now feeds directly into LearnVault Quizzes.</h2>
+    <p>Approved questions can now be assembled into timed quizzes with attempts, scoring and result review.</p>
+</section>
+
+</div>
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified">
+    <div class="footer-inner">
+        <a href="../index.html" class="footer-brand">
+            <img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="resources.html">Resources</a>
+            <a href="questions.html">Question Bank</a>
+        </nav>
+        <span>Learn • Practice • Grow</span>
+    </div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/student-questions.js"></script>
+
+</body>
+</html>

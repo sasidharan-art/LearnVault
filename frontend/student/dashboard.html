@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body class="student-page commercial-role-page" data-commercial-role="student">
+
+<div class="site student-site student-site commercial-role-site">
+
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+aria-label="Toggle navigation" aria-controls="primaryNavigation"
+aria-expanded="false"><span></span><span></span><span></span></button>
+
+<a href="../index.html" class="brand-link" aria-label="LearnVault home">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+</a>
+
+<div class="top-search dashboard-search">
+<span>⌕</span>
+<input id="commercialDashboardSearch" type="search"
+placeholder="Search LearnVault..." aria-label="Search LearnVault">
+</div>
+
+<nav class="top-actions student-account-actions">
+<a class="commercial-header-activity" href="activity.html" title="Activity">◫</a>
+<div class="student-head-identity">
+<span class="student-head-label">STUDENT</span>
+<strong id="headerStudentName">Student</strong>
+</div>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</nav>
+</header>
+
+<div class="page-shell commercial-role-shell">
+
+<aside class="icon-rail commercial-role-rail" id="primaryNavigation" aria-label="STUDENT navigation">
+<a href="dashboard.html" class="rail-item active" title="Dashboard" aria-label="Dashboard">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+<span class="rail-label">Dashboard</span>
+</a>
+<a href="search.html" class="rail-item" title="Search" aria-label="Search">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></span>
+<span class="rail-label">Search</span>
+</a>
+<a href="activity.html" class="rail-item" title="Activity" aria-label="Activity">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h4l2-6 4 12 2-6h4"/></svg></span>
+<span class="rail-label">Activity</span>
+</a>
+<a href="resources.html" class="rail-item" title="Resources" aria-label="Resources">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+<span class="rail-label">Resources</span>
+</a>
+<a href="questions.html" class="rail-item" title="Question Bank" aria-label="Question Bank">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 7a4 4 0 1 1 6 3.5c-1.4.8-2 1.7-2 3"/><circle cx="12" cy="18" r=".8"/></svg></span>
+<span class="rail-label">Question Bank</span>
+</a>
+<a href="quizzes.html" class="rail-item" title="Quizzes" aria-label="Quizzes">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+<span class="rail-label">Quizzes</span>
+</a>
+<a href="assignments.html" class="rail-item" title="Assignments" aria-label="Assignments">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10v3h2v15H5V6h2z"/><path d="M9 3h6v5H9zM8 12h8M8 16h6"/></svg></span>
+<span class="rail-label">Assignments</span>
+</a>
+<a href="progress.html" class="rail-item" title="Progress" aria-label="Progress">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span>
+<span class="rail-label">Progress</span>
+</a>
+<a href="skills.html" class="rail-item" title="Skills" aria-label="Skills">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M21 12h-3M12 21v-3M3 12h3"/></svg></span>
+<span class="rail-label">Skills</span>
+</a>
+<a href="peer-groups.html" class="rail-item" title="Peer Groups" aria-label="Peer Groups">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20c.4-4 2.2-6 5.5-6s5.1 2 5.5 6M10.5 20c.4-3.5 2-5.3 5.5-5.3s5.1 1.8 5.5 5.3"/></svg></span>
+<span class="rail-label">Peer Groups</span>
+</a>
+<a href="profile.html" class="rail-item" title="Profile" aria-label="Profile">
+<span class="rail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.7-5 3.2-7 7.5-7s6.8 2 7.5 7"/></svg></span>
+<span class="rail-label">Profile</span>
+</a>
+</aside>
+
+<main class="main dashboard-main commercial-dashboard-main">
+
+<div id="commercialDashboardLoading" class="dashboard-loading">
+<div class="loading-mark">LV</div>
+<strong>Preparing your learning workspace...</strong>
+</div>
+
+<div id="commercialDashboardContent" hidden>
+
+<section class="commercial-dashboard-hero student-commercial-hero">
+
+<div class="commercial-dashboard-hero-copy">
+<div class="dashboard-welcome-chip">Welcome back, <strong id="commercialWelcomeName">Student</strong> 👋</div>
+<span class="eyebrow">YOUR PERSONAL LEARNING COMMAND CENTER</span>
+<h1>Learn what matters next.</h1>
+<p id="commercialStudentPath">
+Your Course, Level, learning activity and progress come together here.
+</p>
+
+<div class="commercial-dashboard-actions">
+<a href="resources.html" class="button button-primary large">Continue Learning</a>
+<a href="search.html" class="button button-soft large">Search Everything</a>
+<a href="notifications.html" class="button button-soft large">Notifications</a>
+</div>
+</div>
+
+<div class="commercial-dashboard-highlight">
+<div class="dashboard-highlight-head">
+<div>
+<span class="mini-label">OVERALL MASTERY</span>
+<strong id="studentMasteryHero">0%</strong>
+</div>
+<a href="progress.html">Details →</a>
+</div>
+<div class="mastery-track commercial-mastery-track"><span id="studentMasteryBar"></span></div>
+<div class="commercial-mini-metrics">
+<div><span>Average Quiz</span><strong id="studentAverageQuiz">0%</strong></div>
+<div><span>Answer Accuracy</span><strong id="studentAccuracy">0%</strong></div>
+<div><span>Quiz Coverage</span><strong id="studentCoverage">0%</strong></div>
+</div>
+</div>
+
+</section>
+
+
+<section class="commercial-dashboard-grid student-dashboard-grid">
+
+<div class="commercial-dashboard-main-column">
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<div>
+<span class="eyebrow">QUICK ACCESS</span>
+<h2>Your learning tools</h2>
+<p>Everything you use most, without searching through menus.</p>
+</div>
+</div>
+
+<div class="commercial-quick-access-grid">
+<a href="resources.html"><span>▣</span><strong>Resources</strong><small>Notes, files & videos</small></a>
+<a href="questions.html"><span>?</span><strong>Question Bank</strong><small>Practice by Subject</small></a>
+<a href="quizzes.html"><span>✓</span><strong>Quizzes</strong><small>Assess & review</small></a>
+<a href="assignments.html"><span>▤</span><strong>Assignments</strong><small>Submit & track feedback</small></a>
+<a href="skills.html"><span>◎</span><strong>Skills</strong><small>Build measurable progress</small></a>
+<a href="peer-groups.html"><span>◉</span><strong>Peer Groups</strong><small>Learn together</small></a>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">UPCOMING</span>
+<h2>Assignments that need attention</h2>
+</div>
+<a href="assignments.html">View all →</a>
+</div>
+<div id="studentUpcomingAssignments" class="commercial-list-stack">
+<div class="integration-empty">Loading assignments...</div>
+</div>
+</section>
+
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">RECOMMENDED FOR YOU</span>
+<h2>Next best learning actions</h2>
+<p>Personalized from Assignments, Quizzes, Skills and recent learning content.</p>
+</div>
+<a href="study-hub.html">Open Study Hub →</a>
+</div>
+<div id="studentDashboardRecommendations" class="dashboard-recommendation-strip"><div class="integration-empty">Building recommendations...</div></div>
+</section>
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">RECENT</span>
+<h2>Your learning activity</h2>
+</div>
+<a href="activity.html">View all →</a>
+</div>
+<div id="commercialRecentActivity" class="commercial-activity-list">
+<div class="integration-empty">Loading activity...</div>
+</div>
+</section>
+
+</div>
+
+
+<aside class="commercial-dashboard-side-column">
+
+<section class="commercial-dashboard-panel">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">FOCUS NEXT</span>
+<h2>Weak areas</h2>
+<p>Use these to decide what to practise next.</p>
+</div>
+<div id="studentWeakAreas" class="commercial-focus-list">
+<div class="integration-empty">No learning activity yet.</div>
+</div>
+</section>
+
+<section class="commercial-dashboard-panel commercial-academic-card">
+<div class="commercial-dashboard-panel-head">
+<span class="eyebrow">YOUR ACADEMIC PATH</span>
+<h2 id="studentCourseName">Course</h2>
+<p id="studentCourseMeta">Loading...</p>
+</div>
+<div class="commercial-path-row">
+<span>Domain</span><strong id="studentDomainName">-</strong>
+</div>
+<div class="commercial-path-row">
+<span>Department</span><strong id="studentDepartmentName">-</strong>
+</div>
+<div class="commercial-path-row">
+<span>Level / Year</span><strong id="studentLevelName">-</strong>
+</div>
+<a href="profile.html" class="commercial-panel-link">View Profile →</a>
+</section>
+
+<section class="commercial-dashboard-panel commercial-discover-card">
+<span class="eyebrow light">STUDY SMARTER</span>
+<h2>Find anything in your learning space.</h2>
+<p>Global Search looks across Resources, Questions, Quizzes, Assignments, Skills and Peer Groups.</p>
+<a href="search.html" class="button button-white">Open Search</a>
+</section>
+
+</aside>
+
+</section>
+
+</div>
+
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified commercial-footer">
+<div class="footer-inner">
+<a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="search.html">Search</a>
+<a href="activity.html">Activity</a>
+<a href="profile.html">Profile</a>
+</nav>
+<span>Learn • Practice • Grow</span>
+</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/commercial-dashboard.js"></script>
+</body>
+</html>

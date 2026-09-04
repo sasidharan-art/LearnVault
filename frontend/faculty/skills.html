@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills | LearnVault Faculty</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body class="faculty-page learning-extension-page">
+
+<div class="site student-site faculty-site">
+
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+aria-label="Toggle navigation" aria-controls="primaryNavigation"
+aria-expanded="false"><span></span><span></span><span></span></button>
+
+<a href="../index.html" class="brand-link" aria-label="LearnVault home">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+</a>
+
+<div class="top-search dashboard-search">
+<span>⌕</span>
+<input id="moduleTopSearch" type="search" placeholder="Search skills..." aria-label="Search skills">
+</div>
+
+<nav class="top-actions student-account-actions">
+<div class="student-head-identity">
+<span class="student-head-label">FACULTY</span>
+<strong id="headerFacultyName">Faculty</strong>
+</div>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="Faculty navigation">
+<a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item active"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a>
+</aside>
+
+<main class="main dashboard-main learning-extension-main">
+
+<section class="learning-hero">
+<div>
+<span class="eyebrow">FACULTY • SKILL CONTROL</span>
+<h1>Define the skills students should build in your subjects.</h1>
+<p>
+Create subject skills directly, publish or hide them, and monitor aggregate
+student progress without waiting for Admin approval.
+</p>
+</div>
+
+<div class="learning-hero-card">
+<span class="mini-label">AVERAGE STUDENT PROGRESS</span>
+<strong id="facultySkillAverageHero">0%</strong>
+<div class="mastery-track"><span id="facultySkillAverageBar"></span></div>
+<small>Calculated only from your assigned subjects.</small>
+</div>
+</section>
+
+
+<section class="learning-stat-grid">
+<article><span>Assigned Subjects</span><strong id="facultySkillSubjects">0</strong><small>Your teaching access</small></article>
+<article><span>Skills</span><strong id="facultySkillTotal">0</strong><small>Published + hidden</small></article>
+<article><span>Completed Records</span><strong id="facultySkillCompleted">0</strong><small>Student completions</small></article>
+<article><span>Average Progress</span><strong id="facultySkillAverage">0%</strong><small>Across subject skills</small></article>
+</section>
+
+
+<section class="learning-two-column faculty-skill-control">
+
+<article class="learning-panel">
+<div class="learning-panel-head">
+<span class="eyebrow">CREATE SKILL</span>
+<h2>Publish a subject skill</h2>
+<p>Examples: SQL Query Design, Algorithm Analysis, Anatomical Identification.</p>
+</div>
+
+<form id="facultySkillForm" class="learning-form">
+
+<label>
+<span>Assigned Subject</span>
+<select id="facultySkillSubject" required>
+<option value="">Loading assigned subjects...</option>
+</select>
+</label>
+
+<label>
+<span>Skill Name</span>
+<input id="facultySkillName" required placeholder="e.g. SQL Query Design">
+</label>
+
+<label>
+<span>Skill Level</span>
+<select id="facultySkillLevel" required>
+<option value="foundational">Foundational</option>
+<option value="intermediate">Intermediate</option>
+<option value="advanced">Advanced</option>
+</select>
+</label>
+
+<label>
+<span>Description</span>
+<textarea id="facultySkillDescription" rows="4"
+placeholder="What should the student be able to do?"></textarea>
+</label>
+
+<button type="submit" class="button button-primary">
+Publish Skill
+</button>
+
+</form>
+</article>
+
+
+<article class="learning-panel">
+<div class="learning-panel-head">
+<span class="eyebrow">FACULTY LEARNING OWNERSHIP</span>
+<h2>Your complete subject toolkit</h2>
+<p>Everything below is controlled directly by Faculty for assigned subjects.</p>
+</div>
+
+<div class="faculty-control-stack">
+<a href="resources.html">Resources <span>Publish materials →</span></a>
+<a href="questions.html">Question Bank <span>Create units & questions →</span></a>
+<a href="quizzes.html">Quizzes <span>Build & publish assessments →</span></a>
+<a href="peer-groups.html">Peer Groups <span>Create study communities →</span></a>
+<a href="progress.html">Analytics <span>See learning performance →</span></a>
+</div>
+</article>
+
+</section>
+
+
+<section class="learning-panel learning-wide-panel">
+<div class="learning-panel-head">
+<span class="eyebrow">ASSIGNED SUBJECT SKILLS</span>
+<h2>Skill development</h2>
+<p>Publish/hide skills and monitor aggregated learner progress.</p>
+</div>
+
+<div id="facultySkillGrid" class="skill-card-grid"></div>
+</section>
+
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified">
+<div class="footer-inner">
+<a href="../index.html" class="footer-brand">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+</a>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="skills.html">Skills</a>
+<a href="peer-groups.html">Peer Groups</a>
+</nav>
+<span>Learn • Practice • Grow</span>
+</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/faculty-skills.js"></script>
+
+</body>
+</html>

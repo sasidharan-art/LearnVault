@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quiz Builder | LearnVault</title><link rel="stylesheet" href="../css/global.css"></head><body class="faculty-page quiz-page"><div class="site student-site faculty-site"><header class="topbar student-topbar"><button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button><a href="../index.html" class="brand-link"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a><div class="top-search dashboard-search"><span>⌕</span><input id="facultyQuizTopSearch" type="search" placeholder="Search your quizzes..."></div><nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">FACULTY</span><strong id="headerFacultyName">Faculty</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav></header><div class="page-shell"><aside class="icon-rail" id="primaryNavigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item active"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a></aside><main class="main dashboard-main quiz-main"><section class="quiz-hero"><div><span class="eyebrow">FACULTY • QUIZ BUILDER</span><h1>Build quizzes with published questions or add new questions directly.</h1><p>Use your assigned subjects, choose existing published questions, or create new questions here. Your quiz publishes directly to matching students.</p></div><div class="quiz-hero-card"><span>FACULTY WORKFLOW</span><strong>Assigned Subject → Select / Add Questions → Publish Quiz</strong><small>Admin can see every quiz and moderate when necessary, but approval is not required.</small></div></section><section class="quiz-builder-layout faculty-quiz-builder-layout"><article class="quiz-panel"><div class="quiz-panel-head"><span class="eyebrow">CREATE QUIZ</span><h2>Build from Question Bank</h2></div><form id="facultyQuizForm" class="quiz-builder-form"><div class="quiz-form-grid two"><label><span>Assigned Subject</span><select id="facultyQuizSubject" required><option value="">Loading subjects...</option></select></label><label><span>Unit / Module</span><select id="facultyQuizUnit"><option value="">All / General</option></select></label></div><label><span>Quiz Title</span><input id="facultyQuizTitle" required></label><label><span>Description</span><textarea id="facultyQuizDescription" rows="3"></textarea></label><div class="quiz-form-grid three"><label><span>Time Limit</span><input id="facultyQuizTime" type="number" min="1" max="240" value="15"></label><label><span>Pass %</span><input id="facultyQuizPass" type="number" min="0" max="100" value="50"></label><label><span>Max Attempts</span><input id="facultyQuizAttemptsMax" type="number" min="1" max="20" value="1"></label></div><div class="quiz-question-picker-head">
+<div>
+<span>Quiz Questions</span>
+<small id="facultyBuilderCount">Select a subject to load questions.</small>
+</div>
+
+<div class="quiz-picker-actions">
+<button type="button" class="button button-primary compact" id="facultyAddQuizQuestion">
++ Add New Question
+</button>
+<button type="button" class="button button-soft compact" id="facultySelectAllQuestions">
+Select All
+</button>
+</div>
+</div>
+
+<div id="facultyInlineQuestionEditor" class="faculty-inline-question-editor" hidden>
+
+<div class="inline-question-editor-head">
+<div>
+<span class="eyebrow">NEW QUIZ QUESTION</span>
+<h3>Create inside this quiz</h3>
+<p>This question publishes immediately for your assigned subject and is selected for this quiz.</p>
+</div>
+
+<button type="button" class="inline-editor-close" id="facultyCancelInlineQuestion" aria-label="Close question editor">×</button>
+</div>
+
+<div class="quiz-form-grid three">
+<label>
+<span>Question Type</span>
+<select id="facultyInlineQuestionType">
+<option value="mcq">MCQ</option>
+<option value="true_false">True / False</option>
+<option value="short_answer">Short Answer</option>
+</select>
+</label>
+
+<label>
+<span>Difficulty</span>
+<select id="facultyInlineQuestionDifficulty">
+<option value="easy">Easy</option>
+<option value="medium" selected>Medium</option>
+<option value="hard">Hard</option>
+</select>
+</label>
+
+<label>
+<span>Marks</span>
+<input id="facultyInlineQuestionMarks" type="number" min="0.5" max="100" step="0.5" value="1">
+</label>
+</div>
+
+<label>
+<span>Question</span>
+<textarea id="facultyInlineQuestionText" rows="3" placeholder="Enter the quiz question..."></textarea>
+</label>
+
+<label>
+<span>Question Unit / Module</span>
+<select id="facultyInlineQuestionUnit">
+<option value="">General / No Unit</option>
+</select>
+</label>
+
+<div id="facultyInlineMcqEditor" class="mcq-option-editor"></div>
+
+<div id="facultyInlineSimpleAnswerWrap" hidden>
+<label>
+<span>Correct Answer</span>
+<input id="facultyInlineCorrectAnswer" placeholder="Enter the correct answer">
+</label>
+</div>
+
+<label>
+<span>Explanation</span>
+<textarea id="facultyInlineQuestionExplanation" rows="2" placeholder="Optional explanation shown after quiz submission"></textarea>
+</label>
+
+<div class="inline-question-editor-footer">
+<span>New Faculty questions publish immediately. Admin retains full oversight.</span>
+
+<div>
+<button type="button" class="button button-soft" id="facultyResetInlineQuestion">Clear</button>
+<button type="button" class="button button-primary" id="facultySaveInlineQuestion">Save & Select Question</button>
+</div>
+</div>
+
+</div>
+
+<div id="facultyQuizQuestionPicker" class="quiz-question-picker">
+<div class="admin-empty-state">Select an assigned subject first.</div>
+</div><div class="quiz-builder-footer"><div><span>Selected</span><strong id="facultySelectedCount">0 questions</strong></div><button type="submit" class="button button-primary">Create & Publish Quiz</button></div></form></article><article class="quiz-panel"><div class="quiz-panel-head"><span class="eyebrow">MY QUIZZES</span><h2>Creation status</h2><p>Your quizzes are published directly. You can unpublish or republish them anytime.</p></div><div id="facultyQuizList" class="faculty-quiz-list"><div class="admin-empty-state">Loading your quizzes...</div></div></article></section></main></div><div class="nav-overlay" id="navOverlay"></div><footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="questions.html">Question Bank</a><a href="quizzes.html">Quizzes</a></nav><span>Learn • Practice • Grow</span></div></footer></div><div class="toast" id="toast"></div><script src="../js/sidebar.js"></script><script src="../js/faculty-common.js"></script><script src="../js/question-form-helper.js"></script><script src="../js/quiz-builder-helper.js"></script><script src="../js/faculty-quizzes.js"></script></body></html>

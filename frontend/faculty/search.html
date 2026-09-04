@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Search | LearnVault</title><link rel="stylesheet" href="../css/global.css"></head>
+<body class="faculty-page integration-page" data-role="faculty">
+<div class="site student-site faculty-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="integrationHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">FACULTY</span><strong id="headerFacultyName">Faculty</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell"><aside class="icon-rail" id="primaryNavigation" aria-label="faculty navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="search.html" class="rail-item active"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="profile.html" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a></aside><main class="main dashboard-main integration-main">
+<section class="integration-hero"><div><span class="eyebrow">LEARNVAULT • GLOBAL SEARCH</span><h1>Find learning content across your complete academic space.</h1><p>Search Resources, Question Bank, Quizzes, Assignments, Skills and Peer Groups. Results are automatically restricted by your role and academic access.</p></div><div class="integration-hero-card"><span class="mini-label">ROLE-AWARE SEARCH</span><strong>Your permitted learning space</strong><small>Students cannot search unrelated courses. Faculty sees assigned subjects. Admin sees the full system.</small></div></section>
+<section class="integration-panel search-workspace">
+<form id="globalSearchForm" class="global-search-form"><div class="global-search-box"><span>⌕</span><input id="globalSearchInput" autocomplete="off" placeholder="Search DBMS, SQL, quiz, assignment, skill..." required></div><select id="globalSearchType"><option value="">Everything</option><option value="resource">Resources</option><option value="question">Question Bank</option><option value="quiz">Quizzes</option><option value="assignment">Assignments</option><option value="skill">Skills</option><option value="peer_group">Peer Groups</option></select><button class="button button-primary" type="submit">Search</button></form>
+<div class="search-summary-row"><div><strong id="globalSearchSummary">Enter at least 2 characters to search.</strong><small id="globalSearchScope"></small></div></div>
+<div id="globalSearchResults" class="global-search-results"><div class="integration-empty"><strong>Search LearnVault</strong><span>Your results will appear here.</span></div></div>
+</section></main></div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="search.html">Search</a><a href="activity.html">Activity</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script><script src="../js/learning-extension-helper.js"></script><script src="../js/global-search.js"></script>
+</body></html>

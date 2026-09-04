@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Management | LearnVault</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page">
+
+<div class="site student-site admin-site">
+
+    <header class="topbar student-topbar">
+        <button
+            type="button"
+            class="mobile-nav-toggle"
+            id="mobileNavToggle"
+            aria-label="Open navigation"
+            aria-controls="primaryNavigation"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a
+            href="../index.html"
+            class="brand-link"
+            aria-label="LearnVault home"
+        >
+            <img
+                src="../assets/logo/learnvault-logo.png"
+                alt="LearnVault"
+                class="brand-logo"
+            >
+        </a>
+
+        <div class="top-search dashboard-search">
+            <span>⌕</span>
+            <input
+                type="search"
+                placeholder="Search domains, departments, courses..."
+                aria-label="Search academic structure"
+            >
+        </div>
+
+        <nav class="top-actions student-account-actions">
+            <div class="student-head-identity">
+                <span class="student-head-label">ADMIN</span>
+                <strong id="headerAdminName">Administrator</strong>
+            </div>
+
+            <button
+                type="button"
+                class="button button-ghost"
+                id="logoutButton"
+            >
+                Logout
+            </button>
+        </nav>
+    </header>
+
+
+    <div class="page-shell">
+
+        <aside class="icon-rail" id="primaryNavigation" aria-label="Admin navigation">
+<a href="dashboard.html" class="rail-item" title="Dashboard" aria-label="Dashboard">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+    <span class="rail-label">Dashboard</span>
+</a>
+<a href="academic.html" class="rail-item active" title="Academic Structure" aria-label="Academic Structure">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span>
+    <span class="rail-label">Academic Structure</span>
+</a>
+<a href="users.html" class="rail-item" title="Users & Faculty" aria-label="Users & Faculty">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.2 14c3.2-.4 5.1 1.3 5.3 5"/></svg></span>
+    <span class="rail-label">Users & Faculty</span>
+</a>
+<a href="resources.html" class="rail-item" title="Resources" aria-label="Resources">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+    <span class="rail-label">Resources</span>
+</a>
+<a href="approvals.html" class="rail-item" title="Approvals" aria-label="Approvals">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+    <span class="rail-label">Approvals</span>
+</a>
+</aside>
+
+
+        <main class="main dashboard-main">
+
+            <div
+                class="dashboard-loading"
+                id="academicLoading"
+            >
+                <div class="loading-mark">LV</div>
+                <strong>
+                    Loading academic structure...
+                </strong>
+            </div>
+
+
+            <div
+                id="academicContent"
+                hidden
+            >
+
+                <section class="dashboard-hero academic-manager-hero">
+
+                    <div class="dashboard-hero-copy">
+                        <span class="eyebrow">
+                            ADMIN • ACADEMIC MANAGEMENT
+                        </span>
+
+                        <h1>
+                            Control the complete academic structure of LearnVault.
+                        </h1>
+
+                        <p>
+                            Add and manage education domains, departments, courses and learning levels.
+                            The student Create Account page reads active courses
+                            directly from this structure.
+                        </p>
+
+                        <div class="dashboard-primary-actions">
+                            <a
+                                href="#addStructure"
+                                class="button button-primary large"
+                            >
+                                Add Academic Item
+                            </a>
+
+                            <a
+                                href="../register.html"
+                                class="button button-soft large"
+                            >
+                                Preview Registration
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="hero-dashboard admin-rule-card">
+
+                        <span class="mini-label">
+                            EXAMPLE STRUCTURES
+                        </span>
+
+                        <div class="admin-example-list">
+
+                            <div>
+                                <strong>Architecture</strong>
+                                <span>B.Arch → Year 1–5</span>
+                            </div>
+
+                            <div>
+                                <strong>Design</strong>
+                                <span>B.Des UI/UX → Beginner–Advanced</span>
+                            </div>
+
+                            <div>
+                                <strong>School</strong>
+                                <span>CBSE → Class 6–12</span>
+                            </div>
+
+                            <div>
+                                <strong>Competitive Exams</strong>
+                                <span>UPSC → Prelims → Mains</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section
+                    class="section dashboard-section"
+                    id="addStructure"
+                >
+
+                    <div class="section-heading dashboard-section-heading">
+                        <span class="eyebrow">
+                            ADD TO LEARNVAULT
+                        </span>
+
+                        <h2>
+                            Academic structure controls
+                        </h2>
+
+                        <p>
+                            Only Admin can use these controls.
+                        </p>
+                    </div>
+
+
+                    <div class="academic-form-grid">
+
+                        <form
+                            class="academic-admin-form"
+                            id="domainForm"
+                        >
+                            <div class="academic-form-head">
+                                <span>01</span>
+                                <div>
+                                    <h3>Education Domain</h3>
+                                    <p>
+                                        Engineering, Medical, Design,
+                                        Architecture, School, etc.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <label>
+                                Domain Name
+                                <input
+                                    type="text"
+                                    name="domainName"
+                                    placeholder="e.g. Architecture"
+                                    required
+                                >
+                            </label>
+
+                            <button
+                                type="submit"
+                                class="button button-primary"
+                            >
+                                Add Domain
+                            </button>
+                        </form>
+
+
+                        <form
+                            class="academic-admin-form"
+                            id="departmentForm"
+                        >
+                            <div class="academic-form-head">
+                                <span>02</span>
+                                <div>
+                                    <h3>Department / Stream</h3>
+                                    <p>
+                                        Connect a department to an
+                                        education domain.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <label>
+                                Education Domain
+                                <select
+                                    name="domainId"
+                                    id="departmentDomainSelect"
+                                    required
+                                >
+                                    <option value="">
+                                        Select Education Domain
+                                    </option>
+                                </select>
+                            </label>
+
+                            <div class="academic-form-row">
+                                <label>
+                                    Code
+                                    <input
+                                        type="text"
+                                        name="departmentCode"
+                                        placeholder="e.g. ARCH"
+                                        required
+                                    >
+                                </label>
+
+                                <label>
+                                    Department / Stream Name
+                                    <input
+                                        type="text"
+                                        name="departmentName"
+                                        placeholder="e.g. Architecture"
+                                        required
+                                    >
+                                </label>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="button button-primary"
+                            >
+                                Add Department
+                            </button>
+                        </form>
+
+
+                        <form
+                            class="academic-admin-form"
+                            id="courseForm"
+                        >
+                            <div class="academic-form-head">
+                                <span>03</span>
+                                <div>
+                                    <h3>Course / Program</h3>
+                                    <p>
+                                        Active courses appear automatically
+                                        on Create Account.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="academic-form-row">
+                                <label>
+                                    Education Domain
+                                    <select
+                                        name="domainId"
+                                        id="courseDomainSelect"
+                                        required
+                                    >
+                                        <option value="">
+                                            Select Education Domain
+                                        </option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    Department / Stream
+                                    <select
+                                        name="departmentId"
+                                        id="courseDepartmentSelect"
+                                    >
+                                        <option value="">
+                                            No department / stream
+                                        </option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <div class="academic-form-row">
+                                <label>
+                                    Course Code
+                                    <input
+                                        type="text"
+                                        name="courseCode"
+                                        placeholder="e.g. BARCH"
+                                        required
+                                    >
+                                </label>
+
+                                <label>
+                                    Course / Program Name
+                                    <input
+                                        type="text"
+                                        name="courseName"
+                                        placeholder="e.g. Bachelor of Architecture"
+                                        required
+                                    >
+                                </label>
+                            </div>
+
+                            <div class="academic-form-row">
+                                <label>
+                                    Structure Type
+                                    <select
+                                        name="structureType"
+                                        required
+                                    >
+                                        <option value="year_semester">
+                                            Year based
+                                        </option>
+
+                                        <option value="grade">
+                                            Grade / Class
+                                        </option>
+
+                                        <option value="module">
+                                            Module based
+                                        </option>
+
+                                        <option value="exam">
+                                            Exam stages
+                                        </option>
+
+                                        <option value="flexible">
+                                            Flexible
+                                        </option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    Duration (Years)
+                                    <input
+                                        type="number"
+                                        name="durationYears"
+                                        min="1"
+                                        max="20"
+                                        placeholder="Optional"
+                                    >
+                                </label>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="button button-primary"
+                            >
+                                Add Course
+                            </button>
+                        </form>
+
+
+                        <form
+                            class="academic-admin-form"
+                            id="levelForm"
+                        >
+                            <div class="academic-form-head">
+                                <span>04</span>
+                                <div>
+                                    <h3>Current Level / Year</h3>
+                                    <p>
+                                        Year, Class, Stage or Module shown
+                                        after the student selects a course.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <label>
+                                Course / Program
+                                <select
+                                    name="courseId"
+                                    id="levelCourseSelect"
+                                    required
+                                >
+                                    <option value="">
+                                        Select Course / Program
+                                    </option>
+                                </select>
+                            </label>
+
+                            <div class="academic-form-row">
+                                <label>
+                                    Level / Year Name
+                                    <input
+                                        type="text"
+                                        name="levelName"
+                                        placeholder="e.g. Year 1 / Class 10 / Prelims"
+                                        required
+                                    >
+                                </label>
+
+                                <label>
+                                    Display Order
+                                    <input
+                                        type="number"
+                                        name="levelOrder"
+                                        min="1"
+                                        value="1"
+                                        required
+                                    >
+                                </label>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="button button-primary"
+                            >
+                                Add Level
+                            </button>
+                        </form>
+
+                    </div>
+
+                </section>
+
+
+                
+<section class="section dashboard-section" id="subjects">
+    <div class="section-heading dashboard-section-heading"><span class="eyebrow">SUBJECT MANAGEMENT</span><h2>Add subjects to courses and levels</h2><p>Subjects become the link between faculty assignments, resources, question banks and quizzes.</p></div>
+    <div class="admin-two-column">
+        <div class="admin-panel">
+            <form id="adminSubjectForm" class="admin-form-grid">
+                <label>Course / Program<select id="adminSubjectCourse" required><option value="">Loading courses...</option></select></label>
+                <label>Level / Year<select id="adminSubjectLevel"><option value="">Select course first</option></select></label>
+                <label>Subject Code<input id="adminSubjectCode" required placeholder="e.g. ARCH301"></label>
+                <label>Subject Name<input id="adminSubjectName" required placeholder="e.g. Architectural Design Studio"></label>
+                <button type="submit" class="button button-primary">Add Subject</button>
+            </form>
+        </div>
+        <div class="admin-panel"><div class="admin-panel-head"><span class="eyebrow">CURRENT SUBJECTS</span><h2>Course subjects</h2></div><div id="adminSubjectList" class="admin-subject-list"><div class="admin-empty-state">Loading subjects...</div></div></div>
+    </div>
+</section>
+
+<section class="section surface-section dashboard-section">
+
+                    <div class="section-heading row-heading dashboard-section-heading">
+                        <div>
+                            <span class="eyebrow">
+                                LIVE DATABASE STRUCTURE
+                            </span>
+
+                            <h2>
+                                Current academic catalog
+                            </h2>
+
+                            <p>
+                                Deactivate an item instead of deleting it.
+                                Inactive courses stop appearing on registration.
+                            </p>
+                        </div>
+
+                        <a
+                            href="../register.html"
+                            class="button button-soft"
+                        >
+                            Open Create Account
+                        </a>
+                    </div>
+
+
+                    <div
+                        class="academic-catalog"
+                        id="academicCatalog"
+                    ></div>
+
+                </section>
+
+
+                <section class="dashboard-cta">
+                    <div>
+                        <span class="eyebrow light">
+                            DATABASE-DRIVEN REGISTRATION
+                        </span>
+
+                        <h2>
+                            No hard-coded course dropdowns.
+                        </h2>
+
+                        <p>
+                            Add a course here, keep it Active, and it becomes
+                            available to students automatically.
+                        </p>
+                    </div>
+
+                    <a
+                        href="../register.html"
+                        class="button button-white large"
+                    >
+                        Test Registration
+                    </a>
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <div
+        class="nav-overlay"
+        id="navOverlay"
+    ></div>
+
+
+    <footer class="footer student-footer-unified">
+        <div class="footer-inner">
+            <a
+                href="../index.html"
+                class="footer-brand"
+            >
+                <img
+                    src="../assets/logo/learnvault-logo.png"
+                    alt="LearnVault"
+                >
+            </a>
+
+            <nav>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="academic.html">Academic Structure</a>
+                <a href="../register.html">Registration Preview</a>
+            </nav>
+
+            <span>
+                Learn • Practice • Grow
+            </span>
+        </div>
+    </footer>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/admin-academic.js"></script>
+<script src="../js/admin-subjects.js"></script>
+</body>
+</html>

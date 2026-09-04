@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | LearnVault</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-page">
+
+    <a href="index.html" class="auth-brand">
+        <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+    </a>
+
+    <div class="auth-shell register-shell">
+
+        <section class="auth-story register-story">
+            <span class="eyebrow light">LEARNVAULT REGISTRATION</span>
+            <h1>Create one account for your complete learning journey.</h1>
+            <p>
+                LearnVault supports different education paths including engineering,
+                medicine, architecture, design, arts, science, commerce, law, school
+                education, competitive exams, certifications and skill learning.
+            </p>
+
+            <div class="registration-steps">
+                <div class="step active">
+                    <span>1</span>
+                    <p>
+                        <strong>Your details</strong>
+                        <small>Create your student identity.</small>
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>2</span>
+                    <p>
+                        <strong>Your learning path</strong>
+                        <small>Select the course configured by LearnVault Admin.</small>
+                    </p>
+                </div>
+
+                <div class="step">
+                    <span>3</span>
+                    <p>
+                        <strong>Start learning</strong>
+                        <small>Enter your personalised course dashboard.</small>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="auth-panel register-panel">
+            <div class="auth-panel-head">
+                <span class="mini-label">CREATE ACCOUNT</span>
+                <h2>Join LearnVault</h2>
+                <p>
+                    Students can self-register. Faculty accounts and the academic
+                    structure are controlled by the administrator.
+                </p>
+            </div>
+
+            <form class="auth-form" id="academicRegisterForm">
+
+                <div class="field-grid">
+
+                    <label>
+                        Full name
+                        <input
+                            type="text"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required
+                            autocomplete="name"
+                        >
+                    </label>
+
+                    <label>
+                        Phone number
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="+91 98765 43210"
+                            required
+                            autocomplete="tel"
+                        >
+                    </label>
+
+                    <label class="full-field">
+                        Email address
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="student@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </label>
+
+                    <label class="full-field">
+                        Course / Program
+                        <select
+                            name="courseId"
+                            id="courseSelect"
+                            required
+                            disabled
+                        >
+                            <option value="">Loading available courses...</option>
+                        </select>
+
+                        <span class="academic-select-note">
+                            Courses shown here are managed by LearnVault Admin.
+                        </span>
+
+                        <span
+                            class="registration-api-state"
+                            id="registrationApiState"
+                            aria-live="polite"
+                        ></span>
+                    </label>
+
+                    <label class="full-field">
+                        Current Level / Year
+                        <select
+                            name="courseLevelId"
+                            id="courseLevelSelect"
+                            disabled
+                        >
+                            <option value="">Select a course first</option>
+                        </select>
+
+                        <span class="academic-select-note">
+                            This changes automatically according to the selected course.
+                            Semester is not required during registration.
+                        </span>
+                    </label>
+
+                    <div
+                        class="course-context-card"
+                        id="courseContextCard"
+                    >
+                        <span>Your selected learning path</span>
+                        <strong id="selectedCourseName">-</strong>
+
+                        <div class="course-context-line">
+                            <span id="selectedDomain">Domain: -</span>
+                            <span id="selectedDepartment">Department / Stream: -</span>
+                        </div>
+                    </div>
+
+                    <label>
+                        Password
+                        <div class="password-field">
+                            <input
+                                type="password"
+                                name="password"
+                                id="registerPassword"
+                                placeholder="Create password"
+                                required
+                                autocomplete="new-password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="registerPassword"
+                            >
+                                Show
+                            </button>
+                        </div>
+                    </label>
+
+                    <label>
+                        Confirm password
+                        <div class="password-field">
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                id="confirmPassword"
+                                placeholder="Re-enter password"
+                                required
+                                autocomplete="new-password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="confirmPassword"
+                            >
+                                Show
+                            </button>
+                        </div>
+                    </label>
+
+                </div>
+
+                <div class="password-hint">
+                    Use at least 8 characters with a mix of letters and numbers.
+                </div>
+
+                <label class="checkbox-label agreement">
+                    <input type="checkbox" required>
+                    I agree to LearnVault's Terms and Privacy Policy.
+                </label>
+
+                <button
+                    type="submit"
+                    class="button button-primary auth-submit"
+                    id="createAccountButton"
+                >
+                    Create Account
+                </button>
+
+                <div class="student-register-note">
+                    <span>Already have an account?</span>
+                    <a href="login.html">Log in</a>
+                </div>
+
+            </form>
+        </section>
+
+    </div>
+
+</div>
+
+
+<div
+    class="account-success-overlay"
+    id="accountSuccessOverlay"
+    aria-hidden="true"
+>
+    <div class="account-success-card">
+        <span class="mini-label">ACCOUNT CREATED</span>
+        <h2>Account Created Successfully</h2>
+        <p>
+            Save your username or User ID. You can use Email, Username
+            or User ID to log in.
+        </p>
+
+        <div class="account-success-details">
+            <div>
+                <span>Full Name</span>
+                <strong id="createdFullName">-</strong>
+            </div>
+
+            <div>
+                <span>Username</span>
+                <strong id="createdUsername">-</strong>
+            </div>
+
+            <div>
+                <span>User ID</span>
+                <strong id="createdUserId">-</strong>
+            </div>
+
+            <div>
+                <span>Email</span>
+                <strong id="createdEmail">-</strong>
+            </div>
+        </div>
+
+        <a
+            href="login.html"
+            class="button button-primary auth-submit"
+        >
+            Go to Login
+        </a>
+    </div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+<script src="js/register.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question Bank | LearnVault Faculty</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="faculty-page question-bank-page">
+
+<div class="site student-site faculty-site">
+
+<header class="topbar student-topbar">
+    <button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+        aria-label="Toggle navigation" aria-controls="primaryNavigation"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+
+    <a href="../index.html" class="brand-link" aria-label="LearnVault home">
+        <img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+    </a>
+
+    <div class="top-search dashboard-search">
+        <span>⌕</span>
+        <input id="facultyQuestionTopSearch" type="search"
+            placeholder="Search your questions..." aria-label="Search questions">
+    </div>
+
+    <nav class="top-actions student-account-actions">
+        <div class="student-head-identity">
+            <span class="student-head-label">FACULTY</span>
+            <strong id="headerFacultyName">Faculty</strong>
+        </div>
+        <button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+    </nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="Faculty navigation">
+    <a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+    <a href="dashboard.html#subjects" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assigned Subjects</span></a>
+    <a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+    <a href="questions.html" class="rail-item active"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+    <a href="dashboard.html#account" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Account</span></a>
+</aside>
+
+<main class="main dashboard-main question-bank-main">
+
+<section class="question-page-hero">
+    <div>
+        <span class="eyebrow">FACULTY • QUESTION BANK</span>
+        <h1>Create questions for your assigned subjects.</h1>
+        <p>
+            Build units and publish MCQ, True/False and Short Answer questions
+            directly for the subjects assigned to you.
+        </p>
+    </div>
+
+    <div class="question-workflow-card">
+        <span>YOUR ACCESS</span>
+        <strong>Only Admin-assigned subjects are available.</strong>
+        <small>Your published questions are immediately available to matching students and Quiz Builder.</small>
+    </div>
+</section>
+
+<section class="question-faculty-grid">
+
+    <article class="question-panel">
+        <div class="question-panel-head">
+            <span class="eyebrow">CREATE QUESTION</span>
+            <h2>Add to Question Bank</h2>
+        </div>
+
+
+        <form id="facultyUnitForm" class="faculty-unit-manager">
+            <div class="question-form-row">
+                <label>
+                    <span>Subject for New Unit</span>
+                    <select id="facultyUnitSubject" required>
+                        <option value="">Select Assigned Subject</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Unit / Module Name</span>
+                    <input id="facultyUnitName" required
+                        placeholder="e.g. Unit 2 - SQL and Joins">
+                </label>
+            </div>
+
+            <div class="faculty-unit-manager-footer">
+                <label>
+                    <span>Order</span>
+                    <input id="facultyUnitOrder" type="number" min="1" value="1" required>
+                </label>
+
+                <button type="submit" class="button button-soft">
+                    Add Unit / Module
+                </button>
+            </div>
+        </form>
+
+        <form id="facultyQuestionForm" class="question-create-form">
+
+            <div class="question-form-row">
+                <label>
+                    <span>Assigned Subject</span>
+                    <select id="facultyQuestionSubject" required>
+                        <option value="">Loading assigned subjects...</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Unit / Module</span>
+                    <select id="facultyQuestionUnit">
+                        <option value="">General / No Unit</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="question-form-row three">
+                <label>
+                    <span>Question Type</span>
+                    <select id="facultyQuestionType" required>
+                        <option value="mcq">MCQ</option>
+                        <option value="true_false">True / False</option>
+                        <option value="short_answer">Short Answer</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Difficulty</span>
+                    <select id="facultyQuestionDifficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Marks</span>
+                    <input id="facultyQuestionMarks" type="number" min="0.5" step="0.5" value="1">
+                </label>
+            </div>
+
+            <label>
+                <span>Question</span>
+                <textarea id="facultyQuestionText" rows="4" required
+                    placeholder="Enter the complete question..."></textarea>
+            </label>
+
+            <div id="facultyMcqEditor" class="mcq-option-editor"></div>
+
+            <div id="facultySimpleAnswerWrap" hidden>
+                <label>
+                    <span>Correct Answer</span>
+                    <input id="facultyCorrectAnswer">
+                </label>
+            </div>
+
+            <label>
+                <span>Explanation</span>
+                <textarea id="facultyQuestionExplanation" rows="3"
+                    placeholder="Optional explanation"></textarea>
+            </label>
+
+            <button type="submit" class="button button-primary">
+                Publish Question
+            </button>
+
+        </form>
+    </article>
+
+    <article class="question-panel">
+        <div class="question-panel-head">
+            <span class="eyebrow">YOUR QUESTION ACTIVITY</span>
+            <h2>My Questions</h2>
+            <p>Publish/unpublish or delete your own questions. Admin has oversight but no routine approval step.</p>
+        </div>
+
+        <div id="facultyQuestionList" class="faculty-question-list">
+            <div class="admin-empty-state">Loading your questions...</div>
+        </div>
+    </article>
+
+</section>
+
+</main>
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified">
+    <div class="footer-inner">
+        <a href="../index.html" class="footer-brand">
+            <img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="resources.html">Resources</a>
+            <a href="questions.html">Question Bank</a>
+        </nav>
+        <span>Learn • Practice • Grow</span>
+    </div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/faculty-common.js"></script>
+<script src="../js/question-form-helper.js"></script>
+<script src="../js/faculty-questions.js"></script>
+
+</body>
+</html>

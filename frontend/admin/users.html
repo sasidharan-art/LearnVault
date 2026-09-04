@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users & Faculty | LearnVault</title>
+    <link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page users-faculty-page">
+
+<div class="site student-site admin-site">
+
+<header class="topbar student-topbar">
+    <button
+        type="button"
+        class="mobile-nav-toggle"
+        id="mobileNavToggle"
+        aria-label="Toggle navigation"
+        aria-controls="primaryNavigation"
+        aria-expanded="false"
+    >
+        <span></span><span></span><span></span>
+    </button>
+
+    <a href="../index.html" class="brand-link" aria-label="LearnVault home">
+        <img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+    </a>
+
+    <div class="top-search dashboard-search">
+        <span>⌕</span>
+        <input type="search" placeholder="Search LearnVault Admin..." aria-label="Search LearnVault Admin">
+    </div>
+
+    <nav class="top-actions student-account-actions">
+        <div class="student-head-identity">
+            <span class="student-head-label">ADMIN</span>
+            <strong id="headerAdminName">Administrator</strong>
+        </div>
+
+        <button type="button" class="button button-ghost" id="logoutButton">
+            Logout
+        </button>
+    </nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="Admin navigation">
+<a href="dashboard.html" class="rail-item" title="Dashboard" aria-label="Dashboard">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+    <span class="rail-label">Dashboard</span>
+</a>
+<a href="academic.html" class="rail-item" title="Academic Structure" aria-label="Academic Structure">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></span>
+    <span class="rail-label">Academic Structure</span>
+</a>
+<a href="users.html" class="rail-item active" title="Users & Faculty" aria-label="Users & Faculty">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15.2 14c3.2-.4 5.1 1.3 5.3 5"/></svg></span>
+    <span class="rail-label">Users & Faculty</span>
+</a>
+<a href="resources.html" class="rail-item" title="Resources" aria-label="Resources">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 12h8M8 16h8"/></svg></span>
+    <span class="rail-label">Resources</span>
+</a>
+<a href="approvals.html" class="rail-item" title="Approvals" aria-label="Approvals">
+    <span class="rail-icon"><svg class="rail-svg" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16.5 8.5"/></svg></span>
+    <span class="rail-label">Approvals</span>
+</a>
+</aside>
+
+<main class="main dashboard-main admin-users-main">
+
+    <section class="admin-users-hero">
+        <div class="admin-users-hero-copy">
+            <span class="eyebrow">ADMIN • USERS & FACULTY</span>
+            <h1>Manage people and teaching access.</h1>
+            <p>
+                Create faculty accounts, control user access, and assign faculty
+                to the exact subjects they are allowed to teach and upload for.
+            </p>
+        </div>
+
+        <div class="admin-users-hero-note">
+            <span>ACCESS MODEL</span>
+
+            <div>
+                <strong>Students</strong>
+                <small>Self-register</small>
+            </div>
+
+            <div>
+                <strong>Faculty</strong>
+                <small>Admin creates + assigns subjects</small>
+            </div>
+
+            <div>
+                <strong>Admin</strong>
+                <small>Controls accounts and permissions</small>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="admin-user-stat-row">
+        <article>
+            <span>Total Users</span>
+            <strong id="adminUserTotalCount">0</strong>
+            <small>All LearnVault accounts</small>
+        </article>
+
+        <article>
+            <span>Students</span>
+            <strong id="adminStudentCount">0</strong>
+            <small>Registered learners</small>
+        </article>
+
+        <article>
+            <span>Faculty</span>
+            <strong id="adminFacultyCount">0</strong>
+            <small>Teaching accounts</small>
+        </article>
+
+        <article>
+            <span>Active Accounts</span>
+            <strong id="adminActiveCount">0</strong>
+            <small>Currently allowed access</small>
+        </article>
+    </section>
+
+
+    <section class="admin-users-workspace">
+
+        <article class="admin-users-card faculty-create-card">
+            <div class="admin-users-card-head">
+                <div class="admin-card-icon">+</div>
+
+                <div>
+                    <span class="eyebrow">CREATE FACULTY</span>
+                    <h2>New faculty account</h2>
+                    <p>
+                        Faculty cannot self-register. Create the account here and
+                        provide the generated username and password privately.
+                    </p>
+                </div>
+            </div>
+
+            <form id="facultyForm" class="faculty-create-form">
+
+                <label>
+                    <span>Full Name</span>
+                    <input
+                        name="fullName"
+                        required
+                        placeholder="e.g. Dr. Priya Raman"
+                    >
+                </label>
+
+                <label>
+                    <span>Email Address</span>
+                    <input
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="faculty@example.com"
+                    >
+                </label>
+
+                <label>
+                    <span>Phone Number</span>
+                    <input
+                        name="phone"
+                        required
+                        placeholder="9876543210"
+                    >
+                </label>
+
+                <label>
+                    <span>Department / Stream</span>
+                    <input
+                        name="department"
+                        placeholder="e.g. Architecture"
+                    >
+                </label>
+
+                <label>
+                    <span>Designation</span>
+                    <input
+                        name="designation"
+                        placeholder="e.g. Assistant Professor"
+                    >
+                </label>
+
+                <label>
+                    <span>Temporary Password</span>
+                    <input
+                        name="password"
+                        type="password"
+                        minlength="8"
+                        required
+                        placeholder="Minimum 8 characters"
+                    >
+                </label>
+
+                <div class="faculty-create-action">
+                    <p>
+                        The faculty member can log in using Email, Username,
+                        or numeric User ID.
+                    </p>
+
+                    <button
+                        class="button button-primary"
+                        type="submit"
+                    >
+                        Create Faculty Account
+                    </button>
+                </div>
+            </form>
+
+            <div
+                id="facultyCreatedResult"
+                class="admin-result-box faculty-created-result"
+                hidden
+            ></div>
+        </article>
+
+
+        <article class="admin-users-card teaching-access-card" id="facultyAssignments">
+
+            <div class="admin-users-card-head">
+                <div class="admin-card-icon">✓</div>
+
+                <div>
+                    <span class="eyebrow">TEACHING ACCESS</span>
+                    <h2>Assign faculty to subjects</h2>
+                    <p>
+                        Faculty can upload learning resources only for subjects
+                        that Admin assigns here.
+                    </p>
+                </div>
+            </div>
+
+            <form
+                id="facultyAssignmentForm"
+                class="faculty-assignment-form"
+            >
+                <label>
+                    <span>Faculty Member</span>
+
+                    <select
+                        id="assignmentFacultySelect"
+                        name="facultyUserId"
+                        required
+                    >
+                        <option value="">Loading faculty...</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Subject</span>
+
+                    <select
+                        id="assignmentSubjectSelect"
+                        name="subjectId"
+                        required
+                    >
+                        <option value="">Loading subjects...</option>
+                    </select>
+                </label>
+
+                <button
+                    class="button button-primary"
+                    type="submit"
+                >
+                    Assign Subject
+                </button>
+            </form>
+
+            <div class="assignment-divider"></div>
+
+            <div class="current-assignment-head">
+                <div>
+                    <span class="eyebrow">CURRENT ACCESS</span>
+                    <h3>Faculty subject assignments</h3>
+                </div>
+
+                <span class="assignment-count" id="assignmentCount">0 assigned</span>
+            </div>
+
+            <div
+                id="facultyAssignmentList"
+                class="faculty-assignment-list polished-assignment-list"
+            >
+                <div class="admin-empty-state">
+                    Loading assignments...
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+
+    <section class="admin-student-academic-section">
+
+        <div class="admin-student-academic-head">
+            <div class="admin-card-icon">🎓</div>
+
+            <div>
+                <span class="eyebrow">STUDENT ACADEMIC PROFILE</span>
+                <h2>Assign Course / Program and Current Level / Year</h2>
+                <p>
+                    Use this for older student accounts or when Admin needs to
+                    correct a student's academic path. Resource Library, subjects,
+                    quizzes and progress depend on this profile.
+                </p>
+            </div>
+        </div>
+
+        <form id="studentAcademicForm" class="student-academic-form">
+
+            <label>
+                <span>Student</span>
+                <select id="studentAcademicStudentSelect" name="studentUserId" required>
+                    <option value="">Loading students...</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Course / Program</span>
+                <select id="studentAcademicCourseSelect" name="courseId" required>
+                    <option value="">Select Course / Program</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Current Level / Year</span>
+                <select id="studentAcademicLevelSelect" name="courseLevelId" disabled>
+                    <option value="">Select a course first</option>
+                </select>
+            </label>
+
+            <button type="submit" class="button button-primary">
+                Save Student Academic Profile
+            </button>
+
+        </form>
+
+        <div id="studentAcademicCurrent" class="student-academic-current">
+            <span>Select a student to view the current academic profile.</span>
+        </div>
+
+    </section>
+
+
+    <section class="admin-directory-section">
+        <div class="admin-directory-head">
+            <div>
+                <span class="eyebrow">ACCOUNT DIRECTORY</span>
+                <h2>All LearnVault users</h2>
+                <p>
+                    Search accounts, filter by role/status, and manage access.
+                </p>
+            </div>
+
+            <button
+                class="button button-soft"
+                id="refreshUsers"
+                type="button"
+            >
+                Refresh
+            </button>
+        </div>
+
+        <div class="admin-directory-filters">
+            <label class="directory-search">
+                <span>Search</span>
+
+                <div>
+                    <span class="search-symbol">⌕</span>
+                    <input
+                        id="userSearch"
+                        type="search"
+                        placeholder="Name, email, username or User ID"
+                    >
+                </div>
+            </label>
+
+            <label>
+                <span>Role</span>
+
+                <select id="userRoleFilter">
+                    <option value="">All roles</option>
+                    <option value="student">Students</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="admin">Admins</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Status</span>
+
+                <select id="userStatusFilter">
+                    <option value="">All status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="admin-table-wrap polished-admin-table-wrap">
+            <table class="admin-data-table polished-admin-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Academic / Faculty Context</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Control</th>
+                    </tr>
+                </thead>
+
+                <tbody id="usersTableBody">
+                    <tr>
+                        <td colspan="6">
+                            Loading users...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified admin-full-footer">
+    <div class="footer-inner">
+        <a href="../index.html" class="footer-brand">
+            <img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="academic.html">Academic</a>
+            <a href="users.html">Users</a>
+            <a href="resources.html">Resources</a>
+            <a href="approvals.html">Approvals</a>
+        </nav>
+
+        <span>Learn • Practice • Grow</span>
+    </div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/admin-users.js"></script>
+<script src="../js/admin-assignments.js"></script>
+<script src="../js/admin-student-academic.js"></script>
+
+</body>
+</html>

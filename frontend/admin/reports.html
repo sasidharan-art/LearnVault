@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reports | LearnVault</title><link rel="stylesheet" href="../css/global.css"></head>
+<body class="admin-page integration-page" data-role="admin">
+<div class="site student-site admin-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="integrationHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">ADMIN</span><strong id="headerAdminName">Administrator</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell"><aside class="icon-rail" id="primaryNavigation" aria-label="admin navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="search.html" class="rail-item"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="academic.html" class="rail-item"><span class="rail-icon">▦</span><span class="rail-label">Academic Structure</span></a>
+<a href="users.html" class="rail-item"><span class="rail-icon">◇</span><span class="rail-label">Users & Faculty</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="reports.html" class="rail-item active"><span class="rail-icon">▥</span><span class="rail-label">Reports</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="profile.html" class="rail-item"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a>
+<a href="approvals.html" class="rail-item"><span class="rail-icon">◈</span><span class="rail-label">Oversight</span></a></aside><main class="main dashboard-main integration-main">
+<section class="integration-hero"><div><span class="eyebrow">ADMIN • REPORTS & SYSTEM CHECK</span><h1>Turn LearnVault data into review-ready reports.</h1><p>See user counts, learning-content totals, assessment activity, Course-level performance, Faculty contribution and database health from one page.</p></div><div class="integration-hero-card"><span class="mini-label">DATABASE HEALTH</span><strong id="reportSystemHealth">Checking...</strong><small id="reportSystemDetail">Verifying required LearnVault tables.</small></div></section>
+<section class="report-stat-grid"><article><span>Students</span><strong id="reportStudents">0</strong><small id="reportUsersText">0 total users</small></article><article><span>Published Resources</span><strong id="reportResources">0</strong><small>Learning materials</small></article><article><span>Quiz Attempts</span><strong id="reportQuizAttempts">0</strong><small id="reportQuizAverage">0% average score</small></article><article><span>Assignment Submissions</span><strong id="reportSubmissions">0</strong><small id="reportPendingGrading">0 awaiting grading</small></article></section>
+<section class="integration-two-column">
+<article class="integration-panel"><div class="integration-panel-head integration-row-head"><div><span class="eyebrow">COURSE REPORT</span><h2>Learning by Course / Program</h2><p>Students, content and average quiz performance.</p></div><a class="button button-soft" href="/api/integration/admin/reports.csv?report=course">Export CSV</a></div><div class="integration-table-wrap"><table class="integration-table"><thead><tr><th>Course</th><th>Students</th><th>Subjects</th><th>Resources</th><th>Quizzes</th><th>Assignments</th><th>Avg Quiz</th></tr></thead><tbody id="courseReportBody"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></article>
+<article class="integration-panel"><div class="integration-panel-head integration-row-head"><div><span class="eyebrow">FACULTY CONTRIBUTION</span><h2>Teaching-content activity</h2><p>Assigned subjects and published learning content.</p></div><a class="button button-soft" href="/api/integration/admin/reports.csv?report=faculty">Export CSV</a></div><div class="integration-table-wrap"><table class="integration-table"><thead><tr><th>Faculty</th><th>Subjects</th><th>Resources</th><th>Questions</th><th>Quizzes</th><th>Assignments</th><th>Peer Groups</th></tr></thead><tbody id="facultyReportBody"><tr><td colspan="7">Loading...</td></tr></tbody></table></div></article>
+</section>
+<section class="integration-panel integration-wide-panel"><div class="integration-panel-head"><span class="eyebrow">SYSTEM CHECK</span><h2>Required database tables</h2><p>Useful before project review, demonstrations and final submission.</p></div><div id="systemTableCheckGrid" class="system-table-check-grid"></div></section></main></div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="search.html">Search</a><a href="activity.html">Activity</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script><script src="../js/learning-extension-helper.js"></script><script src="../js/admin-reports.js"></script>
+</body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Profile | LearnVault</title><link rel="stylesheet" href="../css/global.css"></head>
+<body class="faculty-page integration-page" data-role="faculty">
+<div class="site student-site faculty-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="integrationHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">FACULTY</span><strong id="headerFacultyName">Faculty</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell"><aside class="icon-rail" id="primaryNavigation" aria-label="faculty navigation"><a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="search.html" class="rail-item"><span class="rail-icon">⌕</span><span class="rail-label">Search</span></a>
+<a href="activity.html" class="rail-item"><span class="rail-icon">◫</span><span class="rail-label">Activity</span></a>
+<a href="resources.html" class="rail-item"><span class="rail-icon">▣</span><span class="rail-label">Resources</span></a>
+<a href="questions.html" class="rail-item"><span class="rail-icon">?</span><span class="rail-label">Question Bank</span></a>
+<a href="quizzes.html" class="rail-item"><span class="rail-icon">✓</span><span class="rail-label">Quizzes</span></a>
+<a href="assignments.html" class="rail-item"><span class="rail-icon">▤</span><span class="rail-label">Assignments</span></a>
+<a href="progress.html" class="rail-item"><span class="rail-icon">↗</span><span class="rail-label">Progress</span></a>
+<a href="skills.html" class="rail-item"><span class="rail-icon">◎</span><span class="rail-label">Skills</span></a>
+<a href="peer-groups.html" class="rail-item"><span class="rail-icon">◉</span><span class="rail-label">Peer Groups</span></a>
+<a href="profile.html" class="rail-item active"><span class="rail-icon">◌</span><span class="rail-label">Profile</span></a></aside><main class="main dashboard-main integration-main">
+<section class="integration-hero profile-hero"><div><span class="eyebrow">ACCOUNT • PROFILE & SECURITY</span><h1>Keep your LearnVault account information current.</h1><p>View your role and academic access, update your basic profile and change your password securely using your current password.</p></div><div class="integration-hero-card"><span class="mini-label">ACCOUNT IDENTITY</span><strong id="profileIdentity">Loading...</strong><small id="profileRoleStatus">-</small></div></section>
+<section class="profile-layout">
+<article class="integration-panel"><div class="integration-panel-head"><span class="eyebrow">PROFILE</span><h2>Basic information</h2><p>Email, Username and User ID remain read-only identifiers.</p></div><form id="profileForm" class="integration-form"><div class="profile-readonly-grid"><label><span>User ID</span><input id="profileUserId" readonly></label><label><span>Username</span><input id="profileUsername" readonly></label><label class="profile-email-field"><span>Email</span><input id="profileEmail" readonly></label></div><label><span>Full Name</span><input id="profileFullName" required maxlength="120"></label><label><span>Phone</span><input id="profilePhone" maxlength="20" placeholder="Phone number"></label><button type="submit" class="button button-primary">Save Profile</button></form></article>
+<article class="integration-panel"><div class="integration-panel-head"><span class="eyebrow">SECURITY</span><h2>Change password</h2><p>Your current password is required before a new password is accepted.</p></div><form id="passwordForm" class="integration-form"><label><span>Current Password</span><input id="currentPassword" type="password" autocomplete="current-password" required></label><label><span>New Password</span><input id="newPassword" type="password" autocomplete="new-password" minlength="8" required></label><label><span>Confirm New Password</span><input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label><button type="submit" class="button button-primary">Change Password</button></form></article>
+</section>
+<section class="integration-panel integration-wide-panel"><div class="integration-panel-head"><span class="eyebrow">ACADEMIC ACCESS</span><h2 id="academicAccessTitle">Your LearnVault access</h2><p id="academicAccessDescription">Loading role information...</p></div><div id="profileAcademicAccess" class="profile-access-grid"></div></section></main></div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="search.html">Search</a><a href="activity.html">Activity</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script><script src="../js/learning-extension-helper.js"></script><script src="../js/profile.js"></script>
+</body></html>

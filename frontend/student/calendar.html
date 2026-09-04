@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Calendar | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+
+<body class="student-page commercial-role-page" data-role="student">
+
+<div class="site student-site commercial-role-site">
+
+<header class="topbar student-topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle"
+aria-label="Toggle navigation" aria-controls="primaryNavigation"
+aria-expanded="false"><span></span><span></span><span></span></button>
+
+<a href="../index.html" class="brand-link" aria-label="LearnVault home">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo">
+</a>
+
+<div class="top-search dashboard-search">
+<span>⌕</span>
+<input id="universalHeaderSearch" type="search"
+placeholder="Search LearnVault..." aria-label="Search LearnVault">
+</div>
+
+<nav class="top-actions student-account-actions">
+<div class="student-head-identity">
+<span class="student-head-label">STUDENT</span>
+<strong id="headerStudentName">Student</strong>
+</div>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</nav>
+</header>
+
+<div class="page-shell">
+
+<aside class="icon-rail" id="primaryNavigation" aria-label="STUDENT navigation">
+<a href="dashboard.html" class="rail-item">
+<span class="rail-icon">⌂</span>
+<span class="rail-label">Dashboard</span>
+</a>
+<a href="study-hub.html" class="rail-item">
+<span class="rail-icon">★</span>
+<span class="rail-label">Study Hub</span>
+</a>
+<a href="search.html" class="rail-item">
+<span class="rail-icon">⌕</span>
+<span class="rail-label">Search</span>
+</a>
+<a href="activity.html" class="rail-item">
+<span class="rail-icon">◫</span>
+<span class="rail-label">Activity</span>
+</a>
+<a href="notifications.html" class="rail-item">
+<span class="rail-icon">◔</span>
+<span class="rail-label">Notifications</span>
+</a>
+<a href="calendar.html" class="rail-item active">
+<span class="rail-icon">▦</span>
+<span class="rail-label">Calendar</span>
+</a>
+<a href="resources.html" class="rail-item">
+<span class="rail-icon">▣</span>
+<span class="rail-label">Resources</span>
+</a>
+<a href="questions.html" class="rail-item">
+<span class="rail-icon">?</span>
+<span class="rail-label">Question Bank</span>
+</a>
+<a href="quizzes.html" class="rail-item">
+<span class="rail-icon">✓</span>
+<span class="rail-label">Quizzes</span>
+</a>
+<a href="assignments.html" class="rail-item">
+<span class="rail-icon">▤</span>
+<span class="rail-label">Assignments</span>
+</a>
+<a href="progress.html" class="rail-item">
+<span class="rail-icon">↗</span>
+<span class="rail-label">Progress</span>
+</a>
+<a href="skills.html" class="rail-item">
+<span class="rail-icon">◎</span>
+<span class="rail-label">Skills</span>
+</a>
+<a href="peer-groups.html" class="rail-item">
+<span class="rail-icon">◉</span>
+<span class="rail-label">Peer Groups</span>
+</a>
+<a href="academic-progress.html" class="rail-item">
+<span class="rail-icon">↟</span>
+<span class="rail-label">Academic Progress</span>
+</a>
+<a href="profile.html" class="rail-item">
+<span class="rail-icon">◌</span>
+<span class="rail-label">Profile</span>
+</a>
+</aside>
+
+<main class="main dashboard-main commercial-dashboard-main">
+
+<section class="universal-feature-hero compact">
+<div>
+<span class="eyebrow">LEARNVAULT • LEARNING CALENDAR</span>
+<h1>See deadlines and updates <span>before they become problems.</span></h1>
+<p>Assignments, Quizzes, announcements and academic events are collected into a clean agenda.</p>
+</div>
+
+<div class="universal-feature-hero-card">
+<span class="mini-label">AGENDA</span>
+<strong id="calendarEventCount">0 events</strong>
+<small>Upcoming and recent learning activity.</small>
+</div>
+</section>
+
+<section class="calendar-stat-grid">
+<article><span>Assignments</span><strong id="calendarAssignments">0</strong><small>Deadline events</small></article>
+<article><span>Quizzes</span><strong id="calendarQuizzes">0</strong><small>Available / published</small></article>
+<article><span>Announcements</span><strong id="calendarAnnouncements">0</strong><small>Platform updates</small></article>
+<article><span>Academic</span><strong id="calendarAcademic">0</strong><small>Progression events</small></article>
+</section>
+
+<section class="commercial-dashboard-panel calendar-main-panel">
+
+<div class="commercial-dashboard-panel-head commercial-row-head">
+<div>
+<span class="eyebrow">TIMELINE</span>
+<h2>Learning agenda</h2>
+<p>Events are grouped by date.</p>
+</div>
+
+<div class="notification-toolbar">
+<select id="calendarFilter">
+<option value="">Everything</option>
+<option value="assignment">Assignments</option>
+<option value="quiz">Quizzes</option>
+<option value="announcement">Announcements</option>
+<option value="academic">Academic</option>
+<option value="academic_request">Academic Requests</option>
+</select>
+
+<button type="button" class="button button-soft" id="calendarRefresh">Refresh</button>
+</div>
+</div>
+
+<div id="learningCalendarAgenda" class="learning-calendar-agenda">
+<div class="integration-empty">Loading Learning Calendar...</div>
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<footer class="footer student-footer-unified commercial-footer">
+<div class="footer-inner">
+<a href="../index.html" class="footer-brand">
+<img src="../assets/logo/learnvault-logo.png" alt="LearnVault">
+</a>
+<nav>
+<a href="dashboard.html">Dashboard</a>
+<a href="notifications.html">Notifications</a>
+<a href="calendar.html">Calendar</a>
+<a href="profile.html">Profile</a>
+</nav>
+<span>Learn • Practice • Grow</span>
+</div>
+</footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="../js/sidebar.js"></script>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/learning-calendar.js"></script>
+</body>
+</html>

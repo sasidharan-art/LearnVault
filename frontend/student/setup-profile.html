@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Up Learning Path | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="student-profile-setup-page">
+<div class="student-setup-shell">
+<header class="student-setup-topbar">
+<a href="../index.html" class="brand-link"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<button type="button" class="button button-ghost" id="logoutButton">Logout</button>
+</header>
+<main class="student-setup-main">
+<section class="student-setup-copy">
+<span class="eyebrow">ONE-TIME LEARNING SETUP</span>
+<h1>Choose your Course and <span>unlock your Student workspace.</span></h1>
+<p>Your account exists, but its academic path is missing. Select your Course / Program and Current Level / Year once. LearnVault will then automatically show only the Subjects, Resources, Quizzes, Assignments, Skills and Peer Groups relevant to you.</p>
+<div class="student-setup-benefits">
+<article><span>01</span><div><strong>Personal Resources</strong><small>Only content relevant to your Course and Level.</small></div></article>
+<article><span>02</span><div><strong>Correct Assessments</strong><small>Quizzes and Assignments from the right Subjects.</small></div></article>
+<article><span>03</span><div><strong>Real Progress</strong><small>Mastery, weak areas and Skill progress become accurate.</small></div></article>
+</div>
+</section>
+<section class="student-setup-card">
+<div class="student-setup-card-head"><span class="mini-label">ACADEMIC PROFILE</span><h2>Set your learning path</h2><p>Choose the same Course / Program you are currently studying.</p></div>
+<form id="studentAcademicSetupForm" class="integration-form">
+<label><span>Course / Program</span><select id="studentSetupCourse" required><option value="">Loading Courses...</option></select></label>
+<label><span>Current Level / Year</span><select id="studentSetupLevel"><option value="">Select Course first</option></select></label>
+<div id="studentSelectedPath" class="student-selected-path" hidden></div>
+<button type="submit" class="button button-primary large">Save & Open My Dashboard</button>
+</form>
+<div class="student-setup-help"><strong>Need the Course changed later?</strong><span>You can update the academic path from your Student Profile.</span></div>
+</section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/learning-extension-helper.js"></script>
+<script src="../js/student-profile-setup.js"></script>
+</body>
+</html>

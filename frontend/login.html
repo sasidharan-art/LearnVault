@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | LearnVault</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-page">
+
+    <a href="index.html" class="auth-brand">
+        <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+    </a>
+
+    <div class="auth-shell">
+
+        <section class="auth-story">
+            <span class="eyebrow light">WELCOME BACK</span>
+            <h1>Your learning is already organised. Pick up where you left off.</h1>
+            <p>One secure login for students, faculty and administrators. Your dashboard changes automatically based on your account role.</p>
+
+            <div class="auth-benefits">
+                <div><span>✓</span><p><strong>Continue learning</strong><small>Resume saved resources and recent topics.</small></p></div>
+                <div><span>✓</span><p><strong>Keep progress together</strong><small>Quizzes, practice and learning activity stay connected.</small></p></div>
+                <div><span>✓</span><p><strong>Role-aware access</strong><small>Students, faculty and admins see the tools meant for them.</small></p></div>
+            </div>
+        </section>
+
+
+        <section class="auth-panel">
+            <div class="auth-panel-head">
+                <span class="mini-label">LEARNVAULT ACCESS</span>
+                <h2>Log in to your account</h2>
+                <p>Enter the credentials associated with your LearnVault account.</p>
+            </div>
+
+            <form class="auth-form" id="loginForm">
+                <label>
+                    Email or user ID
+                    <input type="text" name="identifier" placeholder="you@example.com" required autocomplete="username">
+                </label>
+
+                <label>
+                    Password
+                    <div class="password-field">
+                        <input type="password" name="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" data-target="loginPassword">Show</button>
+                    </div>
+                </label>
+
+                <div class="form-row between">
+                    <label class="checkbox-label"><input type="checkbox"> Keep me signed in</label>
+                    <a href="forgot-password.html" class="text-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="button button-primary auth-submit">Log in</button>
+
+                <div class="student-register-note">
+                    <span>New student?</span>
+                    <a href="register.html">Create your LearnVault account</a>
+                </div>
+
+                <p class="role-note">
+                    Faculty and administrator accounts are created by the administrator and do not use student registration.
+                </p>
+            </form>
+        </section>
+
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="js/main.js"></script>
+</body>
+</html>
