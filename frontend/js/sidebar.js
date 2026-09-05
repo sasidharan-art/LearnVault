@@ -980,6 +980,233 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </div>
             `;
+
+
+        /*
+           Remove any legacy footer links that another older module
+           script may have left behind. The authenticated footer has
+           exactly three centered actions.
+        */
+        const footerNav =
+            footer.querySelector(
+                ".lv-footer-center-links"
+            );
+
+        if (footerNav) {
+
+            footerNav.innerHTML =
+                `
+                <a href="../help.html">Help Center</a>
+                <a href="../support.html">Support</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../feedback.html">Feedback</a>
+                `;
+
+        }
+
+
+        /*
+           Final footer geometry is enforced with inline !important
+           properties so no legacy module CSS can move the logo toward
+           the center again.
+        */
+        const footerInner =
+            footer.querySelector(
+                ".footer-inner"
+            );
+
+        const footerBrand =
+            footer.querySelector(
+                ".footer-brand"
+            );
+
+        const footerTagline =
+            footer.querySelector(
+                ".lv-footer-tagline"
+            );
+
+
+        if (
+            window.innerWidth > 760 &&
+            footerInner
+        ) {
+
+            const setImportant =
+                (
+                    element,
+                    property,
+                    value
+                ) => {
+
+                    if (!element) {
+                        return;
+                    }
+
+                    element.style.setProperty(
+                        property,
+                        value,
+                        "important"
+                    );
+
+                };
+
+
+            setImportant(
+                footer,
+                "width",
+                "100%"
+            );
+
+            setImportant(
+                footer,
+                "margin",
+                "0"
+            );
+
+            setImportant(
+                footer,
+                "padding",
+                "0"
+            );
+
+
+            setImportant(
+                footerInner,
+                "position",
+                "relative"
+            );
+
+            setImportant(
+                footerInner,
+                "width",
+                "100%"
+            );
+
+            setImportant(
+                footerInner,
+                "max-width",
+                "none"
+            );
+
+            setImportant(
+                footerInner,
+                "min-height",
+                "104px"
+            );
+
+            setImportant(
+                footerInner,
+                "margin",
+                "0"
+            );
+
+            setImportant(
+                footerInner,
+                "padding",
+                "12px 28px"
+            );
+
+            setImportant(
+                footerInner,
+                "display",
+                "block"
+            );
+
+
+            setImportant(
+                footerBrand,
+                "position",
+                "absolute"
+            );
+
+            setImportant(
+                footerBrand,
+                "left",
+                "28px"
+            );
+
+            setImportant(
+                footerBrand,
+                "top",
+                "50%"
+            );
+
+            setImportant(
+                footerBrand,
+                "transform",
+                "translateY(-50%)"
+            );
+
+            setImportant(
+                footerBrand,
+                "margin",
+                "0"
+            );
+
+
+            setImportant(
+                footerNav,
+                "position",
+                "absolute"
+            );
+
+            setImportant(
+                footerNav,
+                "left",
+                "50%"
+            );
+
+            setImportant(
+                footerNav,
+                "top",
+                "50%"
+            );
+
+            setImportant(
+                footerNav,
+                "transform",
+                "translate(-50%, -50%)"
+            );
+
+            setImportant(
+                footerNav,
+                "margin",
+                "0"
+            );
+
+
+            setImportant(
+                footerTagline,
+                "position",
+                "absolute"
+            );
+
+            setImportant(
+                footerTagline,
+                "right",
+                "28px"
+            );
+
+            setImportant(
+                footerTagline,
+                "top",
+                "50%"
+            );
+
+            setImportant(
+                footerTagline,
+                "transform",
+                "translateY(-50%)"
+            );
+
+            setImportant(
+                footerTagline,
+                "margin",
+                "0"
+            );
+
+        }
+
     }
 
     normalizeAuthenticatedShell();

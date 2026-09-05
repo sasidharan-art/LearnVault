@@ -16538,3 +16538,496 @@ body.lv-role-page [class*="-stats-grid"] {
     }
 }
 
+
+
+/* ==========================================================
+   LEARNVAULT — TRUE EDGE / TRUE CENTER ROLE FOOTER
+   FINAL OVERRIDE
+
+   Required layout on Student / Faculty / Admin desktop:
+   [LOGO AT LEFT EDGE] [Help Center | Support | Contact CENTERED]
+                                          [TAGLINE AT RIGHT]
+
+   The center links are centered against the BROWSER width,
+   not against the remaining content after the sidebar.
+========================================================== */
+
+@media (min-width: 761px) {
+
+    html body .lv-role-footer {
+        width: 100% !important;
+        min-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        left: 0 !important;
+        right: 0 !important;
+
+        background: #10183f !important;
+    }
+
+    html body .lv-role-footer .footer-inner,
+    html body .lv-role-footer .lv-compact-footer-inner {
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        min-height: 104px !important;
+
+        margin: 0 !important;
+
+        padding:
+            12px 28px
+            !important;
+
+        display: grid !important;
+
+        grid-template-columns:
+            minmax(140px, 1fr)
+            auto
+            minmax(140px, 1fr)
+            !important;
+
+        align-items: center !important;
+
+        gap: 18px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: initial !important;
+    }
+
+    html body .lv-role-footer .footer-brand,
+    html body .lv-role-footer .lv-footer-left-brand {
+
+        grid-column: 1 !important;
+
+        justify-self: start !important;
+        align-self: center !important;
+
+        width: max-content !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        transform: none !important;
+    }
+
+    html body .lv-role-footer .footer-brand img,
+    html body .lv-role-footer .lv-footer-left-brand img {
+
+        width: 88px !important;
+        height: auto !important;
+
+        margin: 0 !important;
+
+        display: block !important;
+
+        transform: none !important;
+    }
+
+    html body .lv-role-footer .lv-footer-center-links {
+
+        grid-column: 2 !important;
+
+        justify-self: center !important;
+        align-self: center !important;
+
+        width: max-content !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        gap: 24px !important;
+
+        transform: none !important;
+    }
+
+    html body .lv-role-footer .lv-footer-center-links a {
+
+        display: inline-flex !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        white-space: nowrap !important;
+    }
+
+    /*
+       Defensive cleanup:
+       if an old cached module appends a legacy fourth "Help" link,
+       only the intended three support links remain visible.
+    */
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(n + 4) {
+
+        display: none !important;
+    }
+
+    html body .lv-role-footer .lv-footer-tagline {
+
+        grid-column: 3 !important;
+
+        justify-self: end !important;
+        align-self: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        transform: none !important;
+
+        font-size: 10px !important;
+
+        white-space: nowrap !important;
+    }
+}
+
+
+/* Mobile keeps the clean stacked footer. */
+@media (max-width: 760px) {
+
+    html body .lv-role-footer .footer-inner,
+    html body .lv-role-footer .lv-compact-footer-inner {
+
+        width: 100% !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+
+        padding:
+            20px 18px
+            !important;
+
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+
+        justify-items: center !important;
+
+        gap: 12px !important;
+    }
+
+    html body .lv-role-footer .footer-brand,
+    html body .lv-role-footer .lv-footer-left-brand,
+    html body .lv-role-footer .lv-footer-center-links,
+    html body .lv-role-footer .lv-footer-tagline {
+
+        grid-column: 1 !important;
+
+        justify-self: center !important;
+
+        margin: 0 !important;
+    }
+
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(n + 4) {
+
+        display: none !important;
+    }
+}
+
+
+
+/* ==========================================================
+   LEARNVAULT — ABSOLUTE FOOTER GEOMETRY + FEEDBACK
+   FINAL AUTHORITATIVE OVERRIDE
+
+   DESKTOP:
+   logo = actual left side of browser
+   Help Center / Support / Contact / Feedback = exact viewport center
+   tagline = actual right side
+========================================================== */
+
+@media (min-width: 761px) {
+
+    html body .lv-role-footer {
+        position: relative !important;
+
+        width: 100% !important;
+        min-width: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        background: #10183f !important;
+    }
+
+    html body .lv-role-footer .footer-inner,
+    html body .lv-role-footer .lv-compact-footer-inner {
+        position: relative !important;
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        min-height: 104px !important;
+
+        margin: 0 !important;
+        padding: 12px 28px !important;
+
+        display: block !important;
+
+        box-sizing: border-box !important;
+    }
+
+    html body .lv-role-footer .footer-brand,
+    html body .lv-role-footer .lv-footer-left-brand {
+        position: absolute !important;
+
+        left: 28px !important;
+        top: 50% !important;
+
+        transform: translateY(-50%) !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        width: max-content !important;
+    }
+
+    html body .lv-role-footer .footer-brand img,
+    html body .lv-role-footer .lv-footer-left-brand img {
+        width: 90px !important;
+        height: auto !important;
+
+        display: block !important;
+
+        margin: 0 !important;
+    }
+
+    html body .lv-role-footer .lv-footer-center-links {
+        position: absolute !important;
+
+        left: 50% !important;
+        top: 50% !important;
+
+        transform:
+            translate(-50%, -50%)
+            !important;
+
+        width: max-content !important;
+        max-width: calc(100% - 430px) !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+
+        gap: 8px 24px !important;
+
+        text-align: center !important;
+    }
+
+    html body .lv-role-footer .lv-footer-center-links a {
+        display: inline-flex !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: rgba(255,255,255,.92) !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        line-height: 1.2 !important;
+
+        text-decoration: none !important;
+        white-space: nowrap !important;
+    }
+
+    html body .lv-role-footer .lv-footer-center-links a:hover {
+        color: #ffffff !important;
+        text-decoration: underline !important;
+        text-underline-offset: 3px !important;
+    }
+
+    html body .lv-role-footer .lv-footer-tagline {
+        position: absolute !important;
+
+        right: 28px !important;
+        top: 50% !important;
+
+        transform: translateY(-50%) !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: rgba(255,255,255,.76) !important;
+
+        font-size: 10px !important;
+        font-weight: 700 !important;
+
+        white-space: nowrap !important;
+    }
+
+    /*
+       The previous phase hid links >= 4 to remove a stale duplicate
+       Help item. Feedback is now intentionally the 4th item.
+    */
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(n + 5) {
+        display: none !important;
+    }
+
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(4) {
+        display: inline-flex !important;
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    html body .lv-role-footer .lv-footer-center-links {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+
+        gap: 8px 17px !important;
+    }
+
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(4) {
+        display: inline-flex !important;
+    }
+
+    html body .lv-role-footer
+        .lv-footer-center-links
+        a:nth-child(n + 5) {
+        display: none !important;
+    }
+}
+
+
+
+/* ==========================================================
+   LEARNVAULT FEEDBACK PAGE
+========================================================== */
+
+.lv-feedback-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(280px, .55fr);
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+.lv-feedback-form {
+    margin-top: 18px;
+
+    display: grid;
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+}
+
+.lv-feedback-form label {
+    display: grid;
+
+    gap: 7px;
+
+    color:
+        var(--lv-commercial-ink, #11182b);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.lv-feedback-form input,
+.lv-feedback-form select,
+.lv-feedback-form textarea {
+    width: 100%;
+
+    border:
+        1px solid
+        rgba(85, 69, 232, .13);
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color:
+        var(--lv-commercial-ink, #11182b);
+
+    font: inherit;
+
+    box-sizing: border-box;
+}
+
+.lv-feedback-form input,
+.lv-feedback-form select {
+    min-height: 46px;
+
+    padding: 0 12px;
+}
+
+.lv-feedback-form textarea {
+    min-height: 150px;
+
+    padding: 12px;
+
+    resize: vertical;
+}
+
+.lv-feedback-full {
+    grid-column:
+        1 / -1;
+}
+
+.lv-feedback-submit {
+    border: 0;
+    cursor: pointer;
+}
+
+.lv-feedback-status {
+    align-self: center;
+
+    margin: 0;
+
+    color:
+        var(--lv-commercial-muted, #66708a);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+@media (max-width: 780px) {
+
+    .lv-feedback-layout,
+    .lv-feedback-form {
+        grid-template-columns:
+            1fr;
+    }
+
+    .lv-feedback-full {
+        grid-column:
+            1;
+    }
+}
+

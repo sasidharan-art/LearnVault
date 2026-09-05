@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | LearnVault</title>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="lv-public-info-page">
+
+<header class="lv-info-header">
+    <div class="lv-info-header-inner">
+
+        <a class="lv-info-brand" href="index.html" aria-label="LearnVault home">
+            <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+
+        <nav class="lv-info-nav" aria-label="Public navigation">
+            <a href="index.html">Home</a>
+            <a href="help.html">Help</a>
+            <a href="support.html">Support</a>
+            <a href="contact.html">Contact</a>
+            <a href="feedback.html" class="active">Feedback</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </div>
+</header>
+
+<main class="lv-info-main">
+
+    <section class="lv-info-hero">
+        <div>
+            <span class="lv-info-eyebrow">LEARNVAULT • FEEDBACK</span>
+            <h1>Help us improve LearnVault.</h1>
+        </div>
+
+        <p>
+            Share a suggestion, report a confusing workflow, or tell us what is
+            working well. Feedback should describe the page, role and problem
+            clearly so it can be reviewed efficiently.
+        </p>
+    </section>
+
+    <section class="lv-feedback-layout">
+
+        <article class="lv-info-card">
+            <span>QUICK FEEDBACK</span>
+            <h2>What would you like to tell us?</h2>
+
+            <form class="lv-feedback-form" id="learnVaultFeedbackForm">
+
+                <label>
+                    Feedback type
+                    <select id="feedbackType" required>
+                        <option value="">Select type</option>
+                        <option>Suggestion</option>
+                        <option>UI / Responsiveness</option>
+                        <option>Bug Report</option>
+                        <option>Learning Content</option>
+                        <option>Accessibility</option>
+                        <option>Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    Your role
+                    <select id="feedbackRole" required>
+                        <option value="">Select role</option>
+                        <option>Student</option>
+                        <option>Faculty</option>
+                        <option>Admin</option>
+                        <option>Visitor</option>
+                    </select>
+                </label>
+
+                <label class="lv-feedback-full">
+                    Page / module
+                    <input
+                        id="feedbackPage"
+                        type="text"
+                        placeholder="Example: Student Resources"
+                        required
+                    >
+                </label>
+
+                <label class="lv-feedback-full">
+                    Message
+                    <textarea
+                        id="feedbackMessage"
+                        rows="6"
+                        placeholder="Describe what happened, what you expected, and what could be improved."
+                        required
+                    ></textarea>
+                </label>
+
+                <button class="lv-info-button lv-feedback-submit" type="submit">
+                    Prepare Feedback
+                </button>
+
+                <p class="lv-feedback-status" id="feedbackStatus" aria-live="polite"></p>
+
+            </form>
+        </article>
+
+        <aside class="lv-info-card">
+            <span>GOOD FEEDBACK INCLUDES</span>
+            <h2>Make it actionable.</h2>
+            <ul>
+                <li>The exact page or feature.</li>
+                <li>Your role: Student, Faculty or Admin.</li>
+                <li>What you clicked or tried to do.</li>
+                <li>What you expected to happen.</li>
+                <li>What actually happened.</li>
+            </ul>
+
+            <p>
+                For account access, password reset, academic changes or urgent
+                operational support, use the dedicated Support page.
+            </p>
+
+            <p>
+                <a href="support.html">Open Support →</a>
+            </p>
+        </aside>
+
+    </section>
+
+</main>
+
+<footer class="lv-info-footer">
+    <div class="lv-info-footer-inner">
+        <a href="index.html">
+            <img src="assets/logo/learnvault-logo.png" alt="LearnVault">
+        </a>
+
+        <nav>
+            <a href="help.html">Help Center</a>
+            <a href="support.html">Support</a>
+            <a href="contact.html">Contact</a>
+            <a href="feedback.html">Feedback</a>
+        </nav>
+
+        <small>Learn • Practice • Grow</small>
+    </div>
+</footer>
+
+<script>
+(function () {
+    "use strict";
+
+    const form =
+        document.getElementById(
+            "learnVaultFeedbackForm"
+        );
+
+    if (!form) {
+        return;
+    }
+
+    form.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+            const type =
+                document.getElementById(
+                    "feedbackType"
+                ).value;
+
+            const role =
+                document.getElementById(
+                    "feedbackRole"
+                ).value;
+
+            const page =
+                document.getElementById(
+                    "feedbackPage"
+                ).value.trim();
+
+            const message =
+                document.getElementById(
+                    "feedbackMessage"
+                ).value.trim();
+
+            const status =
+                document.getElementById(
+                    "feedbackStatus"
+                );
+
+            if (
+                !type ||
+                !role ||
+                !page ||
+                !message
+            ) {
+                status.textContent =
+                    "Complete all fields before preparing feedback.";
+                return;
+            }
+
+            const subject =
+                `[LearnVault Feedback] ${type} - ${page}`;
+
+            const body = [
+                `Role: ${role}`,
+                `Page: ${page}`,
+                `Type: ${type}`,
+                "",
+                message
+            ].join("\n");
+
+            status.textContent =
+                "Feedback prepared. Your email app will open so you can review and send it.";
+
+            window.location.href =
+                `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        }
+    );
+})();
+</script>
+
+</body>
+</html>
