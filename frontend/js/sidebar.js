@@ -109,6 +109,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bindLogoutHomeGlobally();
 
+
+    /* ======================================================
+       UNIVERSAL ROLE PAGE MARKER
+
+       Every Student / Faculty / Admin module gets the same
+       responsive shell even if its original <body> class has
+       a module-specific name such as student-resource-page.
+    ====================================================== */
+
+    const rolePath =
+        window.location.pathname
+            .toLowerCase();
+
+    let roleFromPath =
+        null;
+
+    if (rolePath.includes("/student/")) {
+        roleFromPath = "student";
+    } else if (rolePath.includes("/faculty/")) {
+        roleFromPath = "faculty";
+    } else if (rolePath.includes("/admin/")) {
+        roleFromPath = "admin";
+    }
+
+    if (roleFromPath) {
+
+        document.body.classList.add(
+            "lv-role-page"
+        );
+
+        document.body.dataset.lvRole =
+            roleFromPath;
+
+    }
+
+
     const button =
         document.getElementById("mobileNavToggle");
 
@@ -249,6 +285,82 @@ document.addEventListener("DOMContentLoaded", () => {
         if(quiz&&quiz.parentNode===sidebar) quiz.insertAdjacentElement("afterend",link); else sidebar.appendChild(link);
     }
     ensureProgressLink();
+
+
+    function ensureHelpSupportLink() {
+
+        const role =
+            currentRole();
+
+        if (
+            !role ||
+            !sidebar
+        ) {
+            return;
+        }
+
+
+        const existing =
+            Array.from(
+                sidebar.querySelectorAll(
+                    "a"
+                )
+            )
+                .find(
+                    (link) =>
+                        String(
+                            link.textContent ||
+                            ""
+                        )
+                            .trim()
+                            .toLowerCase()
+                            .includes(
+                                "help & support"
+                            )
+                );
+
+
+        if (existing) {
+            existing.href =
+                "../support.html";
+
+            return;
+        }
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+        link.href =
+            "../support.html";
+
+        link.className =
+            "rail-item lv-support-rail-link";
+
+        link.title =
+            "Help & Support";
+
+        link.setAttribute(
+            "aria-label",
+            "Help & Support"
+        );
+
+        link.innerHTML =
+            `
+            <span class="rail-icon" aria-hidden="true">?</span>
+            <span class="rail-label">Help & Support</span>
+            `;
+
+
+        sidebar.appendChild(
+            link
+        );
+
+    }
+
+    ensureHelpSupportLink();
 
 
     function ensureExtraLearningLink(label, href, icon, afterLabel) {
@@ -501,8 +613,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         document.body.classList.add(
-            "lv-structured-role-page"
+            "lv-structured-role-page",
+            "lv-role-page"
         );
+
+        document.body.dataset.lvRole =
+            role;
 
         const site =
             document.querySelector(
@@ -614,7 +730,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             .join("")
                     }
 
-                    <a href="../help.html">Help</a>
+                    <a href="../help.html">Help Center</a>
+                    <a href="../support.html">Support</a>
+                    <a href="../contact.html">Contact</a>
                 </nav>
 
                 <span class="lv-footer-tagline">
@@ -1504,11 +1622,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /*
            Full/Desktop:
-           Home page starts collapsed.
-           All other pages start expanded.
+           ALL authenticated role pages start expanded with labels.
+           The user can still collapse it manually using the menu
+           button, but navigating to another role module returns to
+           the full desktop navigation.
         */
         setDesktopExpanded(
-            !isHomePage()
+            true
         );
 
     }
@@ -1641,7 +1761,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!hasDesktopState) {
 
                 setDesktopExpanded(
-                    !isHomePage()
+                    true
                 );
 
             } else {

@@ -15029,3 +15029,1149 @@ body.commercial-role-page .commercial-dashboard-panel {
         display: none !important;
     }
 }
+
+
+/* ==========================================================
+   LEARNVAULT — UNIVERSAL RESPONSIVE ROLE SHELL
+   FINAL AUTHORITATIVE LAYER
+
+   Why this exists:
+   Some module pages use body classes such as:
+     student-resource-page
+     student-question-page
+     faculty-resource-page
+     etc.
+
+   Earlier CSS targeted only .student-page / .faculty-page /
+   .admin-page, which made some desktop modules look like a
+   collapsed icon rail even though they were full desktop pages.
+
+   sidebar.js now adds:
+       body.lv-role-page
+       body[data-lv-role="student|faculty|admin"]
+
+   to EVERY authenticated role page.
+========================================================== */
+
+:root {
+    --lv-role-sidebar-expanded: 220px;
+    --lv-role-sidebar-collapsed: 68px;
+    --lv-role-header-height: 74px;
+}
+
+
+/* Global responsiveness safety */
+html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img,
+video,
+iframe,
+canvas,
+svg {
+    max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+body.lv-role-page .site,
+body.lv-role-page .page-shell,
+body.lv-role-page .main,
+body.lv-role-page .dashboard-main,
+body.lv-role-page .icon-rail {
+    box-sizing: border-box !important;
+}
+
+body.lv-role-page .site {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: visible !important;
+}
+
+
+/* ---------------- DESKTOP ---------------- */
+@media (min-width: 901px) {
+
+    body.lv-role-page .page-shell {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        display: grid !important;
+        grid-template-columns:
+            var(--lv-role-sidebar-expanded)
+            minmax(0, 1fr) !important;
+        grid-template-rows: auto !important;
+        align-items: start !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        padding-left: 0 !important;
+
+        flex: 1 0 auto !important;
+        overflow: visible !important;
+    }
+
+    body.lv-role-page.lv-sidebar-collapsed .page-shell {
+        grid-template-columns:
+            var(--lv-role-sidebar-collapsed)
+            minmax(0, 1fr) !important;
+    }
+
+    /*
+       Default desktop behavior is EXPANDED.
+       This also covers pages where an old body class failed to
+       receive lv-sidebar-expanded for a moment during loading.
+    */
+    body.lv-role-page:not(.lv-sidebar-collapsed) .page-shell {
+        grid-template-columns:
+            var(--lv-role-sidebar-expanded)
+            minmax(0, 1fr) !important;
+    }
+
+    body.lv-role-page .icon-rail {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+
+        position: sticky !important;
+        top: var(--lv-role-header-height) !important;
+        left: 0 !important;
+        right: auto !important;
+        bottom: auto !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+
+        height:
+            calc(
+                100dvh -
+                var(--lv-role-header-height)
+            ) !important;
+
+        min-height: 0 !important;
+        max-height:
+            calc(
+                100dvh -
+                var(--lv-role-header-height)
+            ) !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+
+        gap: 5px !important;
+
+        margin: 0 !important;
+        padding: 10px 8px 18px !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+
+        background:
+            var(--lv-commercial-surface, #f5f6ff)
+            !important;
+
+        border: 0 !important;
+        box-shadow: none !important;
+
+        scrollbar-width: thin !important;
+        scrollbar-gutter: stable !important;
+
+        z-index: 40 !important;
+    }
+
+    body.lv-role-page .icon-rail .rail-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 42px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        gap: 8px !important;
+
+        margin: 0 !important;
+        padding: 0 10px 0 0 !important;
+
+        border-radius: 11px !important;
+
+        box-sizing: border-box !important;
+    }
+
+    body.lv-role-page .icon-rail .rail-icon {
+        width: 42px !important;
+        min-width: 42px !important;
+        height: 42px !important;
+
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+
+        flex: 0 0 42px !important;
+    }
+
+    body.lv-role-page:not(.lv-sidebar-collapsed)
+        .icon-rail
+        .rail-label,
+    body.lv-role-page.lv-sidebar-expanded
+        .icon-rail
+        .rail-label {
+
+        display: block !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 150px !important;
+
+        opacity: 1 !important;
+        visibility: visible !important;
+
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+    }
+
+    body.lv-role-page.lv-sidebar-collapsed
+        .icon-rail
+        .rail-item {
+
+        width: 42px !important;
+        min-width: 42px !important;
+
+        justify-content: center !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+
+    body.lv-role-page.lv-sidebar-collapsed
+        .icon-rail
+        .rail-label {
+
+        display: none !important;
+        width: 0 !important;
+        max-width: 0 !important;
+
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    body.lv-role-page .main,
+    body.lv-role-page .dashboard-main {
+
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+
+        overflow: visible !important;
+
+        box-sizing: border-box !important;
+    }
+
+    /*
+       Any role page that used an old fixed left offset must not
+       reserve sidebar width a second time.
+    */
+    body.lv-role-page .main,
+    body.lv-role-page .dashboard-main,
+    body.lv-role-page .page-shell {
+        margin-left: 0 !important;
+    }
+
+    body.lv-role-page .page-shell {
+        padding-left: 0 !important;
+    }
+}
+
+
+/* ---------------- TABLET / MOBILE ---------------- */
+@media (max-width: 900px) {
+
+    :root {
+        --lv-role-header-height: 70px;
+    }
+
+    body.lv-role-page .page-shell {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        display: block !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    body.lv-role-page .icon-rail {
+        position: fixed !important;
+
+        top: var(--lv-role-header-height) !important;
+        left: 0 !important;
+        right: auto !important;
+
+        width: min(270px, 86vw) !important;
+        min-width: 0 !important;
+
+        height:
+            calc(
+                100dvh -
+                var(--lv-role-header-height)
+            ) !important;
+        max-height:
+            calc(
+                100dvh -
+                var(--lv-role-header-height)
+            ) !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+
+        gap: 5px !important;
+
+        padding: 10px !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        transform: translateX(-112%) !important;
+
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+
+        background:
+            var(--lv-commercial-surface, #f5f6ff)
+            !important;
+
+        box-shadow:
+            18px 0 48px
+            rgba(25, 30, 74, .13)
+            !important;
+
+        transition:
+            transform .2s ease,
+            opacity .2s ease,
+            visibility .2s ease !important;
+
+        z-index: 1900 !important;
+    }
+
+    body.lv-role-page.lv-sidebar-mobile-open .icon-rail {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    body.lv-role-page .icon-rail .rail-item {
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 44px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        gap: 9px !important;
+
+        padding: 0 10px 0 0 !important;
+
+        border-radius: 11px !important;
+    }
+
+    body.lv-role-page .icon-rail .rail-icon {
+        width: 44px !important;
+        min-width: 44px !important;
+        height: 44px !important;
+    }
+
+    body.lv-role-page .icon-rail .rail-label {
+        display: block !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 190px !important;
+
+        opacity: 1 !important;
+        visibility: visible !important;
+
+        font-size: 11px !important;
+        font-weight: 800 !important;
+
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+    }
+
+    body.lv-role-page .main,
+    body.lv-role-page .dashboard-main {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+
+/* ==========================================================
+   GENERIC MODULE RESPONSIVENESS
+========================================================== */
+
+body.lv-role-page .main > *,
+body.lv-role-page .dashboard-main > *,
+body.lv-role-page main > * {
+    min-width: 0 !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+body.lv-role-page table {
+    max-width: 100%;
+}
+
+body.lv-role-page .table-wrap,
+body.lv-role-page .table-wrapper,
+body.lv-role-page .responsive-table,
+body.lv-role-page [class*="table-wrap"],
+body.lv-role-page [class*="table-wrapper"] {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+body.lv-role-page .field-grid,
+body.lv-role-page [class*="-filter-grid"],
+body.lv-role-page [class*="-summary-grid"],
+body.lv-role-page [class*="-stats-grid"] {
+    min-width: 0;
+}
+
+@media (max-width: 760px) {
+
+    body.lv-role-page .field-grid,
+    body.lv-role-page [class*="-filter-grid"],
+    body.lv-role-page [class*="-summary-grid"],
+    body.lv-role-page [class*="-stats-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.lv-role-page .main,
+    body.lv-role-page .dashboard-main {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+}
+
+
+/* ==========================================================
+   AUTH PAGES — SLIGHTLY LARGER + FULLY RESPONSIVE
+========================================================== */
+
+.auth-body {
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+}
+
+.auth-page {
+    width: 100% !important;
+    min-height: 100dvh !important;
+    box-sizing: border-box !important;
+}
+
+.auth-shell {
+    width: min(1180px, calc(100% - 40px)) !important;
+    min-width: 0 !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    box-sizing: border-box !important;
+}
+
+.auth-story h1 {
+    font-size:
+        clamp(
+            36px,
+            4vw,
+            52px
+        ) !important;
+
+    line-height: 1.03 !important;
+}
+
+.auth-story > p {
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+}
+
+.auth-benefits strong,
+.registration-steps strong {
+    font-size: 12px !important;
+}
+
+.auth-benefits small,
+.registration-steps small {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+}
+
+.auth-panel-head .mini-label,
+.auth-panel-head > span {
+    font-size: 10px !important;
+}
+
+.auth-panel-head h2 {
+    font-size:
+        clamp(
+            28px,
+            2.6vw,
+            34px
+        ) !important;
+
+    line-height: 1.1 !important;
+}
+
+.auth-panel-head p {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+}
+
+.auth-form > label,
+.auth-form .field-grid > label,
+.auth-label {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+    min-height: 46px !important;
+
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+}
+
+.auth-form select {
+    padding-right: 36px !important;
+}
+
+.auth-submit,
+.auth-submit-btn {
+    min-height: 47px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
+.password-toggle,
+.auth-password-toggle {
+    min-width: 58px !important;
+    min-height: 38px !important;
+
+    font-size: 12px !important;
+    font-weight: 800 !important;
+
+    cursor: pointer !important;
+
+    touch-action: manipulation;
+}
+
+.password-field {
+    min-width: 0 !important;
+}
+
+.password-field input {
+    min-width: 0 !important;
+}
+
+.student-register-note,
+.role-note,
+.password-hint,
+.academic-select-note,
+.registration-api-state,
+.auth-form .text-link,
+.auth-form .checkbox-label {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+}
+
+
+/* Public/auth support shortcuts */
+.auth-support-links {
+    width: min(1180px, calc(100% - 40px));
+
+    margin: 16px auto 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 8px 18px;
+}
+
+.auth-support-links a {
+    color:
+        var(--lv-commercial-muted, #66708a);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.auth-support-links a:hover {
+    color:
+        var(--lv-commercial-primary, #5545e8);
+}
+
+
+@media (max-width: 900px) {
+
+    .auth-page {
+        padding-top: 12px !important;
+    }
+
+    .auth-brand {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+
+        display: block !important;
+
+        width: max-content !important;
+
+        margin:
+            0 auto 12px !important;
+    }
+
+    .auth-shell,
+    .auth-shell.register-shell {
+        width: min(680px, calc(100% - 28px)) !important;
+
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+
+        gap: 0 !important;
+
+        overflow: hidden !important;
+    }
+
+    .auth-story,
+    .auth-story.register-story {
+        padding:
+            30px 24px !important;
+    }
+
+    .auth-panel,
+    .auth-panel.register-panel {
+        width: 100% !important;
+        min-width: 0 !important;
+
+        padding:
+            28px 24px 30px !important;
+
+        box-sizing: border-box !important;
+    }
+
+    .auth-form .field-grid {
+        grid-template-columns:
+            1fr !important;
+    }
+
+    .auth-form .full-field,
+    .course-context-card {
+        grid-column:
+            1 / -1 !important;
+    }
+
+    .auth-story h1 {
+        font-size:
+            clamp(
+                31px,
+                8vw,
+                43px
+            ) !important;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .auth-shell,
+    .auth-shell.register-shell {
+        width: calc(100% - 18px) !important;
+
+        border-radius: 18px !important;
+    }
+
+    .auth-story,
+    .auth-story.register-story {
+        padding:
+            24px 18px !important;
+    }
+
+    .auth-panel,
+    .auth-panel.register-panel {
+        padding:
+            24px 18px 28px !important;
+    }
+
+    .auth-panel-head h2 {
+        font-size: 28px !important;
+    }
+
+    .auth-form input,
+    .auth-form select,
+    .auth-form textarea {
+        min-height: 48px !important;
+        font-size: 15px !important;
+    }
+
+    .form-row.between {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 9px !important;
+    }
+
+    .password-field {
+        display: grid !important;
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto !important;
+    }
+}
+
+
+/* ==========================================================
+   PUBLIC SUPPORT / CONTACT / ABOUT / LEGAL PAGES
+========================================================== */
+
+.lv-public-info-page {
+    margin: 0;
+    min-height: 100dvh;
+
+    background:
+        var(--lv-commercial-surface, #f5f6ff);
+
+    color:
+        var(--lv-commercial-ink, #11182b);
+}
+
+.lv-info-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+
+    width: 100%;
+
+    background:
+        rgba(245, 246, 255, .94);
+
+    backdrop-filter:
+        blur(16px);
+
+    border-bottom:
+        1px solid
+        rgba(85, 69, 232, .08);
+}
+
+.lv-info-header-inner {
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
+
+    min-height: 72px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+}
+
+.lv-info-brand img {
+    width: 104px;
+    height: auto;
+    display: block;
+}
+
+.lv-info-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    gap: 8px 18px;
+}
+
+.lv-info-nav a {
+    color:
+        var(--lv-commercial-ink, #11182b);
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.lv-info-nav a:hover,
+.lv-info-nav a.active {
+    color:
+        var(--lv-commercial-primary, #5545e8);
+}
+
+.lv-info-main {
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
+
+    margin: 0 auto;
+
+    padding:
+        58px 0 70px;
+}
+
+.lv-info-hero {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.3fr)
+        minmax(280px, .7fr);
+
+    gap: 36px;
+    align-items: end;
+
+    padding:
+        30px 0 46px;
+}
+
+.lv-info-eyebrow {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color:
+        var(--lv-commercial-primary, #5545e8);
+
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .11em;
+}
+
+.lv-info-hero h1 {
+    max-width: 780px;
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            42px,
+            5.2vw,
+            68px
+        );
+
+    line-height: .98;
+    letter-spacing: -.045em;
+}
+
+.lv-info-hero p {
+    margin: 0;
+
+    color:
+        var(--lv-commercial-muted, #66708a);
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.lv-info-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 16px;
+}
+
+.lv-info-card {
+    min-width: 0;
+
+    padding: 24px;
+
+    border:
+        1px solid
+        rgba(85, 69, 232, .11);
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,.72);
+}
+
+.lv-info-card span {
+    color:
+        var(--lv-commercial-primary, #5545e8);
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+.lv-info-card h2,
+.lv-info-card h3 {
+    margin: 8px 0 8px;
+
+    font-size: 20px;
+}
+
+.lv-info-card p,
+.lv-info-card li {
+    color:
+        var(--lv-commercial-muted, #66708a);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.lv-info-card a {
+    color:
+        var(--lv-commercial-primary, #5545e8);
+
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.lv-info-card ul {
+    padding-left: 18px;
+}
+
+.lv-info-actions {
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.lv-info-button {
+    min-height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border-radius: 11px;
+
+    background:
+        var(--lv-commercial-primary, #5545e8);
+
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 900;
+
+    text-decoration: none;
+}
+
+.lv-info-button.secondary {
+    background: #fff;
+
+    color:
+        var(--lv-commercial-primary, #5545e8);
+
+    border:
+        1px solid
+        rgba(85, 69, 232, .16);
+}
+
+.lv-info-footer {
+    width: 100%;
+
+    background: #10183f;
+
+    color: rgba(255,255,255,.84);
+}
+
+.lv-info-footer-inner {
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
+
+    min-height: 112px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns:
+        minmax(120px, .7fr)
+        minmax(0, 1.6fr)
+        minmax(150px, .7fr);
+
+    align-items: center;
+
+    gap: 24px;
+}
+
+.lv-info-footer img {
+    width: 84px;
+    height: auto;
+}
+
+.lv-info-footer nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 8px 18px;
+}
+
+.lv-info-footer a {
+    color: rgba(255,255,255,.86);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.lv-info-footer small {
+    justify-self: end;
+
+    font-size: 10px;
+}
+
+
+@media (max-width: 800px) {
+
+    .lv-info-header-inner {
+        min-height: 68px;
+        flex-wrap: wrap;
+        padding: 10px 0;
+    }
+
+    .lv-info-nav {
+        width: 100%;
+        justify-content: flex-start;
+
+        overflow-x: auto;
+        flex-wrap: nowrap;
+
+        padding-bottom: 4px;
+    }
+
+    .lv-info-main {
+        width:
+            min(
+                100% - 28px,
+                680px
+            );
+
+        padding-top: 28px;
+    }
+
+    .lv-info-hero {
+        grid-template-columns:
+            1fr;
+
+        gap: 18px;
+
+        padding:
+            24px 0 30px;
+    }
+
+    .lv-info-hero h1 {
+        font-size:
+            clamp(
+                36px,
+                11vw,
+                54px
+            );
+    }
+
+    .lv-info-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .lv-info-footer-inner {
+        width: calc(100% - 28px);
+
+        grid-template-columns:
+            1fr;
+
+        justify-items: center;
+
+        gap: 12px;
+
+        padding:
+            22px 0;
+
+        text-align: center;
+    }
+
+    .lv-info-footer small {
+        justify-self: center;
+    }
+}
+
+
+/* ==========================================================
+   AUTHENTICATED FOOTER SUPPORT LINKS
+========================================================== */
+
+.lv-role-footer nav a[href*="help"],
+.lv-role-footer nav a[href*="support"],
+.lv-role-footer nav a[href*="contact"] {
+    font-weight: 900 !important;
+}

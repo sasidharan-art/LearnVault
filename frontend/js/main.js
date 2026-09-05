@@ -24,6 +24,149 @@ document.addEventListener(
                 "toast"
             );
 
+
+        /* =====================================================
+           MINIMIZED / MOBILE NAVIGATION
+           Button appears before the logo only in narrow view.
+        ===================================================== */
+
+        const mobileNavToggle =
+            document.getElementById(
+                "mobileNavToggle"
+            );
+
+        const primaryNavigation =
+            document.getElementById(
+                "primaryNavigation"
+            );
+
+        const navOverlay =
+            document.getElementById(
+                "navOverlay"
+            );
+
+
+        function closeMobileNavigation() {
+
+            if (primaryNavigation) {
+                primaryNavigation.classList.remove(
+                    "mobile-open"
+                );
+            }
+
+            if (navOverlay) {
+                navOverlay.classList.remove(
+                    "show"
+                );
+            }
+
+            if (mobileNavToggle) {
+                mobileNavToggle.classList.remove(
+                    "active"
+                );
+
+                mobileNavToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+            }
+
+            document.body.classList.remove(
+                "nav-open"
+            );
+
+        }
+
+
+        function openMobileNavigation() {
+
+            if (primaryNavigation) {
+                primaryNavigation.classList.add(
+                    "mobile-open"
+                );
+            }
+
+            if (navOverlay) {
+                navOverlay.classList.add(
+                    "show"
+                );
+            }
+
+            if (mobileNavToggle) {
+                mobileNavToggle.classList.add(
+                    "active"
+                );
+
+                mobileNavToggle.setAttribute(
+                    "aria-expanded",
+                    "true"
+                );
+            }
+
+            document.body.classList.add(
+                "nav-open"
+            );
+
+        }
+
+
+        if (
+            mobileNavToggle &&
+            primaryNavigation
+        ) {
+
+            mobileNavToggle.addEventListener(
+                "click",
+                () => {
+
+                    const isOpen =
+                        primaryNavigation.classList.contains(
+                            "mobile-open"
+                        );
+
+                    if (isOpen) {
+                        closeMobileNavigation();
+                    } else {
+                        openMobileNavigation();
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (navOverlay) {
+
+            navOverlay.addEventListener(
+                "click",
+                closeMobileNavigation
+            );
+
+        }
+
+
+        if (primaryNavigation) {
+
+            primaryNavigation
+                .querySelectorAll("a")
+                .forEach(
+                    (link) => {
+
+                        link.addEventListener(
+                            "click",
+                            () => {
+                                closeMobileNavigation();
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+
         /* =====================================================
            TOAST
         ===================================================== */
@@ -170,61 +313,82 @@ document.addEventListener(
 
 
         /* =====================================================
-           SHOW / HIDE PASSWORD
+           SHOW / HIDE PASSWORD — SINGLE GLOBAL HANDLER
+
+           Registration previously had TWO listeners:
+           main.js + register.js.
+           One click toggled the field twice and visually appeared
+           to do nothing.
+
+           Password visibility is now controlled ONLY here.
         ===================================================== */
 
-        const passwordButtons =
-            document.querySelectorAll(
-                ".password-toggle"
-            );
+        document.addEventListener(
+            "click",
+            (event) => {
+
+                const button =
+                    event.target.closest(
+                        ".password-toggle"
+                    );
 
 
-        passwordButtons.forEach(
-            (button) => {
-
-                button.addEventListener(
-                    "click",
-                    () => {
-
-                        const targetId =
-                            button.dataset.target;
+                if (!button) {
+                    return;
+                }
 
 
-                        const input =
-                            document.getElementById(
-                                targetId
-                            );
+                event.preventDefault();
 
 
-                        if (!input) {
-
-                            return;
-
-                        }
+                const targetId =
+                    button.dataset.target;
 
 
-                        if (
-                            input.type ===
-                            "password"
-                        ) {
+                if (!targetId) {
+                    return;
+                }
 
-                            input.type =
-                                "text";
 
-                            button.textContent =
-                                "Hide";
+                const input =
+                    document.getElementById(
+                        targetId
+                    );
 
-                        } else {
 
-                            input.type =
-                                "password";
+                if (!input) {
+                    return;
+                }
 
-                            button.textContent =
-                                "Show";
 
-                        }
+                const showing =
+                    input.type ===
+                    "password";
 
-                    }
+
+                input.type =
+                    showing
+                        ? "text"
+                        : "password";
+
+
+                button.textContent =
+                    showing
+                        ? "Hide"
+                        : "Show";
+
+
+                button.setAttribute(
+                    "aria-pressed",
+                    String(showing)
+                );
+
+
+                button.setAttribute(
+                    "aria-label",
+                    showing
+                        ? "Hide password"
+                        : "Show password"
                 );
 
             }
@@ -423,7 +587,7 @@ document.addEventListener(
                                 if (role === "faculty") {
 
                                     window.location.href =
-                                        "faculty/dashboard.html";
+                                        "index.html";
 
                                     return;
                                 }
@@ -431,7 +595,7 @@ document.addEventListener(
                                 if (role === "admin") {
 
                                     window.location.href =
-                                        "admin/dashboard.html";
+                                        "index.html";
 
                                     return;
                                 }
