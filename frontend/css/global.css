@@ -16351,3 +16351,190 @@ body.lv-role-page [class*="-stats-grid"] {
         font-size: 15px !important;
     }
 }
+
+
+/* ==========================================================
+   LEARNVAULT — COMPACT PROFESSIONAL FOOTER
+   FINAL AUTHORITATIVE FOOTER LAYER
+
+   Desktop:
+   [ LOGO ]       [ Help Center | Support | Contact ]       [ TAGLINE ]
+
+   Mobile:
+   Logo
+   support links
+   tagline
+
+   The dark background remains full browser width.
+========================================================== */
+
+.lv-role-footer {
+    width: 100% !important;
+    min-height: 0 !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: #10183f !important;
+
+    overflow: hidden !important;
+}
+
+.lv-role-footer .footer-inner,
+.lv-role-footer .lv-compact-footer-inner {
+    width:
+        min(
+            1180px,
+            calc(100% - 48px)
+        ) !important;
+
+    min-height: 112px !important;
+
+    margin: 0 auto !important;
+
+    padding: 16px 0 !important;
+
+    display: grid !important;
+    grid-template-columns:
+        minmax(130px, .7fr)
+        minmax(300px, 1.6fr)
+        minmax(170px, .7fr)
+        !important;
+
+    align-items: center !important;
+
+    gap: 22px !important;
+
+    box-sizing: border-box !important;
+}
+
+.lv-role-footer .footer-brand,
+.lv-role-footer .lv-footer-left-brand {
+    justify-self: start !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+
+    width: max-content !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.lv-role-footer .footer-brand img,
+.lv-role-footer .lv-footer-left-brand img {
+    width: 92px !important;
+    height: auto !important;
+
+    display: block !important;
+
+    margin: 0 !important;
+}
+
+.lv-role-footer nav,
+.lv-role-footer .lv-footer-center-links {
+    justify-self: center !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+
+    gap: 8px 24px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.lv-role-footer nav a,
+.lv-role-footer .lv-footer-center-links a {
+    color: rgba(255,255,255,.9) !important;
+
+    font-size: 11px !important;
+    font-weight: 800 !important;
+
+    line-height: 1.2 !important;
+
+    text-decoration: none !important;
+
+    white-space: nowrap !important;
+}
+
+.lv-role-footer nav a:hover,
+.lv-role-footer .lv-footer-center-links a:hover {
+    color: #ffffff !important;
+
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+}
+
+.lv-role-footer .lv-footer-tagline {
+    justify-self: end !important;
+
+    margin: 0 !important;
+
+    color: rgba(255,255,255,.76) !important;
+
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    white-space: nowrap !important;
+}
+
+
+/*
+   Remove legacy sidebar-offset padding from footer CONTENT.
+   The sidebar already ends before the footer, so the footer itself
+   must be centered across the full browser width.
+*/
+@media (min-width: 901px) {
+
+    body.lv-role-page .lv-role-footer .footer-inner,
+    body.student-page .lv-role-footer .footer-inner,
+    body.faculty-page .lv-role-footer .footer-inner,
+    body.admin-page .lv-role-footer .footer-inner,
+    body.lv-sidebar-expanded .lv-role-footer .footer-inner,
+    body.lv-sidebar-collapsed .lv-role-footer .footer-inner {
+
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+
+@media (max-width: 760px) {
+
+    .lv-role-footer .footer-inner,
+    .lv-role-footer .lv-compact-footer-inner {
+        width: calc(100% - 32px) !important;
+
+        min-height: 0 !important;
+
+        grid-template-columns: 1fr !important;
+
+        justify-items: center !important;
+
+        gap: 12px !important;
+
+        padding: 22px 0 !important;
+
+        text-align: center !important;
+    }
+
+    .lv-role-footer .footer-brand,
+    .lv-role-footer .lv-footer-left-brand,
+    .lv-role-footer .lv-footer-tagline {
+        justify-self: center !important;
+    }
+
+    .lv-role-footer nav,
+    .lv-role-footer .lv-footer-center-links {
+        gap: 8px 18px !important;
+    }
+
+    .lv-role-footer nav a,
+    .lv-role-footer .lv-footer-center-links a {
+        font-size: 11px !important;
+    }
+}
+

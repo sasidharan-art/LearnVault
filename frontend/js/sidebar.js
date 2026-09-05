@@ -952,11 +952,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         footer.innerHTML =
             `
-            <div class="footer-inner">
+            <div class="footer-inner lv-compact-footer-inner">
 
                 <a
                     href="../index.html"
-                    class="footer-brand"
+                    class="footer-brand lv-footer-left-brand"
                     aria-label="LearnVault home"
                 >
                     <img
@@ -965,16 +965,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                 </a>
 
-                <nav aria-label="LearnVault footer navigation">
-                    ${
-                        links
-                            .map(
-                                ([label, href]) =>
-                                    `<a href="${href}">${label}</a>`
-                            )
-                            .join("")
-                    }
-
+                <nav
+                    class="lv-footer-center-links"
+                    aria-label="LearnVault support navigation"
+                >
                     <a href="../help.html">Help Center</a>
                     <a href="../support.html">Support</a>
                     <a href="../contact.html">Contact</a>
