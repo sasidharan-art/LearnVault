@@ -136,11 +136,255 @@ document.addEventListener("DOMContentLoaded", () => {
     if (roleFromPath) {
 
         document.body.classList.add(
-            "lv-role-page"
+            "lv-role-page",
+            `${roleFromPath}-page`
         );
 
         document.body.dataset.lvRole =
             roleFromPath;
+
+
+        /*
+           Install one final runtime structural layer.
+
+           Several historical LearnVault modules were created at
+           different phases and some retained old shell geometry.
+           This makes the left navigation move inward on certain
+           pages such as Student Resources / Continue Learning.
+
+           The runtime layer below is intentionally structural only:
+           it does not redesign page cards or module content.
+        */
+        if (
+            !document.getElementById(
+                "learnVaultUniversalShellRuntimeStyle"
+            )
+        ) {
+
+            const runtimeStyle =
+                document.createElement(
+                    "style"
+                );
+
+            runtimeStyle.id =
+                "learnVaultUniversalShellRuntimeStyle";
+
+            runtimeStyle.textContent =
+                `
+                @media (min-width: 901px) {
+
+                    body.lv-role-page .site,
+                    body.lv-role-page .student-site,
+                    body.lv-role-page .faculty-site,
+                    body.lv-role-page .admin-site {
+                        width: 100% !important;
+                        min-width: 0 !important;
+                        min-height: 100dvh !important;
+
+                        display: flex !important;
+                        flex-direction: column !important;
+
+                        grid-template-columns: none !important;
+                        grid-template-rows: none !important;
+
+                        margin: 0 !important;
+                        padding: 0 !important;
+
+                        left: 0 !important;
+                        right: auto !important;
+
+                        overflow: visible !important;
+                    }
+
+                    body.lv-role-page .page-shell {
+                        position: relative !important;
+                        left: 0 !important;
+                        right: auto !important;
+
+                        width: 100% !important;
+                        min-width: 0 !important;
+
+                        display: grid !important;
+                        grid-template-columns:
+                            220px
+                            minmax(0, 1fr) !important;
+                        grid-template-rows: auto !important;
+
+                        align-items: start !important;
+
+                        margin: 0 !important;
+                        margin-left: 0 !important;
+
+                        padding: 0 !important;
+                        padding-left: 0 !important;
+
+                        transform: none !important;
+                        overflow: visible !important;
+                    }
+
+                    body.lv-role-page.lv-sidebar-collapsed
+                        .page-shell {
+                        grid-template-columns:
+                            68px
+                            minmax(0, 1fr) !important;
+                    }
+
+                    body.lv-role-page:not(.lv-sidebar-collapsed)
+                        .page-shell {
+                        grid-template-columns:
+                            220px
+                            minmax(0, 1fr) !important;
+                    }
+
+                    body.lv-role-page .icon-rail {
+                        grid-column: 1 !important;
+                        grid-row: 1 !important;
+
+                        position: sticky !important;
+                        top: 74px !important;
+                        left: 0 !important;
+                        right: auto !important;
+
+                        width: 100% !important;
+                        min-width: 0 !important;
+
+                        height:
+                            calc(100dvh - 74px)
+                            !important;
+                        min-height: 0 !important;
+                        max-height:
+                            calc(100dvh - 74px)
+                            !important;
+
+                        margin: 0 !important;
+                        margin-left: 0 !important;
+
+                        padding:
+                            10px 8px 18px
+                            !important;
+
+                        transform: none !important;
+
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+
+                        overflow-x: hidden !important;
+                        overflow-y: auto !important;
+
+                        box-sizing: border-box !important;
+
+                        z-index: 40 !important;
+                    }
+
+                    body.lv-role-page .icon-rail .rail-item {
+                        width: 100% !important;
+                        min-width: 0 !important;
+
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                    }
+
+                    body.lv-role-page:not(.lv-sidebar-collapsed)
+                        .icon-rail
+                        .rail-label,
+                    body.lv-role-page.lv-sidebar-expanded
+                        .icon-rail
+                        .rail-label {
+                        display: block !important;
+                        opacity: 1 !important;
+                        visibility: visible !important;
+                        width: auto !important;
+                        max-width: 150px !important;
+                    }
+
+                    body.lv-role-page.lv-sidebar-collapsed
+                        .icon-rail
+                        .rail-label {
+                        display: none !important;
+                    }
+
+                    body.lv-role-page .main,
+                    body.lv-role-page .dashboard-main {
+                        grid-column: 2 !important;
+                        grid-row: 1 !important;
+
+                        width: 100% !important;
+                        min-width: 0 !important;
+                        max-width: none !important;
+
+                        margin: 0 !important;
+                        margin-left: 0 !important;
+
+                        padding-left:
+                            var(
+                                --lv-module-main-padding-left,
+                                initial
+                            );
+
+                        transform: none !important;
+
+                        box-sizing: border-box !important;
+                    }
+                }
+
+                @media (max-width: 900px) {
+
+                    body.lv-role-page .site,
+                    body.lv-role-page .student-site,
+                    body.lv-role-page .faculty-site,
+                    body.lv-role-page .admin-site,
+                    body.lv-role-page .page-shell,
+                    body.lv-role-page .main,
+                    body.lv-role-page .dashboard-main {
+                        width: 100% !important;
+                        min-width: 0 !important;
+
+                        margin-left: 0 !important;
+                        padding-left: 0 !important;
+
+                        transform: none !important;
+                    }
+
+                    body.lv-role-page .page-shell {
+                        display: block !important;
+                    }
+
+                    body.lv-role-page .icon-rail {
+                        position: fixed !important;
+                        top: 70px !important;
+                        left: 0 !important;
+                        right: auto !important;
+
+                        width:
+                            min(270px, 86vw)
+                            !important;
+
+                        height:
+                            calc(100dvh - 70px)
+                            !important;
+
+                        margin: 0 !important;
+
+                        transform:
+                            translateX(-112%)
+                            !important;
+                    }
+
+                    body.lv-role-page.lv-sidebar-mobile-open
+                        .icon-rail {
+                        transform:
+                            translateX(0)
+                            !important;
+                    }
+                }
+                `;
+
+            document.head.appendChild(
+                runtimeStyle
+            );
+
+        }
 
     }
 
@@ -614,7 +858,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.body.classList.add(
             "lv-structured-role-page",
-            "lv-role-page"
+            "lv-role-page",
+            `${role}-page`
         );
 
         document.body.dataset.lvRole =
