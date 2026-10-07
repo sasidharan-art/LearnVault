@@ -701,6 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ensureIntegrationLink("Search","search.html","⌕","Dashboard");
     ensureIntegrationLink("Activity","activity.html","◫","Search");
+    ensureIntegrationLink("Live Intelligence","live-analytics.html","◉","Activity");
 
     if (window.location.pathname.toLowerCase().includes("/student/")) {
         ensureIntegrationLink("Study Hub","study-hub.html","★","Dashboard");
@@ -770,6 +771,63 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     protectStudentAcademicProfile();
+
+
+    /* ======================================================
+       HACKATHON LIVE LEARNING TELEMETRY
+       Every authenticated role page sends a lightweight heartbeat
+       and a page-view event. This powers the Live Learning
+       Intelligence screen without tracking passwords or form data.
+    ====================================================== */
+
+    function installLiveLearningTelemetry() {
+        const role = roleFromPath;
+        if (!role) return;
+
+        let stopped = false;
+        let heartbeatTimer = null;
+
+        const pageName =
+            window.location.pathname.split("/").pop() || "dashboard.html";
+
+        async function heartbeat() {
+            if (stopped) return;
+            try {
+                await fetch("/api/live/heartbeat", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ page: pageName })
+                });
+            } catch (_) {}
+        }
+
+        async function pageView() {
+            try {
+                await fetch("/api/live/event", {
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        eventType: "page_view",
+                        pageUrl: window.location.pathname,
+                        metadata: { title: document.title.slice(0, 120) }
+                    })
+                });
+            } catch (_) {}
+        }
+
+        heartbeat();
+        pageView();
+        heartbeatTimer = window.setInterval(heartbeat, 30000);
+
+        window.addEventListener("beforeunload", () => {
+            stopped = true;
+            if (heartbeatTimer) window.clearInterval(heartbeatTimer);
+        }, { once: true });
+    }
+
+    installLiveLearningTelemetry();
 
 
     function installNotificationBell() {
@@ -1367,6 +1425,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ["◴", "Focus Center", "focus-center.html", "Daily goals, focus timer and study notes"],
                 ["☆", "Saved Learning", "saved.html", "Pinned and recent learning tools"],
                 ["⌕", "Search", "search.html", "Find learning content"],
+                ["◉", "Live Intelligence", "live-analytics.html", "Real-time learning analytics"],
                 ["▣", "Resources", "resources.html", "Notes, files and videos"],
                 ["?", "Question Bank", "questions.html", "Topic-wise practice"],
                 ["✓", "Quizzes", "quizzes.html", "Assess your knowledge"],
@@ -1384,6 +1443,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ["◴", "Teaching Center", "teaching-center.html", "Teaching plan, priorities and class notes"],
                 ["☆", "Pinned Teaching", "saved.html", "Pinned and recent teaching tools"],
                 ["⌕", "Search", "search.html", "Find content and activity"],
+                ["◉", "Live Intelligence", "live-analytics.html", "Real-time teaching analytics"],
                 ["▣", "Resources", "resources.html", "Publish learning resources"],
                 ["?", "Question Bank", "questions.html", "Create practice questions"],
                 ["✓", "Quizzes", "quizzes.html", "Build assessments"],
@@ -1400,6 +1460,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ["◴", "Operations Center", "operations-center.html", "Daily platform monitoring and admin priorities"],
                 ["☆", "Pinned Controls", "saved.html", "Pinned and recent admin controls"],
                 ["⌕", "Search", "search.html", "Find users and content"],
+                ["◉", "Live Intelligence", "live-analytics.html", "Real-time platform analytics"],
                 ["▥", "Academic Structure", "academic.html", "Domains, Courses and Subjects"],
                 ["◇", "Users & Faculty", "users.html", "Accounts and Faculty access"],
                 ["↟", "Student Advancement", "student-advancement.html", "Promotion and academic history"],
@@ -1721,6 +1782,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     installCommercialQuickAccess();
+
+
+    function installFeedbackShortcut() {
+        if (!currentRole() || document.getElementById("learnVaultFeedbackShortcut")) return;
+        const button = document.createElement("a");
+        button.id = "learnVaultFeedbackShortcut";
+        button.className = "lv-feedback-shortcut";
+        button.href = "../feedback.html";
+        button.title = "Send feedback";
+        button.setAttribute("aria-label", "Send feedback");
+        button.innerHTML = "<span>✦</span><strong>Feedback</strong>";
+        document.body.appendChild(button);
+    }
+
+    installFeedbackShortcut();
 
 
     function installBackToTop() {

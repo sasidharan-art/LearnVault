@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Intelligence | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page commercial-role-page" data-commercial-role="admin">
+<div class="site admin-site commercial-role-site">
+<header class="topbar commercial-role-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" aria-controls="primaryNavigation" aria-expanded="false"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link" aria-label="LearnVault home"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="integrationHeaderSearch" type="search" placeholder="Search LearnVault..." aria-label="Search LearnVault"></div>
+<nav class="top-actions"><div class="student-head-identity"><span class="student-head-label">ADMIN</span><strong id="liveHeaderName">LearnVault</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell commercial-role-shell">
+<aside class="icon-rail commercial-role-rail" id="primaryNavigation" aria-label="ADMIN navigation">
+<a href="dashboard.html" class="rail-item"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="live-analytics.html" class="rail-item active"><span class="rail-icon">◉</span><span class="rail-label">Live Intelligence</span></a>
+</aside>
+<main class="main dashboard-main lv-live-main">
+<section class="lv-live-hero">
+<div>
+<div class="lv-live-status"><span class="lv-live-dot"></span><span>LIVE • Updates every 6 seconds</span></div>
+<span class="eyebrow">LIVE PLATFORM INTELLIGENCE</span>
+<h1>Live Learning Intelligence.</h1>
+<p id="liveHeroText">Turn current learning activity into decisions you can act on immediately.</p>
+</div>
+<div class="lv-live-clock-card"><span>LAST REFRESH</span><strong id="liveLastUpdated">Connecting...</strong><small id="liveConnectionState">Establishing live stream</small></div>
+</section>
+
+<section class="lv-live-kpi-grid">
+<article class="lv-live-kpi"><span>Online now</span><strong id="liveOnlineNow">0</strong><small id="liveOnlineMeta">Active sessions</small></article>
+<article class="lv-live-kpi"><span>Events • 15 min</span><strong id="liveEvents15m">0</strong><small>Learning interactions</small></article>
+<article class="lv-live-kpi"><span>Quiz attempts today</span><strong id="liveQuizzesToday">0</strong><small>Submitted assessments</small></article>
+<article class="lv-live-kpi"><span>Submissions today</span><strong id="liveSubmissionsToday">0</strong><small>Assignment activity</small></article>
+</section>
+
+<section class="lv-live-role-grid" id="liveRoleGrid">
+<div class="lv-live-panel lv-live-panel-primary">
+<div class="lv-live-panel-head"><div><span class="eyebrow">LIVE SIGNALS</span><h2 id="liveRoleTitle">Live platform pulse</h2></div><span class="lv-live-badge">REAL TIME</span></div>
+<div id="liveRoleMetrics" class="lv-live-metric-list"></div>
+</div>
+<div class="lv-live-panel">
+<div class="lv-live-panel-head"><div><span class="eyebrow">ACTIVE SURFACE</span><h2>Where learning is happening</h2></div></div>
+<div id="liveActivePages" class="lv-live-pages"></div>
+</div>
+</section>
+
+<section class="lv-live-bottom-grid">
+<div class="lv-live-panel">
+<div class="lv-live-panel-head"><div><span class="eyebrow">EARLY WARNING</span><h2 id="liveRiskTitle">Learners who may need attention</h2><p id="liveRiskDescription">Use performance signals to intervene before a learner falls behind.</p></div></div>
+<div id="liveRiskList" class="lv-live-risk-list"></div>
+</div>
+<div class="lv-live-panel">
+<div class="lv-live-panel-head"><div><span class="eyebrow">EVENT STREAM</span><h2>Recent learning activity</h2></div></div>
+<div id="liveEventStream" class="lv-live-event-stream"></div>
+</div>
+</section>
+
+<section class="lv-live-demo-banner">
+<div><span class="eyebrow light">HACKATHON VALUE</span><h2>Detect → understand → intervene → measure.</h2><p>LearnVault connects live presence, learning events, assessments and academic context so educators can respond while the learning moment is still happening.</p></div>
+<a href="../feedback.html" class="button button-white">Give Feedback</a>
+</section>
+</main>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer commercial-footer lv-role-footer"></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script>
+<script src="../js/live-analytics.js"></script>
+</body>
+</html>

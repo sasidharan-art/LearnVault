@@ -61,6 +61,9 @@ const notificationRoutes =
 const calendarRoutes =
     require("./routes/calendarRoutes");
 
+const liveAnalyticsRoutes =
+    require("./routes/liveAnalyticsRoutes");
+
 
 const app =
     express();
@@ -413,6 +416,11 @@ app.use(
 app.use(
     "/api/calendar",
     calendarRoutes
+);
+
+app.use(
+    "/api/live",
+    liveAnalyticsRoutes
 );
 
 

@@ -83,32 +83,24 @@ async function sendPasswordResetOtp({
         );
 
 
-    const transporter =
-        nodemailer.createTransport({
+    const baseTransportOptions = {
+        host: process.env.SMTP_HOST,
+        secure: String(process.env.SMTP_SECURE || "").toLowerCase() === "true",
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
+        },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 15000
+    };
 
-            host:
-                process.env.SMTP_HOST,
-
-            port,
-
-            secure:
-                String(
-                    process.env.SMTP_SECURE ||
-                    ""
-                ).toLowerCase() ===
-                "true",
-
-            auth: {
-                user:
-                    process.env.SMTP_USER,
-                pass:
-                    process.env.SMTP_PASS
-            }
-
+    async function sendWithPort(selectedPort) {
+        const transporter = nodemailer.createTransport({
+            ...baseTransportOptions,
+            port: selectedPort
         });
-
-
-    await transporter.sendMail({
+        return transporter.sendMail({
 
         from:
             process.env.SMTP_FROM,
@@ -167,14 +159,22 @@ async function sendPasswordResetOtp({
             </div>
             `
 
-    });
+        });
+    }
 
+    try {
+        await sendWithPort(port);
+    } catch (error) {
+        const canFallback = port === 587 && String(process.env.SMTP_FALLBACK_PORT || "2525") === "2525";
+        const timeoutLike = ["ETIMEDOUT", "ECONNECTION", "ESOCKET"].includes(String(error.code || ""));
+        if (!canFallback || !timeoutLike) throw error;
+        console.warn("Brevo SMTP port 587 timed out; retrying on port 2525.");
+        await sendWithPort(2525);
+    }
 
     return {
-        delivered:
-            true,
-        devMode:
-            false
+        delivered: true,
+        devMode: false
     };
 
 }
