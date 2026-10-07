@@ -109,6 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bindLogoutHomeGlobally();
 
+    /* ======================================================
+       ACADEMIC INTELLIGENCE QUICK ACCESS
+    ====================================================== */
+    (function addAcademicIntelligenceLink(){
+        const rail = document.querySelector(".icon-rail");
+        if(!rail || rail.querySelector('a[href*="academic-intelligence.html"]')) return;
+        const path = window.location.pathname.toLowerCase();
+        let role = path.includes("/student/") ? "student" : path.includes("/faculty/") ? "faculty" : path.includes("/admin/") ? "admin" : null;
+        if(!role) return;
+        const href = role + "/academic-intelligence.html";
+        const label = role === "student" ? "Academic Intelligence" : role === "faculty" ? "Early Risk Monitor" : "Academic Intelligence";
+        const link = document.createElement("a");
+        link.href = href; link.className = "rail-item"; link.title = label; link.setAttribute("aria-label",label);
+        link.innerHTML = `<span class="rail-icon">◎</span><span class="rail-label">${label}</span>`;
+        const profile = Array.from(rail.querySelectorAll("a.rail-item")).find(a => /profile\.html$/i.test(a.getAttribute("href")||""));
+        if(profile) rail.insertBefore(link, profile); else rail.appendChild(link);
+        if(role === "faculty" && !rail.querySelector('a[href="attendance.html"]')) {
+            const attendance = document.createElement("a");
+            attendance.href="attendance.html"; attendance.className="rail-item"; attendance.title="Attendance"; attendance.setAttribute("aria-label","Attendance");
+            attendance.innerHTML='<span class="rail-icon">✓</span><span class="rail-label">Attendance</span>';
+            if(profile) rail.insertBefore(attendance, profile); else rail.appendChild(attendance);
+        }
+    })();
+
 
     /* ======================================================
        UNIVERSAL ROLE PAGE MARKER

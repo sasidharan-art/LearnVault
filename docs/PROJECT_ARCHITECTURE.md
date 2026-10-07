@@ -166,3 +166,29 @@ Admin Reports include:
 - Faculty contribution report
 - CSV export
 - Required-table system check
+
+## Hackathon Intelligence Layer
+
+LearnVault's final hackathon architecture adds an explainable academic intelligence layer above the relational learning records.
+
+`Education Domain -> Department -> Course -> Level -> Semester -> Subject`
+
+feeds
+
+`Student -> Attendance -> Quizzes -> Assignments -> Learning Events -> Skills`
+
+which feeds
+
+`Explainable Early Intervention Engine -> Academic Success Score -> Risk Band -> Recommended Action -> Faculty Intervention`
+
+The engine is deliberately transparent. Its prototype score is:
+
+- Attendance: 30%
+- Quiz performance: 30%
+- Assignment completion: 20%
+- Learning engagement: 10%
+- Skill progress: 10%
+
+The database innovation is the integration of these relational signals through indexed queries and the reusable `vw_student_academic_signals` view, followed by persistent intervention records.
+
+This gives the project a direct relationship between the real-world problem, schema design, DBMS innovation, prototype workflow and measurable evaluation.

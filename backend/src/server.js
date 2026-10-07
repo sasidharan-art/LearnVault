@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const rateLimit = require("./middleware/rateLimit");
 
 const db = require("./config/db");
 
@@ -75,6 +76,12 @@ const educationChallengeRoutes =
 
 const innovationRoutes =
     require("./routes/innovationRoutes");
+
+const attendanceRoutes =
+    require("./routes/attendanceRoutes");
+
+const intelligenceRoutes =
+    require("./routes/intelligenceRoutes");
 
 
 const app =
@@ -283,6 +290,10 @@ app.use(
 
 
 app.use(
+    rateLimit({ windowMs: 60_000, max: Number(process.env.API_RATE_LIMIT || 240), keyGenerator: req => `${req.ip}:api` })
+);
+
+app.use(
     (
         req,
         res,
@@ -303,6 +314,10 @@ app.use(
             "X-Frame-Options",
             "SAMEORIGIN"
         );
+
+        res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+        res.setHeader("X-XSS-Protection", "0");
+        if (production) res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 
         next();
 
@@ -340,10 +355,7 @@ app.use(
    API ROUTES
 ===================================================== */
 
-app.use(
-    "/api/auth",
-    authRoutes
-);
+app.use("/api/auth", rateLimit({ windowMs: 15 * 60_000, max: Number(process.env.AUTH_RATE_LIMIT || 60), keyGenerator: req => `${req.ip}:auth` }), authRoutes);
 
 app.use(
     "/api/resources",
@@ -453,6 +465,16 @@ app.use(
 app.use(
     "/api/innovation",
     innovationRoutes
+);
+
+app.use(
+    "/api/attendance",
+    attendanceRoutes
+);
+
+app.use(
+    "/api/intelligence",
+    intelligenceRoutes
 );
 
 

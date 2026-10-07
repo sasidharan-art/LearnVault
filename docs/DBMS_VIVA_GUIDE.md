@@ -196,3 +196,25 @@ Student:
 Learner with Course / Level restricted access.
 
 This removes unnecessary Admin approval bottlenecks while retaining centralized platform control.
+
+## Hackathon Innovation Answer
+
+**What is your database innovation?**
+
+Our innovation is an Explainable Early Intervention Engine. Traditional academic systems store attendance, quiz and assignment data separately and usually report them retrospectively. LearnVault combines these relational signals to calculate a transparent Academic Success Score and identify students who need attention earlier.
+
+**Why is this a database innovation rather than just a UI feature?**
+
+The score depends on database-level joins, aggregation, indexes, a reusable SQL view and persistent intervention records. The application does not maintain a separate hard-coded student list. The intelligence is derived from normalized academic records.
+
+**What is novel?**
+
+The novelty is the workflow: academic records -> multi-signal relational aggregation -> explainable risk band -> recommended intervention -> intervention history -> measurable outcome.
+
+**How do you validate it?**
+
+Compare a conventional workflow where faculty inspect separate attendance, quiz and assignment screens against LearnVault's prioritized risk workflow. Measure identification time, query latency, number of screens/queries, intervention coverage and post-intervention improvement. Do not claim predictive accuracy without a labeled dataset.
+
+**Why MySQL and not PostgreSQL?**
+
+The current LearnVault production system uses MySQL 8 on Aiven. We retained the existing production stack because this is an evolution of the existing project, not a rewrite. The relational concepts used by the innovation are portable to PostgreSQL if the deployment is migrated later.

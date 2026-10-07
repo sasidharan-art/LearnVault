@@ -1,0 +1,350 @@
+LEARNVAULT - HACKATHON JUDGE PACK
+=================================
+
+PROJECT POSITIONING
+-------------------
+LearnVault is not a conventional attendance or academic management portal.
+It is a database-driven Academic Intelligence Platform that connects academic catalog data, learning activity, assessment, attendance, interventions, skills, career readiness, real-world education challenges and measurable SDG 4 impact.
+
+REAL-WORLD PROBLEM
+------------------
+Educational institutions collect large amounts of fragmented academic data, but the data is often used only for record keeping. Attendance, quizzes, assignments, resources and student activity are stored in separate workflows. Faculty therefore discover struggling students late, students receive generic support, and administrators lack a unified evidence-based view of learning outcomes.
+
+TARGET USERS
+------------
+1. Students - need early guidance, personalized learning and career readiness.
+2. Faculty - need actionable student signals, productivity tools and intervention workflows.
+3. Administrators - need institution-wide analytics, academic governance and measurable impact.
+
+EXISTING SYSTEM GAPS
+--------------------
+- Attendance systems record presence but rarely connect it with learning outcomes.
+- LMS platforms provide content but may not prioritize early academic risk.
+- Student information systems focus on administration rather than intervention.
+- Analytics dashboards often show retrospective statistics instead of actionable signals.
+- Academic catalogs are frequently hard-coded or difficult to update across domains.
+- Career and community impact data is usually disconnected from academic records.
+
+LEARNVAULT UNIQUE VALUE PROPOSITION
+------------------------------------
+A single relational academic intelligence layer connects:
+Academic Catalog -> Student Profile -> Attendance -> Assessments -> Assignments -> Learning Activity -> Skills -> Career -> Innovation -> Community Impact.
+
+The key product outcome is early, explainable intervention instead of late-stage academic reporting.
+
+PRIMARY DATABASE INNOVATION
+---------------------------
+Explainable Early Intervention Engine.
+
+The system derives a transparent Academic Success Score from relational database signals:
+- Attendance = 30%
+- Quiz performance = 30%
+- Assignment completion = 20%
+- Learning engagement = 10%
+- Skill progress = 10%
+
+Score bands:
+75-100: On Track
+50-74: Needs Attention
+0-49: High Risk
+
+The system produces the reason for a risk signal and a recommended action. It does not automatically punish or make disciplinary decisions.
+
+WHY THIS IS NOVEL FOR THE PROJECT
+----------------------------------
+A conventional database stores attendance, quiz and assignment records independently. LearnVault combines those records at the database/application intelligence layer to produce a measurable early-intervention signal and persists intervention actions for follow-up.
+
+DATABASE TECHNICAL DEPTH
+------------------------
+- Relational schema with foreign keys and unique constraints.
+- Indexed academic and activity tables.
+- Database views for reusable academic signal aggregation.
+- Transactional attendance marking.
+- Role-based authorization for Student, Faculty and Admin.
+- JWT authentication in an HttpOnly cookie.
+- Password hashing with bcrypt.
+- Parameterized SQL queries.
+- Academic catalog versioning.
+- Curriculum import and course cloning.
+- Real-time learning event and presence tracking.
+- Database-backed notifications and audit-style intervention records.
+
+FEATURES AND DEMO SCENARIOS
+---------------------------
+1. AI Student Success Center
+Problem: Students may not recognize declining performance early.
+Benefit: One score and clear actions show what to improve.
+Implementation: SQL-derived academic signals plus explainable recommendation rules.
+Demo: Student logs in -> Success Score -> attendance warning -> recommended DBMS practice.
+
+2. AI Attendance Risk Detection
+Problem: Attendance decline is often noticed only after a threshold is crossed.
+Benefit: Early visibility and targeted intervention.
+Implementation: attendance_sessions + attendance_records + risk calculation.
+Demo: Mark absences -> student risk changes -> faculty sees learner in Early Risk Monitor.
+
+3. Student Performance Prediction / Early Risk
+Problem: Faculty review large classes manually.
+Benefit: Prioritized student list.
+Implementation: weighted score from attendance, quizzes, assignments, engagement and skills.
+Demo: Faculty opens Early Risk Monitor and sees students sorted by risk.
+
+4. Personalized Learning Recommendations
+Problem: Students receive generic learning advice.
+Benefit: Actions are tied to actual signals.
+Implementation: recommendation rules based on weak signals and existing resources/quizzes.
+Demo: low quiz score -> Question Bank and targeted revision recommendation.
+
+5. Assignment Completion Analytics
+Problem: Missing work is difficult to prioritize across courses.
+Benefit: faculty and students see completion ratios.
+Implementation: assignment/submission relational joins and aggregate queries.
+Demo: dashboard shows completion percentage and pending work.
+
+6. Faculty Productivity Dashboard
+Problem: Faculty need to prioritize teaching and mentoring work.
+Benefit: assigned subjects, submissions, live classes and risk learners in one workflow.
+Implementation: role-scoped queries across assignments, live classes, innovation submissions and students.
+Demo: faculty opens dashboard -> assigned subjects -> risk list -> intervention.
+
+7. Placement Readiness
+Problem: Academic success does not automatically mean career readiness.
+Benefit: students see target role and missing development areas.
+Implementation: career_profiles, certifications, skills and assessments.
+Demo: target Software Developer -> skills/certifications -> readiness direction.
+
+8. Academic Catalog Intelligence
+Problem: Institutions change courses and curricula frequently.
+Benefit: no code change is required to alter the academic structure.
+Implementation: education_domains, departments, courses, levels, semesters, curriculum_versions, curriculum_subjects.
+Demo: Admin creates a new course -> new students can select it -> dashboard subjects come from the database.
+
+9. Education Innovation Lab
+Problem: students rarely connect DBMS learning with real educational problems.
+Benefit: project-based learning and measurable social impact.
+Implementation: education_challenges + education_challenge_submissions + faculty review.
+Demo: student solves an education challenge -> faculty scores -> impact is recorded.
+
+10. SDG 4 Impact
+Problem: institutions struggle to quantify educational improvement.
+Benefit: measurable quality-education indicators.
+Implementation: analytics over learning, risk, innovation, skills and community tables.
+Demo: Admin shows improvement and participation metrics.
+
+SYSTEM ARCHITECTURE
+-------------------
+Browser / Vercel Frontend
+        |
+        | HTTPS / REST / JSON
+        v
+Node.js + Express Backend on Render
+        |
+        +-- Authentication / Authorization
+        +-- Academic Catalog
+        +-- Student / Faculty / Admin APIs
+        +-- Attendance
+        +-- Assessments / Assignments
+        +-- Academic Intelligence
+        +-- Live Classes / Events
+        +-- Education Innovation Lab
+        +-- Career / Community / Gamification
+        |
+        v
+MySQL 8 / Aiven
+        |
+        +-- Core academic tables
+        +-- Learning tables
+        +-- Analytics tables
+        +-- Intelligence views
+        +-- Intervention records
+
+DATABASE DESIGN IMPROVEMENTS
+----------------------------
+Core hierarchy:
+Education Domain -> Department -> Course -> Course Level -> Semester -> Subject -> Curriculum
+
+Student relationship:
+User -> Student Profile -> Course / Level
+
+Learning relationship:
+Subject -> Resources / Questions / Quizzes / Assignments / Live Classes
+
+Intelligence relationship:
+Student -> Attendance / Quiz Attempts / Assignment Submissions / Learning Events / Skills -> Success Score -> Intervention
+
+Innovation relationship:
+Challenge -> Student Submission -> Faculty Review -> Score / Feedback
+
+Career relationship:
+Student -> Career Profile -> Certifications / Skills -> Readiness
+
+REST API STRUCTURE
+------------------
+/api/auth
+/api/academic
+/api/academic-progress
+/api/resources
+/api/question-bank
+/api/quizzes
+/api/assignments
+/api/skills
+/api/peer
+/api/attendance
+/api/intelligence
+/api/live
+/api/live-classes
+/api/education-challenges
+/api/innovation
+/api/faculty
+/api/admin
+/api/notifications
+/api/calendar
+
+Important intelligence endpoints:
+GET  /api/intelligence/student
+GET  /api/intelligence/faculty/risk
+GET  /api/intelligence/admin/overview
+POST /api/intelligence/interventions
+
+Important attendance endpoints:
+POST  /api/attendance/sessions
+POST  /api/attendance/sessions/:id/records
+PATCH /api/attendance/sessions/:id/close
+GET   /api/attendance/student
+GET   /api/attendance/sessions
+
+SECURITY
+--------
+- JWT authentication.
+- HttpOnly authentication cookie.
+- bcrypt password hashing.
+- Role-based API authorization.
+- Parameterized SQL queries.
+- CORS allow-list.
+- Secure production cookie configuration.
+- File upload validation.
+- No database credentials in frontend.
+- No secrets committed to Git.
+- Faculty attendance restricted to assigned subjects.
+- Student access restricted to own intelligence data.
+- Admin access required for institution-wide intelligence.
+
+SCALABILITY
+----------
+Phase 1: Indexed MySQL relational database.
+Phase 2: Redis/cache for repeated dashboard queries.
+Phase 3: Read replicas for analytics-heavy workloads.
+Phase 4: Object storage for large files.
+Phase 5: Event/stream pipeline for high-volume learning events.
+Phase 6: Vector search for semantic resource and career recommendations.
+
+PERFORMANCE METRICS
+-------------------
+Measure before/after the intelligence layer using:
+- Student dashboard response time.
+- At-risk query response time.
+- Attendance aggregation time.
+- Number of rows scanned before/after indexes.
+- API requests per second under test load.
+- Error rate.
+- Recommendation generation latency.
+
+EDUCATIONAL METRICS
+--------------------
+- Attendance improvement percentage.
+- Assignment completion improvement.
+- Quiz score improvement.
+- Reduction in high-risk learners.
+- Intervention acknowledgement rate.
+- Course completion rate.
+- Skill completion rate.
+- Career readiness improvement.
+- Innovation challenge participation.
+- Community impact hours / learners reached.
+
+VALIDATION PLAN
+---------------
+Baseline:
+A conventional dashboard reports attendance, marks and assignments separately.
+
+Proposed:
+LearnVault combines signals and prioritizes students for early intervention.
+
+Run a controlled demonstration dataset with two groups of equivalent size.
+Compare:
+1. Time required to identify high-risk students.
+2. Percentage of high-risk students identified correctly using known test labels.
+3. Dashboard query latency.
+4. Number of separate screens/queries required by faculty.
+5. Improvement after intervention.
+
+Do not claim real-world predictive accuracy unless a labeled dataset or controlled experiment is available.
+For the hackathon, report prototype metrics honestly as system/evaluation metrics.
+
+TRUST AND RESPONSIBLE AI
+------------------------
+The score is a decision-support signal, not a final academic judgment.
+Faculty should review context before intervention.
+The system should explain which measurable signals contributed to a warning.
+Sensitive wellbeing information should not be inferred or exposed without appropriate governance.
+
+BUSINESS MODEL
+--------------
+B2B SaaS for schools, colleges and universities.
+
+Free / Demo:
+Small institutions and pilot departments.
+
+Institution Plan:
+Academic catalog + learning + analytics + faculty tools.
+
+Enterprise Plan:
+Multi-campus governance + SSO + advanced analytics + integrations + support.
+
+Future revenue:
+Certification partnerships, career services, analytics modules and institution-level integrations.
+
+FUTURE ROADMAP
+--------------
+0-3 months:
+Pilot Academic Intelligence + attendance + intervention workflow.
+
+3-6 months:
+Advanced analytics, notification automation, faculty productivity and richer career readiness.
+
+6-12 months:
+Vector database for semantic recommendations, multilingual learning support and institution integrations.
+
+12+ months:
+Multi-tenant architecture, federated analytics and large-scale institutional deployment.
+
+HACKATHON WINNING PITCH
+-----------------------
+PROBLEM - 30 SECONDS
+Every institution already has student data. The problem is that the data is fragmented. Attendance is in one place, assignments in another, quizzes somewhere else, and faculty often discover that a student is struggling only after the marks have already fallen. LearnVault turns these disconnected records into an early-warning and intervention system.
+
+SOLUTION - 1 MINUTE
+LearnVault is a database-driven Academic Intelligence Platform. It connects the academic catalog, student profile, attendance, assignments, quizzes, learning activity, skills, career readiness and real-world innovation into one relational ecosystem. Our Explainable Early Intervention Engine calculates a transparent Academic Success Score and tells students and faculty not only who needs attention, but why and what action can be taken next.
+
+DEMO FLOW - 2 MINUTES
+1. Admin creates or selects an academic course from Catalog Studio.
+2. Student registers using Domain -> Department -> Course.
+3. Student logs in and sees database-driven subjects.
+4. Faculty records attendance and publishes assignments/quizzes.
+5. Student activity creates learning events and assessment records.
+6. Academic Intelligence recalculates the Success Score.
+7. Faculty opens Early Risk Monitor and sees priority learners.
+8. Faculty records an intervention.
+9. Student sees personalized recommendations.
+10. Admin views institution-level risk and SDG 4 impact analytics.
+11. Finish with Education Innovation Lab and Career Readiness to show the broader ecosystem.
+
+INNOVATION - 1 MINUTE
+Our innovation is not simply using a modern web stack. The database itself becomes part of the intelligence layer. We use indexed relational records and a reusable academic-signal view to combine attendance, assessment, assignment, engagement and skill data. The result is an explainable early-intervention signal stored and tracked through the database. This connects classic DBMS concepts such as joins, aggregation, views, constraints, transactions and indexing to a real educational decision-support problem.
+
+IMPACT - 30 SECONDS
+The goal is measurable improvement: identify struggling students earlier, improve attendance and assignment completion, increase learning engagement, improve career readiness and reduce avoidable academic failure. Every intervention can be measured, and the platform maps those outcomes to SDG 4 - Quality Education.
+
+ONE-LINE CLOSING
+----------------
+LearnVault does not wait for students to fail and then report the result. It uses the data institutions already generate to identify risk earlier, recommend action and measure whether education actually improved.
