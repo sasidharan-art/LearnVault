@@ -28,12 +28,18 @@ router.get("/", authenticateUser, authorizeRoles("student","faculty","admin"), a
         } else {
             const [[profile]] = await db.query(`SELECT sp.course_id,sp.course_level_id FROM student_profiles sp WHERE sp.user_id=? LIMIT 1`, [req.user.userId]);
             if (!profile) return res.json({success:true,classes:[]});
+            const levelFilter = profile.course_level_id
+                ? ` AND (lc.course_level_id IS NULL OR lc.course_level_id=?)`
+                : "";
+            const params = profile.course_level_id
+                ? [req.user.userId, profile.course_id, profile.course_level_id]
+                : [req.user.userId, profile.course_id];
             [rows] = await db.query(`SELECT lc.*,u.full_name faculty_name,s.subject_code,s.subject_name,c.course_name,cl.level_name,
                 (SELECT COUNT(*) FROM live_class_attendance a WHERE a.live_class_id=lc.id) participants,
                 EXISTS(SELECT 1 FROM live_class_attendance a WHERE a.live_class_id=lc.id AND a.user_id=?) joined
                 FROM live_classes lc JOIN users u ON u.id=lc.faculty_user_id LEFT JOIN subjects s ON s.id=lc.subject_id LEFT JOIN courses c ON c.id=lc.course_id LEFT JOIN course_levels cl ON cl.id=lc.course_level_id
-                WHERE lc.status<>'cancelled' AND (lc.course_id IS NULL OR lc.course_id=?) AND (lc.course_level_id IS NULL OR lc.course_level_id=?)
-                ORDER BY lc.starts_at ASC LIMIT 100`, [req.user.userId, profile.course_id, profile.course_level_id]);
+                WHERE lc.status<>'cancelled' AND (lc.course_id IS NULL OR lc.course_id=?)${levelFilter}
+                ORDER BY lc.starts_at ASC LIMIT 100`, params);
         }
         res.json({success:true,classes:rows});
     } catch(e){ console.error(e); res.status(500).json({success:false,message:"Unable to load Live Classes"}); }

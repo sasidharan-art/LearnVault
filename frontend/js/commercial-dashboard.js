@@ -445,6 +445,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             } — your Resources, practice, Assignments and progress are organised here.`
         );
 
+        const subjectBox = document.getElementById("studentDashboardSubjects");
+        const subjectCount = document.getElementById("studentSubjectCount");
+        const subjects = Array.isArray(progress.subjects) ? progress.subjects : [];
+
+        if (subjectCount) {
+            subjectCount.textContent = `${subjects.length} subject${subjects.length === 1 ? "" : "s"}`;
+        }
+
+        if (subjectBox) {
+            subjectBox.innerHTML = subjects.length
+                ? subjects.map(subject => `
+                    <a href="progress.html" class="commercial-subject-item">
+                        <span>${h.esc(subject.subjectCode || "SUB")}</span>
+                        <div>
+                            <strong>${h.esc(subject.subjectName || "Subject")}</strong>
+                            <small>${h.esc(subject.levelName || "Course-wide subject")}</small>
+                        </div>
+                        <b>${percent(subject.masteryScore)}</b>
+                    </a>
+                `).join("")
+                : `<div class="integration-empty">No subjects are configured for this course yet. Ask LearnVault Admin to add them in Catalog Studio.</div>`;
+        }
 
         const weak =
             document.getElementById(

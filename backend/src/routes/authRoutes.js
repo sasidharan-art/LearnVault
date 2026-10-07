@@ -177,10 +177,14 @@ async function generateUniqueUsername(
    STUDENT REGISTRATION
 
    Student chooses:
+   - Education Domain
+   - Department / Stream
    - Course / Program
-   - Current Level / Year (when the course has levels)
 
-   Semester is NOT collected during registration.
+   Academic level / semester is intentionally NOT collected
+   during account creation. The student starts with a course-wide
+   academic profile and can later progress through the Academic
+   Progression system.
 ===================================================== */
 
 router.post(
@@ -191,8 +195,9 @@ router.post(
             fullName,
             email,
             phone,
+            domainId,
+            departmentId,
             courseId,
-            courseLevelId,
             password,
             confirmPassword
         } = req.body;
@@ -249,14 +254,20 @@ router.post(
         }
 
 
-        const parsedCourseId =
-            Number(courseId);
+        const parsedDomainId = domainId ? Number(domainId) : null;
+        const rawDepartmentId = departmentId ? Number(departmentId) : 0;
+        const parsedDepartmentId = Number.isInteger(rawDepartmentId) && rawDepartmentId > 0 ? rawDepartmentId : null;
+        const parsedCourseId = Number(courseId);
 
+        if (!Number.isInteger(parsedDomainId) || parsedDomainId <= 0) {
+            return res.status(400).json({ success: false, message: "Please select a valid education domain" });
+        }
 
-        const parsedLevelId =
-            courseLevelId
-                ? Number(courseLevelId)
-                : null;
+        if (departmentId && Number.isNaN(Number(departmentId))) {
+            return res.status(400).json({ success: false, message: "Please select a valid department / stream" });
+        }
+
+        const parsedLevelId = null;
 
 
         if (
@@ -411,7 +422,11 @@ router.post(
                     SELECT
                         c.id,
                         c.course_name,
-                        c.structure_type
+                        c.structure_type,
+                        c.domain_id,
+                        c.department_id,
+                        ed.domain_name,
+                        d.department_name
 
                     FROM courses c
 
@@ -460,6 +475,21 @@ router.post(
 
             }
 
+            const selectedCourse = courseRows[0];
+
+            if (Number(selectedCourse.domain_id || 0) !== parsedDomainId) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Selected course does not belong to the selected education domain"
+                });
+            }
+
+            if (parsedDepartmentId !== null && Number(selectedCourse.department_id || 0) !== parsedDepartmentId) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Selected course does not belong to the selected department / stream"
+                });
+            }
 
             const [availableLevels] =
                 await connection.query(
@@ -482,22 +512,6 @@ router.post(
                         parsedCourseId
                     ]
                 );
-
-
-            if (
-                availableLevels.length > 0 &&
-                parsedLevelId === null
-            ) {
-
-                return res
-                    .status(400)
-                    .json({
-                        success: false,
-                        message:
-                            "Please select your current level / year"
-                    });
-
-            }
 
 
             if (
@@ -621,14 +635,26 @@ router.post(
                         role:
                             "student",
 
+                        domainId:
+                            parsedDomainId,
+
+                        domainName:
+                            selectedCourse.domain_name,
+
+                        departmentId:
+                            selectedCourse.department_id,
+
+                        departmentName:
+                            selectedCourse.department_name,
+
                         courseId:
                             parsedCourseId,
 
                         courseName:
-                            courseRows[0].course_name,
+                            selectedCourse.course_name,
 
                         courseLevelId:
-                            parsedLevelId
+                            null
 
                     }
 

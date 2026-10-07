@@ -23,7 +23,7 @@ async function getStudentProfile(userId) {
 function levelClause(profile, alias="s") {
     return profile.course_level_id
         ? {sql:` AND (${alias}.course_level_id IS NULL OR ${alias}.course_level_id=?)`, vals:[profile.course_level_id]}
-        : {sql:` AND ${alias}.course_level_id IS NULL`, vals:[]};
+        : {sql:"", vals:[]};
 }
 
 

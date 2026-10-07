@@ -23,198 +23,43 @@ const router =
 router.get(
     "/registration-options",
     async (req, res) => {
-
         try {
+            const [domains] = await db.query(`
+                SELECT id, domain_name, is_active
+                FROM education_domains
+                WHERE is_active = 1
+                ORDER BY domain_name
+            `);
 
-            const [courseRows] =
-                await db.query(
-                    `
-                    SELECT
-                        c.id,
-                        c.course_code,
-                        c.course_name,
-                        c.structure_type,
+            const [departments] = await db.query(`
+                SELECT id, domain_id, department_code, department_name, is_active
+                FROM departments
+                WHERE is_active = 1
+                ORDER BY domain_id, department_name
+            `);
 
-                        ed.id
-                            AS domain_id,
+            const [courses] = await db.query(`
+                SELECT
+                    c.id, c.course_code, c.course_name, c.structure_type,
+                    c.domain_id, ed.domain_name,
+                    c.department_id, d.department_code, d.department_name,
+                    c.is_active
+                FROM courses c
+                LEFT JOIN education_domains ed ON c.domain_id = ed.id
+                LEFT JOIN departments d ON c.department_id = d.id
+                WHERE c.is_active = 1
+                  AND (ed.id IS NULL OR ed.is_active = 1)
+                  AND (d.id IS NULL OR d.is_active = 1)
+                ORDER BY COALESCE(ed.domain_name, ''), COALESCE(d.department_name, ''), c.course_name
+            `);
 
-                        ed.domain_name,
-
-                        d.id
-                            AS department_id,
-
-                        d.department_code,
-
-                        d.department_name
-
-                    FROM courses c
-
-                    LEFT JOIN education_domains ed
-                        ON c.domain_id = ed.id
-
-                    LEFT JOIN departments d
-                        ON c.department_id = d.id
-
-                    WHERE
-                        c.is_active = 1
-
-                        AND
-                        (
-                            ed.id IS NULL
-                            OR ed.is_active = 1
-                        )
-
-                        AND
-                        (
-                            d.id IS NULL
-                            OR d.is_active = 1
-                        )
-
-                    ORDER BY
-                        COALESCE(ed.domain_name, ''),
-                        COALESCE(d.department_name, ''),
-                        c.course_name
-                    `
-                );
-
-
-            const [levelRows] =
-                await db.query(
-                    `
-                    SELECT
-                        id,
-                        course_id,
-                        level_name,
-                        level_order
-
-                    FROM course_levels
-
-                    WHERE is_active = 1
-
-                    ORDER BY
-                        course_id,
-                        level_order,
-                        level_name
-                    `
-                );
-
-
-            const levelsByCourse =
-                new Map();
-
-
-            for (const level of levelRows) {
-
-                const key =
-                    String(level.course_id);
-
-
-                if (
-                    !levelsByCourse.has(key)
-                ) {
-
-                    levelsByCourse.set(
-                        key,
-                        []
-                    );
-
-                }
-
-
-                levelsByCourse
-                    .get(key)
-                    .push({
-                        id:
-                            level.id,
-
-                        levelName:
-                            level.level_name,
-
-                        levelOrder:
-                            level.level_order
-                    });
-
-            }
-
-
-            const courses =
-                courseRows.map(
-                    (course) => ({
-
-                        id:
-                            course.id,
-
-                        courseCode:
-                            course.course_code,
-
-                        courseName:
-                            course.course_name,
-
-                        structureType:
-                            course.structure_type,
-
-                        domainId:
-                            course.domain_id,
-
-                        domainName:
-                            course.domain_name,
-
-                        departmentId:
-                            course.department_id,
-
-                        departmentCode:
-                            course.department_code,
-
-                        departmentName:
-                            course.department_name,
-
-                        levels:
-                            levelsByCourse.get(
-                                String(course.id)
-                            ) || []
-
-                    })
-                );
-
-
-            return res
-                .status(200)
-                .json({
-
-                    success: true,
-
-                    count:
-                        courses.length,
-
-                    courses
-
-                });
-
-
+            return res.json({ success: true, domains, departments, courses });
         } catch (error) {
-
-            console.error(
-                "Registration options error:",
-                error
-            );
-
-
-            return res
-                .status(500)
-                .json({
-
-                    success: false,
-
-                    message:
-                        "Unable to load academic registration options"
-
-                });
-
+            console.error("Registration options error:", error);
+            return res.status(500).json({ success: false, message: "Unable to load academic catalog" });
         }
-
     }
 );
-
 
 /* =====================================================
    ADMIN: VIEW ACADEMIC STRUCTURE

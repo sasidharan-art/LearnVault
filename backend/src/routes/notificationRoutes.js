@@ -57,7 +57,7 @@ async function studentSubjectIds(profile) {
     if (!profile || !profile.course_id) return [];
 
     const values = [profile.course_id];
-    let levelSql = "AND s.course_level_id IS NULL";
+    let levelSql = "";
 
     if (profile.course_level_id) {
         levelSql =

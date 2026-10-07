@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Catalog Studio | LearnVault</title>
+<link rel="stylesheet" href="../css/global.css">
+</head>
+<body class="admin-page">
+<div class="site student-site admin-site">
+<header class="topbar student-topbar">
+<button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
+<a href="../index.html" class="brand-link"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault" class="brand-logo"></a>
+<div class="top-search dashboard-search"><span>⌕</span><input id="catalogSearch" type="search" placeholder="Search domains, courses, subjects..."></div>
+<nav class="top-actions student-account-actions"><div class="student-head-identity"><span class="student-head-label">ADMIN</span><strong id="headerAdminName">Administrator</strong></div><button type="button" class="button button-ghost" id="logoutButton">Logout</button></nav>
+</header>
+<div class="page-shell">
+<aside class="icon-rail" id="primaryNavigation" aria-label="Admin navigation">
+<a href="dashboard.html" class="rail-item" title="Dashboard"><span class="rail-icon">⌂</span><span class="rail-label">Dashboard</span></a>
+<a href="academic.html" class="rail-item" title="Academic Structure"><span class="rail-icon">▦</span><span class="rail-label">Academic Overview</span></a>
+<a href="catalog-studio.html" class="rail-item active" title="Catalog Studio"><span class="rail-icon">✦</span><span class="rail-label">Catalog Studio</span></a>
+<a href="users.html" class="rail-item" title="Users & Faculty"><span class="rail-icon">◉</span><span class="rail-label">Users & Faculty</span></a>
+<a href="reports.html" class="rail-item" title="Reports"><span class="rail-icon">▤</span><span class="rail-label">Reports</span></a>
+</aside>
+<main class="main dashboard-main">
+<section class="dashboard-hero catalog-studio-hero">
+<div class="dashboard-hero-copy"><span class="eyebrow">ADMIN • ACADEMIC CATALOG STUDIO</span><h1>Build the complete academic universe of LearnVault.</h1><p>Manage education domains, departments, programs, levels, semesters, subjects and curriculum versions without changing code.</p><div class="dashboard-primary-actions"><a href="academic.html" class="button button-soft large">Academic Overview</a><button class="button button-primary large" id="refreshCatalog">Refresh Catalog</button></div></div>
+<div class="hero-dashboard admin-rule-card"><span class="mini-label">CATALOG-FIRST PLATFORM</span><div class="admin-example-list"><div><strong>14 Domains</strong><span>School to professional learning</span></div><div><strong>Configurable</strong><span>Years • semesters • subjects</span></div><div><strong>Import Ready</strong><span>CSV / Excel curriculum</span></div><div><strong>Versioned</strong><span>Draft • Active • Archived</span></div></div></div>
+</section>
+<section class="catalog-kpi-grid" id="catalogKpis"></section>
+<section class="catalog-toolbar">
+<div class="catalog-tabs" id="catalogTabs">
+<button class="catalog-tab active" data-tab="overview">Overview</button><button class="catalog-tab" data-tab="domains">Domains</button><button class="catalog-tab" data-tab="courses">Courses</button><button class="catalog-tab" data-tab="subjects">Subjects</button><button class="catalog-tab" data-tab="curriculum">Curriculum</button><button class="catalog-tab" data-tab="import">Import</button>
+</div>
+</section>
+<section class="catalog-panel" data-panel="overview">
+<div class="catalog-panel-head"><div><span class="eyebrow">ACADEMIC UNIVERSE</span><h2>Preloaded education catalog</h2><p>All initial structures remain editable and archivable.</p></div><div class="catalog-filter"><select id="overviewDomainFilter"><option value="">All domains</option></select></div></div>
+<div id="overviewList" class="catalog-domain-grid"></div>
+</section>
+<section class="catalog-panel" data-panel="domains" hidden>
+<div class="catalog-panel-head"><div><span class="eyebrow">STRUCTURE LEVEL 01</span><h2>Education Domains</h2><p>Create and maintain the top-level academic categories.</p></div></div>
+<form id="domainStudioForm" class="catalog-form"><input name="domainName" required placeholder="Education domain name, e.g. Architecture"><button class="button button-primary">Add Domain</button></form>
+<div id="domainTable" class="catalog-table-wrap"></div>
+</section>
+<section class="catalog-panel" data-panel="courses" hidden>
+<div class="catalog-panel-head"><div><span class="eyebrow">STRUCTURE LEVEL 02–04</span><h2>Departments, Courses, Levels & Semesters</h2><p>Configure the academic hierarchy used by registration and progression.</p></div></div>
+<div class="catalog-form-grid">
+<form id="departmentStudioForm" class="catalog-form"><h3>Add Department / Stream</h3><select name="domainId" id="studioDepartmentDomain" required><option value="">Select domain</option></select><input name="departmentCode" required placeholder="Code e.g. CSE"><input name="departmentName" required placeholder="Department name"><button class="button button-primary">Add Department</button></form>
+<form id="courseStudioForm" class="catalog-form"><h3>Add Course / Program</h3><select name="domainId" id="studioCourseDomain" required><option value="">Select domain</option></select><select name="departmentId" id="studioCourseDepartment"><option value="">No department</option></select><input name="courseCode" required placeholder="Course code"><input name="courseName" required placeholder="Course name"><div class="catalog-form-row"><input type="number" name="durationYears" min="1" step="0.5" placeholder="Duration years"><select name="structureType"><option value="year_semester">Year + Semester</option><option value="grade">Grade / Class</option><option value="module">Module based</option><option value="exam">Exam stages</option><option value="flexible">Flexible</option></select></div><button class="button button-primary">Add Course</button></form>
+<form id="levelStudioForm" class="catalog-form"><h3>Add Year / Level</h3><select name="courseId" id="studioLevelCourse" required><option value="">Select course</option></select><input name="levelName" required placeholder="Year 1 / Class 10 / Prelims"><input type="number" name="levelOrder" min="1" value="1" required><button class="button button-primary">Add Level</button></form>
+<form id="semesterStudioForm" class="catalog-form"><h3>Add Semester / Term</h3><select name="courseId" id="studioSemesterCourse" required><option value="">Select course</option></select><select name="courseLevelId" id="studioSemesterLevel"><option value="">No level</option></select><input name="semesterName" required placeholder="Semester 1 / Term 1"><input type="number" name="semesterNumber" min="1" placeholder="Number"><button class="button button-primary">Add Semester</button></form>
+</div>
+<div class="catalog-subsection"><h3>Departments / Streams</h3><div id="departmentTable" class="catalog-table-wrap"></div></div><div class="catalog-subsection"><h3>Courses, Years & Semesters</h3><div id="courseTable" class="catalog-table-wrap"></div></div>
+</section>
+<section class="catalog-panel" data-panel="subjects" hidden>
+<div class="catalog-panel-head"><div><span class="eyebrow">STRUCTURE LEVEL 05</span><h2>Subjects</h2><p>Attach subjects to courses and academic levels.</p></div></div>
+<form id="subjectStudioForm" class="catalog-form-grid compact"><select name="courseId" id="studioSubjectCourse" required><option value="">Select course</option></select><select name="courseLevelId" id="studioSubjectLevel"><option value="">No level</option></select><input name="subjectCode" required placeholder="Subject code"><input name="subjectName" required placeholder="Subject name"><button class="button button-primary">Add Subject</button></form>
+<div id="subjectTable" class="catalog-table-wrap"></div>
+</section>
+<section class="catalog-panel" data-panel="curriculum" hidden>
+<div class="catalog-panel-head"><div><span class="eyebrow">CURRICULUM GOVERNANCE</span><h2>Curriculum Builder</h2><p>Create versions, archive old curriculum, upload syllabus and configure credits, outcomes and resource requirements.</p></div></div>
+<form id="curriculumStudioForm" class="catalog-form-grid compact"><select name="courseId" id="studioCurriculumCourse" required><option value="">Select course</option></select><select name="courseLevelId" id="studioCurriculumLevel"><option value="">All levels</option></select><input name="curriculumName" required placeholder="Standard Curriculum 2026-27"><input name="versionCode" required placeholder="STD-2026-27"><input name="academicYearLabel" placeholder="Academic year"><select name="status"><option value="draft">Draft</option><option value="active">Active</option><option value="archived">Archived</option></select><textarea name="notes" placeholder="Curriculum notes"></textarea><button class="button button-primary">Create Curriculum</button></form>
+<div class="catalog-subsection"><h3>Curriculum versions</h3><div id="curriculumTable" class="catalog-table-wrap"></div></div>
+<div class="catalog-subsection"><h3>Configure subject credits & outcomes</h3><form id="mappingStudioForm" class="catalog-form-grid compact"><select name="curriculumId" id="studioMappingCurriculum" required><option value="">Select curriculum</option></select><select name="subjectId" id="studioMappingSubject" required><option value="">Select subject</option></select><select name="semesterId" id="studioMappingSemester"><option value="">No semester</option></select><input type="number" step="0.5" min="0" name="credits" placeholder="Credits"><label class="catalog-check"><input type="checkbox" name="isCore" checked> Core subject</label><textarea name="learningOutcomes" placeholder="Learning outcomes"></textarea><textarea name="resourceRequirements" placeholder="Subject resources: Notes; Videos; Question Bank; Quiz"></textarea><button class="button button-primary">Save Subject Configuration</button></form></div>
+<div class="catalog-subsection"><h3>Configured curriculum subjects</h3><div id="mappingTable" class="catalog-table-wrap"></div></div>
+</section>
+<section class="catalog-panel" data-panel="import" hidden>
+<div class="catalog-panel-head"><div><span class="eyebrow">BULK CURRICULUM IMPORT</span><h2>Import Academic Catalog</h2><p>Upload CSV or Excel. Use the template to import domains, departments, courses, levels, semesters and subjects.</p></div><a class="button button-soft" href="/api/academic/catalog/import-template">Download CSV Template</a></div>
+<form id="importForm" class="catalog-import-box"><input type="file" name="file" accept=".csv,.xlsx,.xls" required><button class="button button-primary">Import Catalog</button></form>
+<div id="importResult" class="catalog-import-result"></div>
+<div class="catalog-subsection"><h3>Import history</h3><div id="importHistory" class="catalog-table-wrap"></div></div>
+</section>
+</main></div>
+<div class="nav-overlay" id="navOverlay"></div>
+<footer class="footer student-footer-unified"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="academic.html">Academic Structure</a><a href="catalog-studio.html">Catalog Studio</a></nav><span>Learn • Practice • Grow</span></div></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/sidebar.js"></script><script src="../js/admin-common.js"></script><script src="../js/admin-catalog-studio.js"></script>
+</body>
+</html>

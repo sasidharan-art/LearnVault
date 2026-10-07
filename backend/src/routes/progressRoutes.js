@@ -26,7 +26,7 @@ async function studentProfile(userId){
 function levelClause(profile,alias="s"){
     return profile.course_level_id
       ? {sql:`AND (${alias}.course_level_id IS NULL OR ${alias}.course_level_id=?)`,values:[profile.course_level_id]}
-      : {sql:`AND ${alias}.course_level_id IS NULL`,values:[]};
+      : {sql:"",values:[]};
 }
 function mergeSubjects(base,attempts,answers){
     const am=new Map(attempts.map(x=>[String(x.subject_id),x]));

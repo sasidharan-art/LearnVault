@@ -16,6 +16,9 @@ const resourceRoutes =
 const academicRoutes =
     require("./routes/academicRoutes");
 
+const academicCatalogRoutes =
+    require("./routes/academicCatalogRoutes");
+
 const adminRoutes =
     require("./routes/adminRoutes");
 
@@ -353,6 +356,11 @@ app.use(
 );
 
 app.use(
+    "/api/academic",
+    academicCatalogRoutes
+);
+
+app.use(
     "/api/admin",
     adminRoutes
 );
@@ -587,6 +595,11 @@ const serveFrontend =
     ).toLowerCase() ===
         "true";
 
+
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "../../uploads"))
+);
 
 if (serveFrontend) {
 

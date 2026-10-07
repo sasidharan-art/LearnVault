@@ -100,10 +100,7 @@ function studentLevelCondition(profile) {
         };
     }
 
-    return {
-        sql: `AND s.course_level_id IS NULL`,
-        values: []
-    };
+    return { sql: "", values: [] };
 }
 
 function validateQuestionPayload(body) {

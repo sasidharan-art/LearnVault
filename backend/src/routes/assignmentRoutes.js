@@ -110,10 +110,7 @@ function levelClause(profile, alias = "s") {
             values: [profile.course_level_id]
         };
     }
-    return {
-        sql: `AND ${alias}.course_level_id IS NULL`,
-        values: []
-    };
+    return { sql: "", values: [] };
 }
 
 async function assignmentRow(id) {

@@ -11,7 +11,7 @@ async function studentProfile(userId){
         LEFT JOIN education_domains ed ON ed.id=c.domain_id WHERE sp.user_id=? AND c.is_active=1 LIMIT 1`,[userId]);
     return r[0]||null;
 }
-function levelClause(p,a="s"){return p.course_level_id?{sql:` AND (${a}.course_level_id IS NULL OR ${a}.course_level_id=?)`,vals:[p.course_level_id]}:{sql:` AND ${a}.course_level_id IS NULL`,vals:[]};}
+function levelClause(p,a="s"){return p.course_level_id?{sql:` AND (${a}.course_level_id IS NULL OR ${a}.course_level_id=?)`,vals:[p.course_level_id]}:{sql:"",vals:[]};}
 async function facultyCanSubject(uid,sid){const [r]=await db.query(`SELECT s.id FROM faculty_subject_assignments fsa JOIN subjects s ON s.id=fsa.subject_id JOIN courses c ON c.id=s.course_id
     WHERE fsa.faculty_user_id=? AND fsa.subject_id=? AND fsa.is_active=1 AND s.is_active=1 AND c.is_active=1 LIMIT 1`,[uid,sid]);return r.length>0;}
 async function getGroup(id){const [r]=await db.query(`SELECT pg.*,s.course_id,s.course_level_id,s.subject_code,s.subject_name,c.course_name,u.full_name creator_name

@@ -35,7 +35,7 @@ function configured(profile) {
 async function subjectIdsFor(profile) {
     if (!configured(profile)) return [];
     const values = [profile.course_id];
-    let levelSql = `AND s.course_level_id IS NULL`;
+    let levelSql = ``;
     if (profile.course_level_id) {
         levelSql = `AND (s.course_level_id IS NULL OR s.course_level_id = ?)`;
         values.push(profile.course_level_id);

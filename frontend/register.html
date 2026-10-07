@@ -101,6 +101,32 @@
                     </label>
 
                     <label class="full-field">
+                        Education Domain
+                        <select
+                            name="domainId"
+                            id="domainSelect"
+                            required
+                            disabled
+                        >
+                            <option value="">Loading education domains...</option>
+                        </select>
+                        <span class="academic-select-note">Choose your broad education area.</span>
+                    </label>
+
+                    <label class="full-field">
+                        Department / Stream
+                        <select
+                            name="departmentId"
+                            id="departmentSelect"
+                            required
+                            disabled
+                        >
+                            <option value="">Select a domain first</option>
+                        </select>
+                        <span class="academic-select-note">Departments are controlled by LearnVault Admin.</span>
+                    </label>
+
+                    <label class="full-field">
                         Course / Program
                         <select
                             name="courseId"
@@ -108,34 +134,14 @@
                             required
                             disabled
                         >
-                            <option value="">Loading available courses...</option>
+                            <option value="">Select a department first</option>
                         </select>
-
-                        <span class="academic-select-note">
-                            Courses shown here are managed by LearnVault Admin.
-                        </span>
-
+                        <span class="academic-select-note">Select the course configured under your academic path.</span>
                         <span
                             class="registration-api-state"
                             id="registrationApiState"
                             aria-live="polite"
                         ></span>
-                    </label>
-
-                    <label class="full-field">
-                        Current Level / Year
-                        <select
-                            name="courseLevelId"
-                            id="courseLevelSelect"
-                            disabled
-                        >
-                            <option value="">Select a course first</option>
-                        </select>
-
-                        <span class="academic-select-note">
-                            This changes automatically according to the selected course.
-                            Semester is not required during registration.
-                        </span>
                     </label>
 
                     <div
