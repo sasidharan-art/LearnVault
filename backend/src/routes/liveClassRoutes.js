@@ -5,6 +5,7 @@ const authorizeRoles = require('../middleware/roleMiddleware');
 const rateLimit = require('../middleware/rateLimit');
 const cache = require('../middleware/cache');
 const router = express.Router();
+router.use(async (req,res,next)=>{ try{ await ensureLiveSchema(); next(); }catch(e){ console.error('Live schema initialization error:',e); res.status(503).json({success:false,message:'Live Classroom database is not ready. Apply the LearnVault live-class migration and retry.'}); }});
 
 const clean = v => String(v ?? '').trim();
 const id = v => Number.isInteger(Number(v)) && Number(v) > 0 ? Number(v) : null;
@@ -15,6 +16,37 @@ const safeUrl = v => {
   try { const u = new URL(value); return ['http:', 'https:'].includes(u.protocol) ? value : ''; }
   catch { return ''; }
 };
+
+let liveSchemaPromise = null;
+async function ensureLiveSchema(){
+  if(liveSchemaPromise) return liveSchemaPromise;
+  liveSchemaPromise = (async()=>{
+    const [cols] = await db.query(`SELECT COLUMN_NAME FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name='live_classes'`);
+    const have = new Set(cols.map(x=>x.COLUMN_NAME));
+    const adds = [];
+    if(!have.has('stream_provider')) adds.push("ADD COLUMN stream_provider VARCHAR(30) NULL AFTER meeting_url");
+    if(!have.has('stream_url')) adds.push("ADD COLUMN stream_url TEXT NULL AFTER stream_provider");
+    if(!have.has('thumbnail_url')) adds.push("ADD COLUMN thumbnail_url TEXT NULL AFTER stream_url");
+    if(!have.has('chat_enabled')) adds.push("ADD COLUMN chat_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER thumbnail_url");
+    if(!have.has('native_enabled')) adds.push("ADD COLUMN native_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER chat_enabled");
+    if(!have.has('active_host_user_id')) adds.push("ADD COLUMN active_host_user_id INT NULL AFTER faculty_user_id");
+    if(adds.length) await db.query(`ALTER TABLE live_classes ${adds.join(', ')}`);
+    await db.query(`CREATE TABLE IF NOT EXISTS live_class_signals_v2_v2 (
+      id BIGINT AUTO_INCREMENT PRIMARY KEY, live_class_id INT NOT NULL, from_user_id INT NOT NULL, to_user_id INT NOT NULL,
+      signal_type ENUM('offer','answer') NOT NULL, payload LONGTEXT NOT NULL, created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, consumed_at DATETIME NULL,
+      INDEX idx_lcsv2_to (live_class_id,to_user_id,signal_type,consumed_at,id), INDEX idx_lcsv2_from (live_class_id,from_user_id,signal_type,created_at),
+      CONSTRAINT fk_lcsv2_class FOREIGN KEY (live_class_id) REFERENCES live_classes(id) ON DELETE CASCADE,
+      CONSTRAINT fk_lcsv2_from FOREIGN KEY (from_user_id) REFERENCES users(id) ON DELETE CASCADE,
+      CONSTRAINT fk_lcsv2_to FOREIGN KEY (to_user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB`);
+    await db.query(`CREATE TABLE IF NOT EXISTS live_class_attendance (
+      id INT AUTO_INCREMENT PRIMARY KEY, live_class_id INT NOT NULL, user_id INT NOT NULL, joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, left_at DATETIME NULL, attendance_minutes INT NOT NULL DEFAULT 0,
+      UNIQUE KEY uq_live_class_attendance (live_class_id,user_id), INDEX idx_live_attendance_user (user_id,joined_at), INDEX idx_live_attendance_active (live_class_id,left_at,user_id),
+      CONSTRAINT fk_live_attendance_class2 FOREIGN KEY (live_class_id) REFERENCES live_classes(id) ON DELETE CASCADE, CONSTRAINT fk_live_attendance_user2 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB`).catch(()=>{});
+  })().catch(err=>{liveSchemaPromise=null; throw err;});
+  return liveSchemaPromise;
+}
 
 async function facultySubjectAllowed(userId, subjectId) {
   if (!subjectId) return true;
@@ -100,8 +132,9 @@ router.post('/', authenticateUser, authorizeRoles('faculty','admin'), rateLimit(
   if(!title||!startsAt)return res.status(400).json({success:false,message:'Title and start time are required'});
   try {
     if(req.user.role==='faculty' && !(await facultySubjectAllowed(req.user.userId,subjectId)))return res.status(403).json({success:false,message:'You can schedule Live Classes only for your assigned subjects'});
-    const [r]=await db.query(`INSERT INTO live_classes(faculty_user_id,subject_id,course_id,course_level_id,title,description,meeting_url,stream_provider,stream_url,thumbnail_url,chat_enabled,native_enabled,starts_at,ends_at,status) VALUES(?,?,?,?,?,?,?,?,?,?,1,?,?,?,?,'scheduled')`,[req.user.userId,subjectId,courseId,levelId,title,description||null,meetingUrl||'', 'native',null,null,nativeEnabled?1:0,startsAt,endsAt||null]);
+    const [r]=await db.query(`INSERT INTO live_classes(faculty_user_id,subject_id,course_id,course_level_id,title,description,meeting_url,starts_at,ends_at,status) VALUES(?,?,?,?,?,?,?,?,?,'scheduled')`,[req.user.userId,subjectId,courseId,levelId,title,description||null,meetingUrl||'',startsAt,endsAt||null]);
     const classId=r.insertId;
+    await db.query(`UPDATE live_classes SET stream_provider='native', chat_enabled=1, native_enabled=?, active_host_user_id=NULL WHERE id=?`,[nativeEnabled?1:0,classId]);
     if(req.body.notifyStudents && subjectId){
       const notificationBody=clean(req.body.notificationMessage)||`Live Class scheduled: ${title}. Join LearnVault at the scheduled time.`;
       await db.query(`INSERT INTO announcements(created_by,target_type,target_role,subject_id,title,body,priority,status,starts_at,expires_at) VALUES(?,?,?,?,?,?,'important','published',NOW(),?)`,[req.user.userId,'subject','student',subjectId,`Live Class: ${title}`,notificationBody,endsAt||null]);
@@ -160,25 +193,25 @@ router.get('/:id/native/participants', authenticateUser, authorizeRoles('faculty
 router.post('/:id/native/offer', authenticateUser, authorizeRoles('faculty','admin'), rateLimit({windowMs:60_000,max:120,keyGenerator:req=>`${req.user.userId}:live-signal`}), async (req,res)=>{
   const classId=id(req.params.id),toUserId=id(req.body.toUserId),payload=clean(req.body.payload);
   if(!classId||!toUserId||payload.length<10||payload.length>200000)return res.status(400).json({success:false,message:'Invalid WebRTC offer'});
-  try { const row=await classOwnerOrAdmin(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); await db.query(`INSERT INTO live_class_signals(live_class_id,from_user_id,to_user_id,signal_type,payload) VALUES(?,?,?,?,?)`,[classId,req.user.userId,toUserId,'offer',payload]); res.json({success:true}); }
+  try { const row=await classOwnerOrAdmin(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); await db.query(`INSERT INTO live_class_signals_v2(live_class_id,from_user_id,to_user_id,signal_type,payload) VALUES(?,?,?,?,?)`,[classId,req.user.userId,toUserId,'offer',payload]); res.json({success:true}); }
   catch(e){console.error(e);res.status(500).json({success:false,message:'Unable to send WebRTC offer'});}
 });
 
 router.get('/:id/native/offers', authenticateUser, authorizeRoles('student'), async (req,res)=>{
   const classId=id(req.params.id); if(!classId)return res.status(400).json({success:false,message:'Invalid Live Class'});
-  try { const row=await classAccessible(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); const [rows]=await db.query(`SELECT id,from_user_id,payload FROM live_class_signals WHERE live_class_id=? AND to_user_id=? AND signal_type='offer' AND consumed_at IS NULL ORDER BY id`,[classId,req.user.userId]); if(rows.length) await db.query(`UPDATE live_class_signals SET consumed_at=NOW() WHERE id IN (${rows.map(()=>'?').join(',')})`,rows.map(x=>x.id)); res.json({success:true,offers:rows}); }
+  try { const row=await classAccessible(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); const [rows]=await db.query(`SELECT id,from_user_id,payload FROM live_class_signals_v2 WHERE live_class_id=? AND to_user_id=? AND signal_type='offer' AND consumed_at IS NULL ORDER BY id`,[classId,req.user.userId]); if(rows.length) await db.query(`UPDATE live_class_signals_v2 SET consumed_at=NOW() WHERE id IN (${rows.map(()=>'?').join(',')})`,rows.map(x=>x.id)); res.json({success:true,offers:rows}); }
   catch(e){console.error(e);res.status(500).json({success:false,message:'Unable to load WebRTC offers'});}
 });
 
 router.post('/:id/native/answer', authenticateUser, authorizeRoles('student'), rateLimit({windowMs:60_000,max:120,keyGenerator:req=>`${req.user.userId}:live-signal`}), async (req,res)=>{
   const classId=id(req.params.id),payload=clean(req.body.payload); if(!classId||payload.length<10||payload.length>200000)return res.status(400).json({success:false,message:'Invalid WebRTC answer'});
-  try { const row=await classAccessible(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); await db.query(`INSERT INTO live_class_signals(live_class_id,from_user_id,to_user_id,signal_type,payload) VALUES(?,?,?,?,?)`,[classId,req.user.userId,row.faculty_user_id,'answer',payload]); res.json({success:true}); }
+  try { const row=await classAccessible(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); await db.query(`INSERT INTO live_class_signals_v2(live_class_id,from_user_id,to_user_id,signal_type,payload) VALUES(?,?,?,?,?)`,[classId,req.user.userId,row.faculty_user_id,'answer',payload]); res.json({success:true}); }
   catch(e){console.error(e);res.status(500).json({success:false,message:'Unable to send WebRTC answer'});}
 });
 
 router.get('/:id/native/answers', authenticateUser, authorizeRoles('faculty','admin'), async (req,res)=>{
   const classId=id(req.params.id); if(!classId)return res.status(400).json({success:false,message:'Invalid Live Class'});
-  try { const row=await classOwnerOrAdmin(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); const [rows]=await db.query(`SELECT id,from_user_id,payload FROM live_class_signals WHERE live_class_id=? AND to_user_id=? AND signal_type='answer' AND consumed_at IS NULL ORDER BY id`,[classId,row.faculty_user_id]); if(rows.length) await db.query(`UPDATE live_class_signals SET consumed_at=NOW() WHERE id IN (${rows.map(()=>'?').join(',')})`,rows.map(x=>x.id)); res.json({success:true,answers:rows}); }
+  try { const row=await classOwnerOrAdmin(classId,req); if(!row)return res.status(404).json({success:false,message:'Live Class not found'}); const [rows]=await db.query(`SELECT id,from_user_id,payload FROM live_class_signals_v2 WHERE live_class_id=? AND to_user_id=? AND signal_type='answer' AND consumed_at IS NULL ORDER BY id`,[classId,row.faculty_user_id]); if(rows.length) await db.query(`UPDATE live_class_signals_v2 SET consumed_at=NOW() WHERE id IN (${rows.map(()=>'?').join(',')})`,rows.map(x=>x.id)); res.json({success:true,answers:rows}); }
   catch(e){console.error(e);res.status(500).json({success:false,message:'Unable to load WebRTC answers'});}
 });
 

@@ -18,46 +18,28 @@ function riskLabel(band){
     return band === "high" ? "High Risk" : band === "medium" ? "Needs Attention" : "On Track";
 }
 
+async function safeOne(sql, params, fallback={}){ try { const [rows]=await db.query(sql,params); return rows[0]||fallback; } catch(error){ console.warn('Academic signal unavailable:', error.code || error.message); return fallback; } }
+async function safeMany(sql, params){ try { const [rows]=await db.query(sql,params); return rows; } catch(error){ console.warn('Academic dataset unavailable:', error.code || error.message); return []; } }
+
 async function studentSignals(userId){
-    const [[attendance]] = await db.query(`
-        SELECT COUNT(ar.id) total,
-               SUM(ar.attendance_status='present') present_count,
-               SUM(ar.attendance_status='late') late_count,
-               ROUND(100*SUM(ar.attendance_status='present')/NULLIF(COUNT(ar.id),0),2) attendance_rate
-        FROM attendance_records ar
-        INNER JOIN attendance_sessions ats ON ats.id=ar.session_id
-        WHERE ar.student_user_id=? AND ats.status<>'cancelled'`,[userId]);
-    const [[quiz]] = await db.query(`SELECT COALESCE(AVG(percentage),0) average,COUNT(*) attempts FROM quiz_attempts WHERE student_user_id=? AND status='submitted'`,[userId]);
-    const [[assign]] = await db.query(`
-        SELECT COUNT(DISTINCT a.id) total,
-               COUNT(DISTINCT CASE WHEN s.status IN ('submitted','graded') THEN a.id END) completed
-        FROM assignments a
-        INNER JOIN subjects asub ON asub.id=a.subject_id
-        INNER JOIN student_profiles sp ON sp.user_id=? AND sp.course_id=asub.course_id
-        LEFT JOIN assignment_submissions s ON s.assignment_id=a.id AND s.student_user_id=?
-        WHERE a.status='published'`,[userId,userId]);
-    const [[events]] = await db.query(`SELECT COUNT(*) count FROM learning_events WHERE user_id=? AND created_at>=DATE_SUB(NOW(),INTERVAL 30 DAY)`,[userId]);
-    const [[skills]] = await db.query(`SELECT COUNT(*) total, SUM(status='completed') completed FROM student_skill_progress WHERE student_user_id=?`,[userId]);
-    const [[live]] = await db.query(`SELECT COUNT(DISTINCT live_class_id) classes_joined, COALESCE(SUM(attendance_minutes),0) minutes, COALESCE(AVG(attendance_minutes),0) avg_minutes FROM live_class_attendance WHERE user_id=?`,[userId]);
-    const attendanceRate=n(attendance.attendance_rate);
-    const quizAverage=n(quiz.average);
-    const assignmentCompletion=pct(assign.completed,assign.total);
-    const engagement=Math.min(100,r2(n(events.count)*2));
-    const skillProgress=pct(skills.completed,skills.total);
-    const liveParticipation=Math.min(100,r2((n(live.minutes)/Math.max(1,n(live.classes_joined)*45))*100));
+    const attendance=await safeOne(`SELECT COUNT(ar.id) total, SUM(ar.attendance_status='present') present_count, SUM(ar.attendance_status='late') late_count, ROUND(100*SUM(ar.attendance_status='present')/NULLIF(COUNT(ar.id),0),2) attendance_rate FROM attendance_records ar INNER JOIN attendance_sessions ats ON ats.id=ar.session_id WHERE ar.student_user_id=? AND ats.status<>'cancelled'`,[userId]);
+    const quiz=await safeOne(`SELECT COALESCE(AVG(percentage),0) average,COUNT(*) attempts FROM quiz_attempts WHERE student_user_id=? AND status='submitted'`,[userId]);
+    const assign=await safeOne(`SELECT COUNT(DISTINCT a.id) total, COUNT(DISTINCT CASE WHEN s.status IN ('submitted','graded') THEN a.id END) completed FROM assignments a INNER JOIN subjects asub ON asub.id=a.subject_id INNER JOIN student_profiles sp ON sp.user_id=? AND sp.course_id=asub.course_id LEFT JOIN assignment_submissions s ON s.assignment_id=a.id AND s.student_user_id=? WHERE a.status='published'`,[userId,userId]);
+    const events=await safeOne(`SELECT COUNT(*) count FROM learning_events WHERE user_id=? AND created_at>=DATE_SUB(NOW(),INTERVAL 30 DAY)`,[userId]);
+    const skills=await safeOne(`SELECT COUNT(*) total, SUM(status='completed') completed FROM student_skill_progress WHERE student_user_id=?`,[userId]);
+    const live=await safeOne(`SELECT COUNT(DISTINCT live_class_id) classes_joined, COALESCE(SUM(attendance_minutes),0) minutes, COALESCE(AVG(attendance_minutes),0) avg_minutes FROM live_class_attendance WHERE user_id=?`,[userId]);
+    const attendanceRate=n(attendance.attendance_rate), quizAverage=n(quiz.average), assignmentCompletion=pct(assign.completed,assign.total), engagement=Math.min(100,r2(n(events.count)*2)), skillProgress=pct(skills.completed,skills.total), liveParticipation=Math.min(100,r2((n(live.minutes)/Math.max(1,n(live.classes_joined)*45))*100));
     const score=r2((attendanceRate*0.25)+(quizAverage*0.25)+(assignmentCompletion*0.20)+(engagement*0.10)+(skillProgress*0.10)+(liveParticipation*0.10));
-    const band=riskBand(score);
-    const alerts=[];
-    if(attendanceRate < 75) alerts.push({type:"attendance",severity:"high",message:`Attendance is ${attendanceRate}%. Review attendance before the next academic checkpoint.`});
-    if(quizAverage < 60 && n(quiz.attempts)>0) alerts.push({type:"performance",severity:"high",message:`Quiz average is ${quizAverage}%. Target weak topics with guided practice.`});
-    if(assignmentCompletion < 70 && n(assign.total)>0) alerts.push({type:"assignment",severity:"medium",message:`Assignment completion is ${assignmentCompletion}%. Complete pending work.`});
-    if(engagement < 25) alerts.push({type:"engagement",severity:"medium",message:"Learning activity is low. Use the Study Hub and recommended resources."});
-    const recommendations=[];
-    if(attendanceRate < 80) recommendations.push("Attend upcoming sessions consistently and review missed topics.");
-    if(quizAverage < 70) recommendations.push("Practice weak quiz topics using the Question Bank and targeted quizzes.");
-    if(assignmentCompletion < 85) recommendations.push("Prioritize pending assignments before starting optional work.");
-    if(engagement < 40) recommendations.push("Follow the personalized Study Hub plan for 20–30 minutes daily.");
-    if(recommendations.length===0) recommendations.push("Maintain your current learning rhythm and build career-ready skills.");
+    const band=riskBand(score), alerts=[], recommendations=[];
+    if(attendanceRate < 75) alerts.push({type:'attendance',severity:'high',message:`Attendance is ${attendanceRate}%. Review attendance before the next academic checkpoint.`});
+    if(quizAverage < 60 && n(quiz.attempts)>0) alerts.push({type:'performance',severity:'high',message:`Quiz average is ${quizAverage}%. Target weak topics with guided practice.`});
+    if(assignmentCompletion < 70 && n(assign.total)>0) alerts.push({type:'assignment',severity:'medium',message:`Assignment completion is ${assignmentCompletion}%. Complete pending work.`});
+    if(engagement < 25) alerts.push({type:'engagement',severity:'medium',message:'Learning activity is low. Use the Study Hub and recommended resources.'});
+    if(attendanceRate < 80) recommendations.push('Attend upcoming sessions consistently and review missed topics.');
+    if(quizAverage < 70) recommendations.push('Practice weak quiz topics using the Question Bank and targeted quizzes.');
+    if(assignmentCompletion < 85) recommendations.push('Prioritize pending assignments before starting optional work.');
+    if(engagement < 40) recommendations.push('Follow the personalized Study Hub plan for 20–30 minutes daily.');
+    if(!recommendations.length) recommendations.push('Maintain your current learning rhythm and build career-ready skills.');
     return {score,band,label:riskLabel(band),attendanceRate,quizAverage,assignmentCompletion,engagement,skillProgress,liveParticipation,liveClasses:n(live.classes_joined),liveMinutes:n(live.minutes),attempts:n(quiz.attempts),events30d:n(events.count),alerts,recommendations};
 }
 
@@ -75,7 +57,7 @@ async function buildRiskRows(limit=100, facultyUserId=null){
         scope=`AND EXISTS (SELECT 1 FROM faculty_subject_assignments fsa INNER JOIN subjects fs ON fs.id=fsa.subject_id WHERE fsa.faculty_user_id=? AND fsa.is_active=1 AND fs.course_id=sp.course_id)`;
         params.push(facultyUserId);
     }
-    const [students]=await db.query(`SELECT u.id,u.full_name,u.username,c.course_name,ed.domain_name,d.department_name FROM users u INNER JOIN student_profiles sp ON sp.user_id=u.id INNER JOIN courses c ON c.id=sp.course_id LEFT JOIN education_domains ed ON ed.id=c.domain_id LEFT JOIN departments d ON d.id=c.department_id WHERE u.role_id=(SELECT id FROM roles WHERE role_name='student' LIMIT 1) AND u.status='active' ${scope} ORDER BY u.full_name LIMIT ${Number(limit)}`,params);
+    const students=await safeMany(`SELECT u.id,u.full_name,u.username,c.course_name,ed.domain_name,d.department_name FROM users u INNER JOIN student_profiles sp ON sp.user_id=u.id INNER JOIN courses c ON c.id=sp.course_id LEFT JOIN education_domains ed ON ed.id=c.domain_id LEFT JOIN departments d ON d.id=c.department_id WHERE u.role_id=(SELECT id FROM roles WHERE role_name='student' LIMIT 1) AND u.status='active' ${scope} ORDER BY u.full_name LIMIT ${Number(limit)}`,params);
     const rows=[];
     for(const s of students){ const signals=await studentSignals(s.id); rows.push({...s, ...signals}); }
     return rows.sort((a,b)=>a.score-b.score);
