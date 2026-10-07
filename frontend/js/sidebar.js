@@ -118,8 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const path = window.location.pathname.toLowerCase();
         let role = path.includes("/student/") ? "student" : path.includes("/faculty/") ? "faculty" : path.includes("/admin/") ? "admin" : null;
         if(!role) return;
-        const href = role + "/academic-intelligence.html";
+        const href = "academic-intelligence.html";
         const label = role === "student" ? "Academic Intelligence" : role === "faculty" ? "Early Risk Monitor" : "Academic Intelligence";
+        if(!rail.querySelector('a[href="live-classes.html"]')) {
+            const liveLink=document.createElement("a");
+            liveLink.href="live-classes.html"; liveLink.className="rail-item"; liveLink.title="Live Classes"; liveLink.setAttribute("aria-label","Live Classes");
+            liveLink.innerHTML='<span class="rail-icon">▶</span><span class="rail-label">Live Classes</span>';
+            rail.insertBefore(liveLink, rail.firstElementChild?.nextSibling || null);
+        }
         const link = document.createElement("a");
         link.href = href; link.className = "rail-item"; link.title = label; link.setAttribute("aria-label",label);
         link.innerHTML = `<span class="rail-icon">◎</span><span class="rail-label">${label}</span>`;

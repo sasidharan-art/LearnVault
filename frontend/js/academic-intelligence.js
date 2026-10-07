@@ -1,55 +1,29 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const path = window.location.pathname.toLowerCase();
-    const role = path.includes("/faculty/") ? "faculty" : path.includes("/admin/") ? "admin" : "student";
-    const api = role === "student" ? "/api/intelligence/student" : role === "faculty" ? "/api/intelligence/faculty/risk" : "/api/intelligence/admin/overview";
-    const root = document.getElementById("intelligenceRoot");
-    const rail = document.getElementById("primaryNavigation");
-    if (rail && !rail.children.length) {
-        const links = role === "student" ? [
-            ["dashboard.html","Dashboard"],["resources.html","Resources"],["quizzes.html","Quizzes"],["assignments.html","Assignments"],["academic-intelligence.html","Academic Intelligence"],["career-center.html","Career Center"],["innovation-center.html","Innovation Lab"],["profile.html","Profile"]
-        ] : role === "faculty" ? [
-            ["dashboard.html","Dashboard"],["resources.html","Resources"],["assignments.html","Assignments"],["academic-intelligence.html","Early Risk Monitor"],["live-classes.html","Live Classes"],["innovation-center.html","Innovation Center"],["profile.html","Profile"]
-        ] : [
-            ["dashboard.html","Dashboard"],["users.html","Users"],["catalog-studio.html","Catalog Studio"],["academic-intelligence.html","Academic Intelligence"],["student-advancement.html","Student Advancement"],["live-analytics.html","Live Intelligence"],["reports.html","Reports"]
-        ];
-        rail.innerHTML = links.map(([href,label]) => `<a href="${href}" class="rail-item ${href==='academic-intelligence.html'?'active':''}"><span class="rail-label">${label}</span></a>`).join("");
-    }
-    const esc = value => String(value ?? "-").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-    try {
-        const response = await fetch(api, {credentials:"same-origin"});
-        const data = await response.json();
-        if(response.status===401){window.location.replace("../login.html");return;}
-        if(!response.ok) throw new Error(data.message||"Unable to load Academic Intelligence");
-        if(role === "student") renderStudent(data);
-        else if(role === "faculty") renderFaculty(data);
-        else renderAdmin(data);
-    } catch(error){ root.innerHTML=`<div class="commercial-dashboard-panel"><h2>Academic Intelligence unavailable</h2><p>${esc(error.message)}</p></div>`; }
+  const path=location.pathname.toLowerCase();
+  const role=path.includes("/faculty/")?"faculty":path.includes("/admin/")?"admin":"student";
+  const root=document.getElementById("intelligenceRoot");
+  const esc=v=>String(v??"-").replace(/[&<>\'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\'":"&#39;",'"':"&quot;"}[c]));
+  const api=role==="student"?"/api/intelligence/student":role==="faculty"?"/api/intelligence/faculty/risk":"/api/intelligence/admin/overview";
+  const card=(label,value)=>`<div class="lv-intelligence-card"><div class="lv-label">${esc(label)}</div><div class="lv-value">${esc(value)}</div></div>`;
+  const bar=(label,value,cls="")=>`<div class="lv-graph-row"><div><span>${esc(label)}</span><strong>${Number(value||0).toFixed(0)}%</strong></div><div class="lv-graph-track"><span class="${cls}" style="width:${Math.max(0,Math.min(100,Number(value||0)))}%"></span></div></div>`;
+  const riskBars=(rows)=>{const high=rows.filter(x=>x.band==="high").length,med=rows.filter(x=>x.band==="medium").length,low=rows.filter(x=>x.band==="low").length,total=Math.max(1,rows.length);return [bar("High Risk",high/total*100,"risk-high"),bar("Needs Attention",med/total*100,"risk-medium"),bar("On Track",low/total*100,"risk-low")].join("")};
+  try{
+    const r=await fetch(api,{credentials:"same-origin"});const data=await r.json();if(r.status===401){location.replace("../login.html");return;}if(!r.ok)throw Error(data.message||"Unable to load Academic Intelligence");
+    if(role==="student")renderStudent(data); else if(role==="faculty")renderFaculty(data); else renderAdmin(data);
+  }catch(e){root.innerHTML=`<section class="commercial-dashboard-panel"><span class="eyebrow">ACADEMIC INTELLIGENCE</span><h1>Unable to load the monitor</h1><p>${esc(e.message)}</p><a class="button button-primary" href="dashboard.html">Back to Dashboard</a></section>`}
 
-    function renderStudent(data){
-        const s=data.signals||{};
-        const score=Number(s.score||0);
-        root.innerHTML=`
-        <div class="commercial-dashboard-panel">
-          <div class="commercial-dashboard-panel-head"><span class="eyebrow">AI STUDENT SUCCESS CENTER</span><h1>Academic Intelligence</h1><p>Explainable signals from your attendance, assessments, assignments, engagement and skill progress.</p></div>
-          <div class="lv-intelligence-grid">
-            <div class="lv-intelligence-card"><div class="lv-label">AI Success Score</div><div class="lv-score-ring" style="--score:${score}"><div class="lv-score-inner"><strong>${score}</strong><span>/ 100</span></div></div><div style="text-align:center;font-weight:800">${esc(s.label)}</div></div>
-            <div class="lv-intelligence-card"><div class="lv-label">Attendance</div><div class="lv-value">${Number(s.attendanceRate||0)}%</div><p>Transparent attendance signal used for early intervention.</p></div>
-            <div class="lv-intelligence-card"><div class="lv-label">Quiz Average</div><div class="lv-value">${Number(s.quizAverage||0)}%</div><p>${Number(s.attempts||0)} submitted attempt(s).</p></div>
-            <div class="lv-intelligence-card"><div class="lv-label">Assignments</div><div class="lv-value">${Number(s.assignmentCompletion||0)}%</div><p>Completion across published course assignments.</p></div>
-          </div>
-        </div>
-        <div class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">EARLY INTERVENTION</span><h2>Signals that need attention</h2></div>${(s.alerts||[]).length ? s.alerts.map(a=>`<div class="lv-alert ${a.severity==='medium'?'medium':''}"><strong>${esc(a.type)}</strong><div>${esc(a.message)}</div></div>`).join("") : '<div class="lv-demo-note"><strong>You are on track.</strong><div>No high-priority learning risk signal is currently detected.</div></div>'}</div>
-        <div class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">PERSONALIZED ACTIONS</span><h2>Recommended next steps</h2></div><ol>${(s.recommendations||[]).map(r=>`<li style="margin:10px 0">${esc(r)}</li>`).join("")}</ol><div class="lv-demo-note"><strong>Database innovation:</strong> ${esc(data.innovation?.name)}. Formula: ${esc(data.innovation?.formula)}</div></div>`;
-    }
-    function renderFaculty(data){
-        const rows=data.students||[];
-        root.innerHTML=`<div class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">FACULTY PRODUCTIVITY + EARLY RISK MONITOR</span><h1>Students Requiring Attention</h1><p>Prioritize mentoring using transparent academic signals rather than waiting for final results.</p></div><div class="lv-risk-list">${rows.length?rows.map(s=>`<div class="lv-risk-row"><div><strong>${esc(s.full_name)}</strong><div>${esc(s.course_name||"")} · Attendance ${Number(s.attendanceRate||0)}% · Quiz ${Number(s.quizAverage||0)}%</div></div><div><strong>${Number(s.score||0)}</strong><div>Success Score</div></div><div class="lv-risk-badge lv-risk-${s.band}">${esc(s.label)}</div></div>`).join(""):'<div class="lv-demo-note">No assigned learners with activity data were found.</div>'}</div></div>`;
-    }
-    function renderAdmin(data){
-        const o=data.overview||{}; const rows=data.atRisk||[];
-        root.innerHTML=`<div class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">SMART EDUCATION ANALYTICS</span><h1>Institutional Academic Intelligence</h1><p>One view of student risk, learning quality and intervention readiness.</p></div><div class="lv-intelligence-grid">
-          ${card("Active Students",o.studentCount)}${card("Average Success",o.averageSuccessScore+"%")} ${card("Average Attendance",o.averageAttendance+"%")} ${card("Assignment Completion",o.averageAssignmentCompletion+"%")} ${card("High Risk",o.highRisk)} ${card("Needs Attention",o.needsAttention)} ${card("On Track",o.onTrack)} ${card("Graduation Readiness",o.graduationReadiness+"%")}
-        </div></div><div class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">EARLY WARNING</span><h2>Priority Learners</h2></div><div class="lv-risk-list">${rows.length?rows.map(s=>`<div class="lv-risk-row"><div><strong>${esc(s.full_name)}</strong><div>${esc(s.course_name||"")} · ${esc(s.department_name||"")}</div></div><div><strong>${Number(s.score||0)}</strong><div>Success Score</div></div><div class="lv-risk-badge lv-risk-${s.band}">${esc(s.label)}</div></div>`).join(""):'<div class="lv-demo-note">No priority learners detected.</div>'}</div></div><div class="commercial-dashboard-panel"><div class="lv-demo-note"><strong>Novel DBMS innovation:</strong> Explainable Early Intervention Engine. Risk is calculated from relational signals stored in MySQL and surfaced through indexed, role-protected queries. The system supports intervention—not automatic academic punishment.</div></div>`;
-    }
-    function card(label,value){return `<div class="lv-intelligence-card"><div class="lv-label">${esc(label)}</div><div class="lv-value">${esc(value)}</div></div>`;}
+  function renderStudent(data){
+    const s=data.signals||{}; const score=Number(s.score||0);
+    root.innerHTML=`<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">EXPLAINABLE EARLY INTERVENTION ENGINE</span><h1>Your Academic Risk Monitor</h1><p>The score is explainable: every signal comes from relational academic activity in MySQL.</p></div><div class="lv-intelligence-grid">${card("Success Score",score+"%")}${card("Risk Status",s.label)}${card("Live Participation",Number(s.liveParticipation||0).toFixed(0)+"%")}${card("Live Classes",s.liveClasses||0)}${card("Attendance",Number(s.attendanceRate||0)+"%")}${card("Quiz Average",Number(s.quizAverage||0)+"%")}${card("Assignments",Number(s.assignmentCompletion||0)+"%")}${card("Engagement",Number(s.engagement||0)+"%")}</div></section>
+    <section class="lv-intelligence-two"><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">SIGNAL BREAKDOWN</span><h2>What drives your score</h2></div>${bar("Attendance",s.attendanceRate)}${bar("Quiz performance",s.quizAverage)}${bar("Assignment completion",s.assignmentCompletion)}${bar("Engagement",s.engagement)}${bar("Skills progress",s.skillProgress)}${bar("Live participation",s.liveParticipation)}</section><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">EARLY WARNING</span><h2>Signals requiring action</h2></div>${(s.alerts||[]).map(a=>`<div class="lv-alert ${a.severity==='medium'?'medium':''}"><strong>${esc(a.type)}</strong><div>${esc(a.message)}</div></div>`).join("")||'<div class="lv-demo-note"><strong>On track.</strong><div>No priority intervention signal is currently detected.</div></div>'}</section></section>
+    <section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">PERSONALIZED ACTIONS</span><h2>Next best actions</h2></div><ol>${(s.recommendations||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ol><div class="lv-demo-note"><strong>${esc(data.innovation?.name)}</strong><br>${esc(data.innovation?.formula)}</div></section>`;
+  }
+  function renderFaculty(data){
+    const rows=data.students||[]; const avg=rows.length?rows.reduce((a,x)=>a+Number(x.score||0),0)/rows.length:0;
+    root.innerHTML=`<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">FACULTY EARLY RISK MONITOR</span><h1>Intervene before students fall behind</h1><p>Students are ranked using transparent attendance, assessment, assignment, engagement, skills and live-class participation signals.</p></div><div class="lv-intelligence-grid">${card("Assigned learners",rows.length)}${card("Average success",avg.toFixed(0)+"%")}${card("High risk",rows.filter(x=>x.band==='high').length)}${card("Needs attention",rows.filter(x=>x.band==='medium').length)}</div></section><section class="lv-intelligence-two"><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">RISK DISTRIBUTION</span><h2>Class health</h2></div>${riskBars(rows)}</section><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">PRIORITY QUEUE</span><h2>Students requiring attention</h2></div><div class="lv-risk-list">${rows.filter(x=>x.band!=='low').slice(0,20).map(s=>`<div class="lv-risk-row"><div><strong>${esc(s.full_name)}</strong><div>${esc(s.course_name||"")} · Attendance ${Number(s.attendanceRate||0)}% · Live ${Number(s.liveParticipation||0)}%</div></div><div><strong>${Number(s.score||0)}%</strong><div>Success Score</div></div><div class="lv-risk-badge lv-risk-${s.band}">${esc(s.label)}</div></div>`).join("")||'<div class="lv-demo-note">No priority learners detected.</div>'}</div></section></section>`;
+  }
+  function renderAdmin(data){
+    const o=data.overview||{},rows=data.atRisk||[]; const total=Math.max(1,Number(o.studentCount||0));
+    root.innerHTML=`<section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">INSTITUTIONAL ACADEMIC INTELLIGENCE</span><h1>Early Risk Monitor</h1><p>Institution-wide academic health with explainable database-backed signals.</p></div><div class="lv-intelligence-grid">${card("Students",o.studentCount)}${card("Average success",o.averageSuccessScore+"%")}${card("Attendance",o.averageAttendance+"%")}${card("Assignments",o.averageAssignmentCompletion+"%")}${card("High risk",o.highRisk)}${card("Needs attention",o.needsAttention)}${card("On track",o.onTrack)}${card("Readiness",o.graduationReadiness+"%")}</div></section><section class="lv-intelligence-two"><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">RISK GRAPH</span><h2>Institution health</h2></div>${bar("High Risk",Number(o.highRisk||0)/total*100,"risk-high")}${bar("Needs Attention",Number(o.needsAttention||0)/total*100,"risk-medium")}${bar("On Track",Number(o.onTrack||0)/total*100,"risk-low")}</section><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">PRIORITY LEARNERS</span><h2>Top intervention queue</h2></div><div class="lv-risk-list">${rows.map(s=>`<div class="lv-risk-row"><div><strong>${esc(s.full_name)}</strong><div>${esc(s.course_name||"")} · ${esc(s.department_name||"")}</div></div><div><strong>${Number(s.score||0)}%</strong><div>Success</div></div><div class="lv-risk-badge lv-risk-${s.band}">${esc(s.label)}</div></div>`).join("")||'<div class="lv-demo-note">No priority learners detected.</div>'}</div></section></section><section class="commercial-dashboard-panel"><div class="commercial-dashboard-panel-head"><span class="eyebrow">HACKATHON INNOVATION</span><h2>Explainable intervention, not black-box punishment</h2></div><p>Every risk signal is derived from indexed MySQL records and can be explained to faculty and students. Live-class participation is explicitly included in the success model.</p></section>`;
+  }
 });
