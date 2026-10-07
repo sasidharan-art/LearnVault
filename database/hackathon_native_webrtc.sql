@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 ALTER TABLE live_classes
   ADD COLUMN IF NOT EXISTS active_host_user_id INT NULL AFTER faculty_user_id;

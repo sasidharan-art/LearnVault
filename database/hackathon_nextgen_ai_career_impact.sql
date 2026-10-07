@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 -- LearnVault Next-Generation Hackathon Extension
 -- AI Student Success + Career Development + Community Impact + Gamification

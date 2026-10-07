@@ -1,15 +1,15 @@
-USE learnvault_db;
+USE defaultdb;
 
 -- Safe incremental patch for the already-deployed LearnVault database.
 -- Run once on Aiven. It does not drop or replace existing data.
 
 ALTER TABLE live_classes
-  ADD COLUMN IF NOT EXISTS stream_provider VARCHAR(30) NULL AFTER meeting_url,
-  ADD COLUMN IF NOT EXISTS stream_url TEXT NULL AFTER stream_provider,
-  ADD COLUMN IF NOT EXISTS thumbnail_url TEXT NULL AFTER stream_url,
-  ADD COLUMN IF NOT EXISTS chat_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER thumbnail_url,
-  ADD COLUMN IF NOT EXISTS native_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER chat_enabled,
-  ADD COLUMN IF NOT EXISTS active_host_user_id INT NULL AFTER faculty_user_id;
+  ADD COLUMN stream_provider VARCHAR(30) NULL AFTER meeting_url,
+  ADD COLUMN stream_url TEXT NULL AFTER stream_provider,
+  ADD COLUMN thumbnail_url TEXT NULL AFTER stream_url,
+  ADD COLUMN chat_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER thumbnail_url,
+  ADD COLUMN native_enabled TINYINT(1) NOT NULL DEFAULT 1 AFTER chat_enabled,
+  ADD COLUMN active_host_user_id INT NULL AFTER faculty_user_id;
 
 CREATE TABLE IF NOT EXISTS live_class_attendance (
   id INT AUTO_INCREMENT PRIMARY KEY,

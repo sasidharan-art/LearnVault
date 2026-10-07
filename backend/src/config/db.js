@@ -108,7 +108,7 @@ const config = {
 
     database:
         process.env.DB_NAME ||
-        "learnvault_db",
+        "defaultdb",
 
     waitForConnections:
         true,

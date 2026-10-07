@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 CREATE TABLE IF NOT EXISTS quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,

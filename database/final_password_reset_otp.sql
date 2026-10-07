@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 /* ==========================================================
    LEARNVAULT FINAL PASSWORD RESET OTP TABLE

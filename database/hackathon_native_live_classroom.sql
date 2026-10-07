@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 -- Native LearnVault Live Classroom
 -- Video stays inside LearnVault using WebRTC. The API only handles signaling,

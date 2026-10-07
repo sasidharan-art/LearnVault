@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 ALTER TABLE live_classes
   ADD COLUMN IF NOT EXISTS stream_provider VARCHAR(30) NULL AFTER meeting_url,

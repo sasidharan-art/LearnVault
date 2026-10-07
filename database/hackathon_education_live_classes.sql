@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 -- LearnVault Hackathon Extension
 -- Live Classes + Education Real-World Problem Lab
@@ -192,8 +192,8 @@ SELECT NULL,'Future Career Roadmap Generator','Career Planning','Build a roadmap
 WHERE NOT EXISTS (SELECT 1 FROM education_challenges WHERE title='Future Career Roadmap Generator');
 
 -- Enrich Innovation Lab challenges with measurable impact and learning outcomes.
-ALTER TABLE education_challenges ADD COLUMN IF NOT EXISTS impact_analysis TEXT NULL AFTER real_world_context;
-ALTER TABLE education_challenges ADD COLUMN IF NOT EXISTS learning_outcomes TEXT NULL AFTER expected_outcome;
-ALTER TABLE education_challenge_submissions ADD COLUMN IF NOT EXISTS improvement_suggestions TEXT NULL AFTER faculty_feedback;
+ALTER TABLE education_challenges ADD COLUMN impact_analysis TEXT NULL AFTER real_world_context;
+ALTER TABLE education_challenges ADD COLUMN learning_outcomes TEXT NULL AFTER expected_outcome;
+ALTER TABLE education_challenge_submissions ADD COLUMN improvement_suggestions TEXT NULL AFTER faculty_feedback;
 
 UPDATE education_challenges SET impact_analysis=COALESCE(impact_analysis, CONCAT('Measure the educational benefit of the proposed solution for learners, faculty or the institution. Expected outcome: ', COALESCE(expected_outcome,'measurable improvement.'))), learning_outcomes=COALESCE(learning_outcomes, CONCAT('Students should demonstrate practical problem solving, evidence-based design and the skills listed for this challenge.')) WHERE impact_analysis IS NULL OR learning_outcomes IS NULL;

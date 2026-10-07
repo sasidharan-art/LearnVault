@@ -1,5 +1,5 @@
 
-USE learnvault_db;
+USE defaultdb;
 
 CREATE TABLE IF NOT EXISTS live_class_polls (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,

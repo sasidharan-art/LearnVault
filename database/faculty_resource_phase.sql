@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 /* =====================================================
    PHASE: SUBJECT MANAGEMENT + FACULTY ASSIGNMENTS

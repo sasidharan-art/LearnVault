@@ -1,4 +1,4 @@
-USE learnvault_db;
+USE defaultdb;
 
 /* LEARNVAULT — FACULTY-CONTROLLED LEARNING TRANSITION
    Routine Admin approval is removed from learning content.
