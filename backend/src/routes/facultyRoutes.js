@@ -65,4 +65,31 @@ router.get(
     }
 );
 
+router.get(
+    "/subjects",
+    authenticateUser,
+    authorizeRoles("faculty"),
+    async (req, res) => {
+        try {
+            const [subjects] = await db.query(`
+                SELECT s.id, s.subject_code, s.subject_name, c.id AS course_id, c.course_name,
+                       cl.id AS course_level_id, cl.level_name
+                FROM faculty_subject_assignments fsa
+                INNER JOIN subjects s ON s.id = fsa.subject_id
+                INNER JOIN courses c ON c.id = s.course_id
+                LEFT JOIN course_levels cl ON cl.id = s.course_level_id
+                WHERE fsa.faculty_user_id = ?
+                  AND fsa.is_active = 1
+                  AND s.is_active = 1
+                  AND c.is_active = 1
+                ORDER BY c.course_name, cl.level_order, s.subject_name
+            `, [req.user.userId]);
+            return res.json({ success: true, subjects });
+        } catch (error) {
+            console.error("Faculty subjects error:", error);
+            return res.status(500).json({ success: false, message: "Unable to load assigned subjects" });
+        }
+    }
+);
+
 module.exports = router;

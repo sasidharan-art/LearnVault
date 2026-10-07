@@ -17171,3 +17171,56 @@ body.lv-role-page [class*="-stats-grid"] {
     .lv-live-event { grid-template-columns: 30px minmax(0, 1fr); }
     .lv-live-event time { grid-column: 2; }
 }
+
+/* =====================================================
+   HACKATHON EXTENSION: LIVE CLASSES + EDUCATION LAB
+===================================================== */
+.lv-feature-hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:stretch;margin-bottom:24px}
+.lv-feature-hero>div:first-child{padding:30px;border:1px solid var(--border,#e2e8f0);border-radius:20px;background:linear-gradient(135deg,rgba(79,70,229,.10),rgba(6,182,212,.06));box-shadow:0 16px 40px rgba(15,23,42,.06)}
+.lv-feature-hero h1{margin:8px 0 12px;font-size:clamp(28px,4vw,46px);line-height:1.05}.lv-feature-hero h1 span{color:#4f46e5}.lv-feature-hero p{max-width:820px;color:#64748b;font-size:16px;line-height:1.7}
+.lv-feature-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}.lv-feature-column{display:grid;gap:24px}.lv-feature-list{display:grid;gap:16px}.lv-feature-card{border:1px solid var(--border,#e2e8f0);border-radius:18px;padding:20px;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.05)}.lv-feature-card-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.lv-feature-card h3{margin:6px 0 6px;font-size:20px}.lv-feature-card h4{margin:18px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#475569}.lv-feature-card p{color:#64748b;line-height:1.65;margin:8px 0}.lv-feature-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;color:#64748b;font-size:13px}.lv-feature-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.lv-feature-card textarea{width:100%;margin-top:12px}.challenge-submit-box{margin-top:16px;padding:14px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0}.challenge-review{display:block;margin-top:10px;font-size:13px;color:#475569}.lv-feature-card input[type=number]{max-width:130px}.lv-live-badge{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#eef2ff;color:#4338ca;font-size:12px;font-weight:700;white-space:nowrap}
+@media(max-width:900px){.lv-feature-hero{grid-template-columns:1fr}.lv-feature-hero>div:first-child{padding:24px}.lv-feature-card-head{flex-direction:column}}
+@media(max-width:560px){.lv-feature-card{padding:16px}.lv-feature-actions .button{width:100%}}
+
+/* =====================================================
+   NEXT-GEN INNOVATION CENTER
+===================================================== */
+.innovation-hero{display:grid;grid-template-columns:1.35fr .65fr;gap:18px;margin-bottom:18px}
+.innovation-hero,.innovation-panel{background:linear-gradient(135deg,rgba(38,34,78,.9),rgba(15,19,39,.96));border:1px solid rgba(145,130,255,.18);border-radius:18px;box-shadow:0 18px 45px rgba(0,0,0,.16)}
+.innovation-hero{padding:28px}
+.innovation-hero h1{font-size:clamp(28px,4vw,46px);margin:7px 0 10px;letter-spacing:-1.5px}
+.innovation-hero p{max-width:760px;color:var(--muted,#9ea5bd);line-height:1.7}
+.innovation-kicker{font-size:11px;font-weight:800;letter-spacing:.14em;color:#9f8cff}
+.innovation-score{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:22px;border-radius:16px;background:rgba(255,255,255,.04)}
+.innovation-score strong{font-size:52px;line-height:1}
+.innovation-score span{margin-top:8px;font-weight:800}
+.innovation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.innovation-kpi{padding:18px;border-radius:16px;background:var(--surface,#11172a);border:1px solid var(--border,#252d46)}
+.innovation-kpi small{display:block;color:var(--muted,#9ea5bd);font-size:12px;margin-bottom:8px}
+.innovation-kpi strong{font-size:27px}
+.innovation-panel{padding:22px;margin-bottom:18px}
+.innovation-panel-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:16px}
+.innovation-panel h2{margin:3px 0 5px}
+.innovation-panel p{color:var(--muted,#9ea5bd)}
+.innovation-list{display:grid;gap:10px}
+.innovation-item{padding:15px;border:1px solid var(--border,#252d46);border-radius:14px;background:rgba(255,255,255,.025)}
+.innovation-item strong{display:block;margin-bottom:5px}
+.innovation-item small{color:var(--muted,#9ea5bd);line-height:1.55}
+.innovation-badges{display:flex;flex-wrap:wrap;gap:9px}
+.innovation-badge{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;border:1px solid rgba(159,140,255,.22);background:rgba(159,140,255,.08);font-size:12px;font-weight:750}
+.innovation-progress{height:9px;border-radius:999px;background:#222943;overflow:hidden;margin:12px 0}
+.innovation-progress span{display:block;height:100%;background:linear-gradient(90deg,#6757ff,#4ba7ff);border-radius:999px}
+.innovation-two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.innovation-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.innovation-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.innovation-form .full{grid-column:1/-1}
+.innovation-form input,.innovation-form textarea,.innovation-form select{width:100%;padding:12px 13px;border-radius:11px;border:1px solid var(--border,#2a324d);background:#0d1324;color:inherit}
+.innovation-form textarea{min-height:105px;resize:vertical}
+.innovation-table{width:100%;border-collapse:collapse}
+.innovation-table th,.innovation-table td{padding:11px 10px;border-bottom:1px solid var(--border,#252d46);text-align:left;font-size:13px}
+.innovation-table th{color:#aeb6d0;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.impact-number{font-size:30px;font-weight:850}
+.risk-pill{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.risk-low{background:rgba(50,200,130,.12);color:#67e3aa}.risk-medium{background:rgba(255,190,70,.12);color:#ffd27a}.risk-high{background:rgba(255,90,110,.12);color:#ff8999}
+@media(max-width:1050px){.innovation-grid{grid-template-columns:repeat(2,1fr)}.innovation-hero{grid-template-columns:1fr}.innovation-three{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.innovation-grid,.innovation-two,.innovation-three,.innovation-form{grid-template-columns:1fr}.innovation-hero{padding:20px}.innovation-panel{padding:17px}.innovation-score strong{font-size:42px}}

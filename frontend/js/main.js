@@ -587,7 +587,7 @@ document.addEventListener(
                                 if (role === "faculty") {
 
                                     window.location.href =
-                                        "index.html";
+                                        "faculty/dashboard.html";
 
                                     return;
                                 }
@@ -595,7 +595,7 @@ document.addEventListener(
                                 if (role === "admin") {
 
                                     window.location.href =
-                                        "index.html";
+                                        "admin/dashboard.html";
 
                                     return;
                                 }

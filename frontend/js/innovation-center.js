@@ -1,0 +1,29 @@
+(function(){
+  const role=document.body.dataset.role || (location.pathname.includes('/admin/')?'admin':location.pathname.includes('/faculty/')?'faculty':'student');
+  const $=s=>document.querySelector(s);
+  const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  async function get(url,opt={}){const r=await fetch(url,{credentials:'include',...opt});const j=await r.json().catch(()=>({success:false,message:'Invalid response'}));if(!r.ok||j.success===false)throw new Error(j.message||'Request failed');return j;}
+  function set(id,v){const e=$(id);if(e)e.textContent=v;}
+  function riskClass(v){return String(v||'').toLowerCase()==='high'?'risk-high':String(v||'').toLowerCase()==='medium'?'risk-medium':'risk-low';}
+
+  async function student(){
+    const d=await get('/api/innovation/student');
+    set('#innovationWelcome',d.profile?.course_name||'Your learning journey');
+    set('#successScore',Math.round(d.success.score));set('#successBand',d.success.band);set('#riskLevel',d.success.risk);
+    set('#signalQuiz',d.success.signals.averageQuiz+'%');set('#signalAccuracy',d.success.signals.accuracy+'%');set('#signalAssignments',d.success.signals.assignmentCompletion+'%');set('#signalActivity',d.success.signals.activityScore+'%');
+    set('#careerRole',d.career.target_role||'Set a target role');set('#careerReadiness',Math.round(d.career.readiness_score||0)+'%');
+    set('#xpValue',d.gamification.xp);set('#levelValue',d.gamification.level.name);set('#nextLevel',d.gamification.nextLevel||'Max level');
+    const bar=$('#successBar');if(bar)bar.style.width=Math.min(100,Math.max(0,d.success.score))+'%';
+    const rec=$('#recommendations');if(rec)rec.innerHTML=d.success.recommendations.map(x=>`<div class="innovation-item"><strong>${esc(x.title)}</strong><small>${esc(x.reason)}</small></div>`).join('');
+    const badges=$('#badges');if(badges)badges.innerHTML=(d.gamification.badges.length?d.gamification.badges:[]).map(b=>`<span class="innovation-badge">${esc(b.icon||'★')} ${esc(b.badge_name)}</span>`).join('')||'<small>No badges yet. Complete meaningful learning actions to earn your first badge.</small>';
+    const projects=$('#communityProjects');if(projects)projects.innerHTML=d.community.projects.map(p=>`<div class="innovation-item"><strong>${esc(p.title)}</strong><small>${esc(p.category)} · ${esc(p.description)}</small><div style="margin-top:10px"><button class="button button-soft small" data-join="${p.id}" ${p.joined?'disabled':''}>${p.joined?'Joined':'Join Project'}</button></div></div>`).join('')||'<div class="integration-empty">No community projects yet.</div>';
+    document.querySelectorAll('[data-join]').forEach(b=>b.addEventListener('click',async()=>{b.disabled=true;try{await get('/api/innovation/community/'+b.dataset.join+'/join',{method:'POST'});b.textContent='Joined';}catch(e){b.disabled=false;alert(e.message)}}));
+    set('#impactProjects',d.community.impact.projects);set('#impactHours',d.community.impact.hours);set('#impactPeople',d.community.impact.peopleReached);
+    const certs=$('#certifications');if(certs)certs.innerHTML=d.certifications.map(c=>`<div class="innovation-item"><strong>${esc(c.name)}</strong><small>${esc(c.issuer||'Self tracked')} · ${esc(c.status)}</small></div>`).join('')||'<div class="integration-empty">Add certifications to strengthen your career profile.</div>';
+  }
+  async function faculty(){const d=await get('/api/innovation/faculty');set('#facultyClasses',d.analytics.liveClasses);set('#facultySubmissions',d.analytics.innovationSubmissions);set('#facultyHeroScore',d.analytics.innovationAverageScore+'%');set('#facultyAvgScore',d.analytics.innovationAverageScore+'%');set('#facultyLearners',d.analytics.activeLearners);}
+  async function admin(){const d=await get('/api/innovation/admin');const a=d.analytics;set('#adminActive',a.activeUsers);set('#adminOnlineKpi',a.onlineStudents);set('#adminOnlineTable',a.onlineStudents);set('#adminCompletionKpi',a.courseCompletionRate+'%');set('#adminCompletionTable',a.courseCompletionRate+'%');set('#adminQuiz',a.quizPerformance+'%');set('#adminEngagement',a.studentEngagementScore+'%');set('#adminImprovementKpi',a.learningImprovementPercentage+'%');set('#adminImprovementTable',a.learningImprovementPercentage+'%');set('#adminReadinessHero',a.graduationReadinessIndicator+'%');set('#adminReadinessTable',a.graduationReadinessIndicator+'%');set('#adminInnovationKpi',a.innovationSubmissions);set('#adminInnovationTable',a.innovationSubmissions);set('#adminCommunityHoursKpi',a.communityHours);set('#adminCommunityHoursTable',a.communityHours);set('#adminXp',a.totalXp);}
+  async function careerSave(e){e.preventDefault();const f=e.currentTarget;const body={targetRole:f.targetRole.value,targetDomain:f.targetDomain.value,bio:f.bio.value,resumeUrl:f.resumeUrl.value,portfolioUrl:f.portfolioUrl.value};try{await get('/api/innovation/career/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});alert('Career profile saved');}catch(x){alert(x.message)}}
+  async function certSave(e){e.preventDefault();const f=e.currentTarget;try{await get('/api/innovation/career/certifications',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:f.name.value,issuer:f.issuer.value,status:f.status.value,issuedOn:f.issuedOn.value||null,expiresOn:f.expiresOn.value||null,credentialUrl:f.credentialUrl.value})});alert('Certification added');f.reset();await student();}catch(x){alert(x.message)}}
+  document.addEventListener('DOMContentLoaded',()=>{document.querySelector('#careerForm')?.addEventListener('submit',careerSave);document.querySelector('#certForm')?.addEventListener('submit',certSave);(role==='student'?student:role==='faculty'?faculty:admin)().catch(e=>console.error(e));});
+})();

@@ -64,6 +64,15 @@ const calendarRoutes =
 const liveAnalyticsRoutes =
     require("./routes/liveAnalyticsRoutes");
 
+const liveClassRoutes =
+    require("./routes/liveClassRoutes");
+
+const educationChallengeRoutes =
+    require("./routes/educationChallengeRoutes");
+
+const innovationRoutes =
+    require("./routes/innovationRoutes");
+
 
 const app =
     express();
@@ -421,6 +430,21 @@ app.use(
 app.use(
     "/api/live",
     liveAnalyticsRoutes
+);
+
+app.use(
+    "/api/live-classes",
+    liveClassRoutes
+);
+
+app.use(
+    "/api/education-challenges",
+    educationChallengeRoutes
+);
+
+app.use(
+    "/api/innovation",
+    innovationRoutes
 );
 
 

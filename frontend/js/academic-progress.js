@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const history = document.getElementById("academicHistoryList");
     const requests = document.getElementById("academicRequestList");
     const search = document.getElementById("universalHeaderSearch");
+    const quickNext = document.getElementById("academicQuickNext");
+    let nextLevelId = null;
 
     let courses = [];
 
@@ -192,15 +194,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         renderProgress(data);
 
+        window.__academicCurrentCourseId = Number(data.profile.course_id);
         course.value = String(data.profile.course_id);
         fillLevels();
 
         if (data.nextLevel) {
+            nextLevelId = Number(data.nextLevel.id);
             level.value = String(data.nextLevel.id);
+            if (quickNext) {
+                quickNext.hidden = false;
+                quickNext.textContent = `Use ${data.nextLevel.level_name}`;
+            }
+        } else if (quickNext) {
+            quickNext.hidden = true;
         }
     }
 
     course.addEventListener("change", fillLevels);
+
+    if (quickNext) {
+        quickNext.addEventListener("click", () => {
+            if (!nextLevelId) return;
+            course.value = String((window.__academicCurrentCourseId || course.value));
+            fillLevels();
+            level.value = String(nextLevelId);
+            document.getElementById("academicRequestReason").value = "Requesting promotion to the next configured academic level.";
+            level.focus();
+        });
+    }
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
