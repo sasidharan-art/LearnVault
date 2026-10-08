@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Focus Center | LearnVault</title>
 <link rel="stylesheet" href="../css/global.css">
+
+<style>
+#focusModeGate{position:fixed;inset:0;z-index:99999;background:rgba(8,12,28,.97);display:flex;align-items:center;justify-content:center;padding:24px;}
+#focusModeGate.hidden{display:none;}
+.focus-gate-card{width:min(560px,100%);background:#11182f;border:1px solid rgba(130,145,255,.3);border-radius:22px;padding:36px;box-shadow:0 30px 90px rgba(0,0,0,.45);text-align:center;color:#fff;}
+.focus-gate-icon{font-size:52px;margin-bottom:12px}.focus-gate-card h1{margin:0 0 10px;font-size:32px}.focus-gate-card p{color:#b9c2df;line-height:1.6}.focus-gate-list{text-align:left;background:rgba(255,255,255,.04);border-radius:14px;padding:16px 20px;margin:20px 0}.focus-gate-list div{padding:7px 0}.focus-gate-start{width:100%;padding:14px 20px;border:0;border-radius:12px;background:linear-gradient(135deg,#5b5cff,#7c4dff);color:#fff;font-weight:800;font-size:16px;cursor:pointer}.focus-gate-timer{font-size:14px;color:#aeb8da;margin-top:12px}
+body.focus-locked .site{filter:blur(2px);pointer-events:none;user-select:none;}
+#focusViolationToast{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:100000;background:#8b1e3f;color:#fff;padding:13px 20px;border-radius:12px;font-weight:700;display:none;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+</style>
 </head>
 <body class="student-page commercial-role-page" data-role="student">
 <div class="site student-site commercial-role-site">
@@ -76,6 +85,26 @@
 <footer class="footer student-footer-unified commercial-footer"><div class="footer-inner"><a href="../index.html" class="footer-brand"><img src="../assets/logo/learnvault-logo.png" alt="LearnVault"></a><nav><a href="dashboard.html">Dashboard</a><a href="notifications.html">Notifications</a><a href="calendar.html">Calendar</a><a href="profile.html">Profile</a></nav><span>Learn • Practice • Grow</span></div></footer>
 </div>
 <div class="toast" id="toast"></div>
+
+<div id="focusModeGate">
+  <div class="focus-gate-card">
+    <div class="focus-gate-icon">🎯</div>
+    <h1>Start Focus Mode</h1>
+    <p>Welcome to LearnVault. Start a focused learning session before entering your student workspace.</p>
+    <div class="focus-gate-list">
+      <div>✓ 25-minute focused study session</div>
+      <div>✓ Full-screen learning workspace</div>
+      <div>✓ Tab switching is detected and recorded</div>
+      <div>✓ Navigation is restricted during the session</div>
+      <div>✓ Session ends automatically when the timer reaches 00:00</div>
+    </div>
+    <button id="startMandatoryFocus" class="focus-gate-start" type="button">Start Focus Mode</button>
+    <div class="focus-gate-timer">You can return to normal navigation after the session ends.</div>
+  </div>
+</div>
+<div id="focusViolationToast"></div>
+<script src="../js/focus-mode-gate.js"></script>
+
 <script src="../js/sidebar.js"></script>
 <script src="../js/productivity-center.js"></script>
 </body>

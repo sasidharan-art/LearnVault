@@ -97,7 +97,7 @@ router.get("/groups/:id/posts",authenticateUser,authorizeRoles("student","facult
 router.post("/groups/:id/posts",authenticateUser,authorizeRoles("student","faculty","admin"),async(req,res)=>{
     const id=Number(req.params.id),title=clean(req.body.title),body=clean(req.body.body);if(!title||!body)return res.status(400).json({success:false,message:"Discussion title and message are required"});
     try{const g=await getGroup(id);if(!(await canAccess(req,g,req.user.role==='student')))return res.status(403).json({success:false,message:"Peer Group access denied"});if(g.status==='archived'||(req.user.role==='student'&&g.status!=='open'))return res.status(400).json({success:false,message:"This Peer Group is read-only"});
-        const [r]=await db.query(`INSERT INTO peer_posts(group_id,author_user_id,title,body,status) VALUES(?,?,?,?,'visible')`,[id,req.user.userId,title,body]);res.status(201).json({success:true,message:"Discussion posted",postId:r.insertId});
+        const [r]=await db.query(`INSERT INTO peer_posts(group_id,author_user_id,title,body,status) VALUES(?,?,?,?,'visible')`,[id,req.user.userId,title,body]); const [[created]]=await db.query(`SELECT p.id,p.title,p.body,p.status,p.created_at,u.full_name author_name,rr.role_name author_role FROM peer_posts p JOIN users u ON u.id=p.author_user_id JOIN roles rr ON rr.id=u.role_id WHERE p.id=? LIMIT 1`,[r.insertId]); res.status(201).json({success:true,message:"Discussion posted successfully",postId:r.insertId,post:created||{id:r.insertId,title,body,status:'visible',created_at:new Date().toISOString(),author_name:'Student',author_role:'Student',comments:[]}});
     }catch(e){console.error(e);res.status(500).json({success:false,message:"Unable to post discussion"});}
 });
 

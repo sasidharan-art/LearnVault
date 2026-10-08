@@ -579,7 +579,7 @@ document.addEventListener(
                                 if (role === "student") {
 
                                     window.location.href =
-                                        "student/dashboard.html";
+                                        "student/focus-center.html?login=1";
 
                                     return;
                                 }
