@@ -17726,3 +17726,484 @@ body.lv-role-page .button {
         flex-direction: column !important;
     }
 }
+
+/* ================================================================
+   FINAL STRUCTURED ROLE UI — FACULTY + ADMIN
+   Visual-only layout pass. Existing IDs, API hooks and JS behavior
+   are intentionally preserved.
+================================================================ */
+body.faculty-page,
+body.admin-page {
+    --role-accent: #5146e5;
+    --role-accent-2: #753bea;
+    --role-bg: #f5f7fc;
+    --role-card: #ffffff;
+    --role-border: #e4e7f0;
+    --role-text: #172033;
+    --role-muted: #687386;
+    background: var(--role-bg) !important;
+    color: var(--role-text);
+    overflow-x: hidden !important;
+}
+
+body.admin-page {
+    --role-accent: #5b4be7;
+    --role-accent-2: #8a45e8;
+}
+
+body.faculty-page .topbar,
+body.admin-page .topbar {
+    background: rgba(255,255,255,.96) !important;
+    border-bottom: 1px solid var(--role-border) !important;
+    box-shadow: 0 5px 22px rgba(31,42,68,.06) !important;
+}
+
+body.faculty-page .main,
+body.admin-page .main,
+body.faculty-page .commercial-dashboard-main,
+body.admin-page .commercial-dashboard-main {
+    width: 100% !important;
+    max-width: 1540px !important;
+    margin: 0 auto !important;
+    padding: 30px clamp(18px, 3vw, 42px) 60px !important;
+}
+
+/* Dashboard: strong hierarchy instead of a flat vertical stack. */
+body.faculty-page .commercial-dashboard-hero,
+body.admin-page .commercial-dashboard-hero {
+    grid-template-columns: minmax(0, 1.55fr) minmax(360px, .75fr) !important;
+    gap: 22px !important;
+    margin-bottom: 24px !important;
+}
+
+body.faculty-page .commercial-dashboard-hero-copy,
+body.admin-page .commercial-dashboard-hero-copy,
+body.faculty-page .commercial-dashboard-highlight,
+body.admin-page .commercial-dashboard-highlight {
+    border: 1px solid var(--role-border) !important;
+    border-radius: 22px !important;
+    box-shadow: 0 12px 32px rgba(31,42,68,.07) !important;
+}
+
+body.faculty-page .commercial-dashboard-hero-copy,
+body.admin-page .commercial-dashboard-hero-copy {
+    padding: clamp(24px, 3vw, 38px) !important;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f7ff 100%) !important;
+}
+
+body.faculty-page .commercial-dashboard-hero-copy h1,
+body.admin-page .commercial-dashboard-hero-copy h1 {
+    max-width: 850px !important;
+    margin: 8px 0 12px !important;
+    font-size: clamp(32px, 3.3vw, 52px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -1.4px !important;
+}
+
+body.faculty-page .commercial-dashboard-hero-copy > p,
+body.admin-page .commercial-dashboard-hero-copy > p {
+    max-width: 760px !important;
+    color: var(--role-muted) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+}
+
+body.faculty-page .commercial-dashboard-highlight,
+body.admin-page .commercial-dashboard-highlight {
+    padding: 22px !important;
+    background: var(--role-card) !important;
+}
+
+body.faculty-page .commercial-dashboard-highlight .commercial-mini-metrics,
+body.admin-page .commercial-dashboard-highlight .commercial-mini-metrics {
+    margin-top: 18px !important;
+}
+
+body.faculty-page .commercial-dashboard-highlight .commercial-mini-metrics > div,
+body.admin-page .commercial-dashboard-highlight .commercial-mini-metrics > div {
+    min-height: 78px !important;
+    padding: 13px !important;
+    border: 1px solid #e8eaf2 !important;
+    border-radius: 14px !important;
+    background: #f8f9fd !important;
+}
+
+body.faculty-page .commercial-dashboard-highlight .commercial-mini-metrics span,
+body.admin-page .commercial-dashboard-highlight .commercial-mini-metrics span {
+    font-size: 10px !important;
+    letter-spacing: .5px !important;
+}
+
+body.faculty-page .commercial-dashboard-highlight .commercial-mini-metrics strong,
+body.admin-page .commercial-dashboard-highlight .commercial-mini-metrics strong {
+    font-size: 22px !important;
+    margin-top: 5px !important;
+}
+
+body.faculty-page .commercial-dashboard-grid,
+body.admin-page .commercial-dashboard-grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, .75fr) !important;
+    gap: 22px !important;
+}
+
+body.faculty-page .commercial-dashboard-main-column,
+body.admin-page .commercial-dashboard-main-column,
+body.faculty-page .commercial-dashboard-side-column,
+body.admin-page .commercial-dashboard-side-column {
+    gap: 22px !important;
+}
+
+body.faculty-page .commercial-dashboard-panel,
+body.admin-page .commercial-dashboard-panel {
+    padding: 22px !important;
+    border: 1px solid var(--role-border) !important;
+    border-radius: 18px !important;
+    background: rgba(255,255,255,.98) !important;
+    box-shadow: 0 8px 24px rgba(31,42,68,.055) !important;
+}
+
+body.faculty-page .commercial-dashboard-panel-head,
+body.admin-page .commercial-dashboard-panel-head {
+    margin-bottom: 18px !important;
+}
+
+body.faculty-page .commercial-dashboard-panel-head h2,
+body.admin-page .commercial-dashboard-panel-head h2 {
+    margin: 5px 0 5px !important;
+    font-size: 21px !important;
+    line-height: 1.25 !important;
+}
+
+body.faculty-page .commercial-dashboard-panel-head p,
+body.admin-page .commercial-dashboard-panel-head p {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
+    color: var(--role-muted) !important;
+}
+
+body.faculty-page .commercial-dashboard-actions,
+body.admin-page .commercial-dashboard-actions {
+    gap: 10px !important;
+    margin-top: 22px !important;
+}
+
+body.faculty-page .commercial-dashboard-actions .button,
+body.admin-page .commercial-dashboard-actions .button {
+    min-height: 44px !important;
+    padding: 0 16px !important;
+    border-radius: 11px !important;
+}
+
+/* Control cards become a proper dashboard grid. */
+body.faculty-page .commercial-control-grid,
+body.admin-page .commercial-control-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+body.faculty-page .commercial-control-grid a,
+body.admin-page .commercial-control-grid a {
+    min-height: 78px !important;
+    padding: 14px !important;
+    border: 1px solid #e4e7f0 !important;
+    border-radius: 14px !important;
+    background: #fbfcff !important;
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease !important;
+}
+
+body.faculty-page .commercial-control-grid a:hover,
+body.admin-page .commercial-control-grid a:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(81,70,229,.28) !important;
+    box-shadow: 0 10px 22px rgba(81,70,229,.09) !important;
+}
+
+body.faculty-page .commercial-control-grid a > span,
+body.admin-page .commercial-control-grid a > span {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 12px !important;
+    font-size: 15px !important;
+}
+
+body.faculty-page .commercial-control-grid strong,
+body.admin-page .commercial-control-grid strong {
+    font-size: 13px !important;
+}
+
+body.faculty-page .commercial-control-grid small,
+body.admin-page .commercial-control-grid small {
+    margin-top: 4px !important;
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+}
+
+body.faculty-page .commercial-control-grid b,
+body.admin-page .commercial-control-grid b {
+    font-size: 15px !important;
+}
+
+body.faculty-page .commercial-inventory-grid,
+body.admin-page .commercial-inventory-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+}
+
+body.faculty-page .commercial-inventory-grid article,
+body.admin-page .commercial-inventory-grid article {
+    min-height: 88px !important;
+    padding: 15px !important;
+    border: 1px solid #e7e9f1 !important;
+    border-radius: 14px !important;
+    background: #fafbfe !important;
+}
+
+body.faculty-page .commercial-inventory-grid span,
+body.admin-page .commercial-inventory-grid span {
+    font-size: 10px !important;
+}
+
+body.faculty-page .commercial-inventory-grid strong,
+body.admin-page .commercial-inventory-grid strong {
+    font-size: 25px !important;
+    margin-top: 4px !important;
+}
+
+/* All legacy Faculty/Admin module pages: consistent page rhythm. */
+body.faculty-page .main > section,
+body.admin-page .main > section,
+body.faculty-page .main > .section,
+body.admin-page .main > .section {
+    margin-bottom: 22px !important;
+}
+
+body.faculty-page .section-heading,
+body.admin-page .section-heading,
+body.faculty-page .question-panel-head,
+body.admin-page .question-panel-head,
+body.faculty-page .quiz-panel-head,
+body.admin-page .quiz-panel-head,
+body.faculty-page .assignment-panel-head,
+body.admin-page .assignment-panel-head,
+body.faculty-page .learning-panel-head,
+body.admin-page .learning-panel-head,
+body.faculty-page .integration-panel-head,
+body.admin-page .integration-panel-head,
+body.faculty-page .admin-users-card-head,
+body.admin-page .admin-users-card-head {
+    gap: 12px !important;
+}
+
+body.faculty-page .faculty-hero,
+body.admin-page .admin-page-hero,
+body.faculty-page .question-page-hero,
+body.admin-page .admin-users-hero,
+body.faculty-page .quiz-hero,
+body.admin-page .quiz-hero,
+body.faculty-page .assignment-hero,
+body.admin-page .assignment-hero,
+body.faculty-page .learning-hero,
+body.admin-page .integration-hero {
+    border-radius: 20px !important;
+    margin-bottom: 22px !important;
+}
+
+/* Turn common module grids into real columns with contained cards. */
+body.faculty-page .question-faculty-grid,
+body.admin-page .question-faculty-grid,
+body.faculty-page .quiz-builder-layout,
+body.admin-page .quiz-builder-layout,
+body.faculty-page .assignment-layout,
+body.admin-page .assignment-layout,
+body.faculty-page .learning-two-column,
+body.admin-page .learning-two-column,
+body.faculty-page .integration-two-column,
+body.admin-page .integration-two-column,
+body.faculty-page .admin-two-column,
+body.admin-page .admin-two-column,
+body.faculty-page .admin-users-workspace,
+body.admin-page .admin-users-workspace {
+    min-width: 0 !important;
+    gap: 18px !important;
+}
+
+body.faculty-page .question-panel,
+body.admin-page .question-panel,
+body.faculty-page .quiz-panel,
+body.admin-page .quiz-panel,
+body.faculty-page .assignment-panel,
+body.admin-page .assignment-panel,
+body.faculty-page .learning-panel,
+body.admin-page .learning-panel,
+body.faculty-page .integration-panel,
+body.admin-page .integration-panel,
+body.faculty-page .admin-users-card,
+body.admin-page .admin-users-card {
+    border: 1px solid var(--role-border) !important;
+    border-radius: 17px !important;
+    background: #fff !important;
+    box-shadow: 0 7px 22px rgba(31,42,68,.05) !important;
+    min-width: 0 !important;
+}
+
+body.faculty-page .form-grid,
+body.admin-page .form-grid,
+body.faculty-page .question-form-row,
+body.admin-page .question-form-row,
+body.faculty-page .quiz-form-grid,
+body.admin-page .quiz-form-grid,
+body.faculty-page .assignment-form-grid,
+body.admin-page .assignment-form-grid,
+body.faculty-page .academic-form-grid,
+body.admin-page .academic-form-grid {
+    min-width: 0 !important;
+    gap: 14px !important;
+}
+
+body.faculty-page input,
+body.admin-page input,
+body.faculty-page select,
+body.admin-page select,
+body.faculty-page textarea,
+body.admin-page textarea {
+    min-height: 42px;
+    border-radius: 10px !important;
+    border-color: #dfe3ec !important;
+    background: #fff !important;
+}
+
+body.faculty-page .table-wrap,
+body.admin-page .table-wrap,
+body.faculty-page .admin-table-wrap,
+body.admin-page .admin-table-wrap,
+body.faculty-page .integration-table-wrap,
+body.admin-page .integration-table-wrap {
+    border: 1px solid #e4e7f0 !important;
+    border-radius: 14px !important;
+    overflow-x: auto !important;
+    background: #fff !important;
+}
+
+body.faculty-page table,
+body.admin-page table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+}
+
+body.faculty-page th,
+body.admin-page th {
+    background: #f7f8fc !important;
+    color: #536074 !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+body.faculty-page td,
+body.admin-page td {
+    font-size: 12px !important;
+    border-top: 1px solid #edf0f5 !important;
+}
+
+/* Live Classroom studio gets the same dashboard-grade containment. */
+body.faculty-page .live-studio-main,
+body.admin-page .live-studio-main {
+    width: min(1500px, 100%);
+    margin: 0 auto;
+    padding: 28px clamp(16px, 3vw, 40px) 56px !important;
+    box-sizing: border-box;
+}
+
+body.faculty-page .live-studio-grid,
+body.admin-page .live-studio-grid {
+    gap: 20px !important;
+}
+
+body.faculty-page .live-studio-video-card,
+body.admin-page .live-studio-video-card,
+body.faculty-page .live-studio-side-stack > section,
+body.admin-page .live-studio-side-stack > section {
+    border: 1px solid var(--role-border) !important;
+    border-radius: 18px !important;
+    background: #fff !important;
+    box-shadow: 0 9px 26px rgba(31,42,68,.06) !important;
+    overflow: hidden;
+}
+
+body.faculty-page .live-studio-control-grid,
+body.admin-page .live-studio-control-grid {
+    gap: 18px !important;
+}
+
+/* Responsive structure */
+@media (max-width: 1180px) {
+    body.faculty-page .commercial-dashboard-hero,
+    body.admin-page .commercial-dashboard-hero,
+    body.faculty-page .commercial-dashboard-grid,
+    body.admin-page .commercial-dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.faculty-page .commercial-dashboard-side-column,
+    body.admin-page .commercial-dashboard-side-column {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 760px) {
+    body.faculty-page .main,
+    body.admin-page .main,
+    body.faculty-page .commercial-dashboard-main,
+    body.admin-page .commercial-dashboard-main {
+        padding: 18px 12px 42px !important;
+    }
+
+    body.faculty-page .commercial-dashboard-hero-copy,
+    body.admin-page .commercial-dashboard-hero-copy,
+    body.faculty-page .commercial-dashboard-highlight,
+    body.admin-page .commercial-dashboard-highlight,
+    body.faculty-page .commercial-dashboard-panel,
+    body.admin-page .commercial-dashboard-panel {
+        padding: 17px !important;
+        border-radius: 16px !important;
+    }
+
+    body.faculty-page .commercial-dashboard-hero-copy h1,
+    body.admin-page .commercial-dashboard-hero-copy h1 {
+        font-size: 31px !important;
+    }
+
+    body.faculty-page .commercial-control-grid,
+    body.admin-page .commercial-control-grid,
+    body.faculty-page .commercial-inventory-grid,
+    body.admin-page .commercial-inventory-grid,
+    body.faculty-page .commercial-dashboard-side-column,
+    body.admin-page .commercial-dashboard-side-column {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.faculty-page .commercial-dashboard-actions,
+    body.admin-page .commercial-dashboard-actions {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    body.faculty-page .commercial-dashboard-actions .button,
+    body.admin-page .commercial-dashboard-actions .button {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 430px) {
+    body.faculty-page .commercial-dashboard-hero-copy h1,
+    body.admin-page .commercial-dashboard-hero-copy h1 {
+        font-size: 27px !important;
+    }
+
+    body.faculty-page .commercial-dashboard-panel-head h2,
+    body.admin-page .commercial-dashboard-panel-head h2 {
+        font-size: 18px !important;
+    }
+}
