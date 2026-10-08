@@ -64,22 +64,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (active && document.hidden) showViolation("You switched away from LearnVault");
     });
 
-    window.addEventListener("blur", () => {
-        if (active) showViolation("LearnVault lost focus");
-    });
-
     document.addEventListener("fullscreenchange", () => {
         if (active && !document.fullscreenElement) showViolation("Fullscreen was exited");
     });
-
-    document.addEventListener("click", (event) => {
-        if (!active) return;
-        const link = event.target.closest("a");
-        if (link && link.href && !link.href.startsWith("javascript:")) {
-            event.preventDefault();
-            showViolation("Navigation is restricted during Focus Mode");
-        }
-    }, true);
 
     window.addEventListener("beforeunload", (event) => {
         if (!active) return;
