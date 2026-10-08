@@ -2593,3 +2593,48 @@ body.lv-public-home a {
     }
 }
 
+
+/* FINAL RESPONSIVE AUTH ACTIONS — keep BOTH Login and Create Account visible */
+@media (max-width: 430px) {
+    .lv-home-header-inner {
+        grid-template-columns: 42px minmax(0, 1fr) auto !important;
+        gap: 6px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    .lv-home-brand { grid-column: 2 !important; }
+    .lv-home-brand img {
+        width: 72px !important;
+        height: 46px !important;
+    }
+    .lv-home-actions {
+        grid-column: 3 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+    }
+    .lv-home-actions .lv-home-link-button,
+    .lv-home-actions .lv-home-primary-button {
+        display: inline-flex !important;
+        min-height: 34px !important;
+        padding: 0 8px !important;
+        font-size: 8px !important;
+        white-space: nowrap !important;
+    }
+    .lv-home-menu-toggle {
+        grid-column: 1 !important;
+        display: inline-flex !important;
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+@media (max-width: 350px) {
+    .lv-home-header-inner { gap: 3px !important; }
+    .lv-home-brand img { width: 62px !important; }
+    .lv-home-actions .lv-home-link-button,
+    .lv-home-actions .lv-home-primary-button {
+        padding: 0 6px !important;
+        font-size: 7px !important;
+    }
+}
