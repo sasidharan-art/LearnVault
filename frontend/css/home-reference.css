@@ -2638,3 +2638,18 @@ body.lv-public-home a {
         font-size: 7px !important;
     }
 }
+
+/* FINAL OVERRIDE: Login + Create Account must never disappear on compact screens. */
+@media (max-width: 760px) {
+  .lv-home-actions .lv-home-link-button,
+  .lv-home-actions .lv-home-primary-button {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .lv-home-actions .lv-home-menu-button {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
