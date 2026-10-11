@@ -11,6 +11,9 @@ const db = require("./config/db");
 const authRoutes =
     require("./routes/authRoutes");
 
+const focusRoutes =
+    require("./routes/focusRoutes");
+
 const resourceRoutes =
     require("./routes/resourceRoutes");
 
@@ -356,6 +359,7 @@ app.use(
 ===================================================== */
 
 app.use("/api/auth", rateLimit({ windowMs: 15 * 60_000, max: Number(process.env.AUTH_RATE_LIMIT || 60), keyGenerator: req => `${req.ip}:auth` }), authRoutes);
+app.use("/api/focus", rateLimit({ windowMs: 60 * 60_000, max: 3, keyGenerator: req => `${req.ip}:focus-alert` }), focusRoutes);
 
 app.use(
     "/api/resources",

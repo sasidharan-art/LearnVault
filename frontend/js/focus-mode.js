@@ -32,6 +32,8 @@
   let timer = null;
   let toastTimer = null;
   let hiddenEpisodeHandled = false;
+  let violationEmailSent = false;
+  const MAX_VIOLATIONS = 3;
 
   function injectStyles() {
     if (document.getElementById('lvFocusStyles')) return;
@@ -48,7 +50,11 @@
       .lv-focus-custom{display:flex;gap:8px;align-items:center;margin:10px 0 18px;flex-wrap:wrap}
       .lv-focus-custom input{width:90px;padding:10px;border-radius:9px;border:1px solid #5965a8;background:#0c1227;color:#fff}
       .lv-focus-start{width:100%;padding:13px;border:0;border-radius:11px;background:#625cff;color:#fff;font-weight:800;cursor:pointer}
-      .lv-focus-bar{position:fixed;top:0;left:0;right:0;z-index:99980;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:8px 14px;background:#11182f;color:#fff;border-bottom:1px solid rgba(130,145,255,.35);font-size:13px;box-sizing:border-box}
+      .lv-focus-bar{position:fixed;top:0;left:0;right:0;z-index:100100;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:8px 14px;background:#11182f;color:#fff;border-bottom:1px solid rgba(130,145,255,.35);font-size:13px;box-sizing:border-box;min-height:42px}
+      body.lv-focus-active{padding-top:42px!important}
+      body.lv-focus-active header.topbar,body.lv-focus-active .topbar,body.lv-focus-active .site-header,body.lv-focus-active .student-header{position:sticky!important;top:42px!important;z-index:100000!important;visibility:visible!important;display:flex!important}
+      body.lv-focus-active .sidebar,body.lv-focus-active nav{scroll-margin-top:54px}
+      body.lv-focus-active{--lv-focus-header-offset:42px}
       .lv-focus-bar strong{color:#aeb8ff}.lv-focus-end{border:0;border-radius:8px;padding:5px 9px;background:#2a345c;color:#fff;cursor:pointer}
       .lv-focus-toast{position:fixed;top:55px;right:18px;z-index:99999;background:#8b1e3f;color:#fff;padding:11px 15px;border-radius:10px;font-weight:700;display:none;box-shadow:0 8px 25px rgba(0,0,0,.35);max-width:min(420px,calc(100vw - 36px))}
       @media(max-width:520px){.lv-focus-bar{gap:7px;padding:7px;font-size:11px}.lv-focus-toast{left:12px;right:12px;top:52px}}
@@ -70,8 +76,8 @@
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
-  function recordViolation(message) {
-    if (!session) return;
+  async function recordViolation(message) {
+    if (!session || session.violationCount >= MAX_VIOLATIONS) return;
     session.violationCount = (session.violationCount || 0) + 1;
     saveSession(session);
     const history = getViolations();
@@ -79,7 +85,22 @@
     safeHistory.push({ at: new Date().toISOString(), message });
     try { localStorage.setItem(VIOLATIONS_KEY, JSON.stringify(safeHistory.slice(-100))); } catch (_) {}
     updateBar();
-    showToast('Focus reminder: ' + message);
+    showToast(`Focus reminder (${session.violationCount}/${MAX_VIOLATIONS}): ` + message);
+    if (session.violationCount >= MAX_VIOLATIONS && !violationEmailSent) {
+      violationEmailSent = true;
+      try {
+        const response = await fetch('/api/focus/violation-alert', {
+          method: 'POST', credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ violationCount: session.violationCount, durationMinutes: session.durationMinutes })
+        });
+        if (!response.ok) throw new Error('Email alert could not be confirmed');
+        showToast('Three Focus Mode violations reached. An email alert was sent. Focus Mode has ended.');
+      } catch (error) {
+        showToast('Three violations reached. Email alert could not be sent; check email settings.');
+      }
+      finish(false);
+    }
   }
 
   function updateBar() {
@@ -99,6 +120,7 @@
     timer = null;
     try { localStorage.removeItem(SESSION_KEY); } catch (_) {}
     document.getElementById('lvFocusBar')?.remove();
+    document.body.classList.remove('lv-focus-active');
     session = null;
     if (completed) showToast('Focus session completed. Great work!');
   }
@@ -106,7 +128,9 @@
   function start(minutes) {
     const now = Date.now();
     session = { startedAt: now, endsAt: now + minutes * 60000, durationMinutes: minutes, violationCount: 0 };
+    violationEmailSent = false;
     saveSession(session);
+    document.body.classList.add('lv-focus-active');
     renderBar();
     if (timer) clearInterval(timer);
     timer = setInterval(() => {
@@ -130,6 +154,7 @@
       bar.className = 'lv-focus-bar';
       bar.innerHTML = '<strong>🔒 Focus Mode</strong><span id="lvFocusClock"></span><span id="lvFocusViolationCount"></span><button type="button" class="lv-focus-end" id="lvFocusEnd">End Focus</button>';
       document.body.appendChild(bar);
+      document.body.classList.add('lv-focus-active');
       bar.querySelector('#lvFocusEnd').addEventListener('click', () => finish(false));
     }
     updateBar();
@@ -169,11 +194,28 @@
     } catch (_) { return false; }
   }
 
-  // Mark intentional same-tab navigation before the browser hides/unloads this page.
+  // Keep the site header visible and allow normal same-site navigation.
+  // External links are blocked during Focus Mode and count as a violation.
   document.addEventListener('click', (event) => {
     const link = event.target.closest && event.target.closest('a[href]');
+    if (!session || !link || link.hasAttribute('download')) return;
+    let target;
+    try { target = new URL(link.getAttribute('href'), window.location.href); } catch (_) { return; }
+    if (target.origin !== window.location.origin) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      recordViolation('Attempted to open an external website during Focus Mode');
+      return;
+    }
     if (isInternalNavigationLink(link)) setInternalNavigationIntent();
   }, true);
+
+  // Browsers do not allow websites to fully prevent tab/app switching. Warn on leaving the page.
+  window.addEventListener('beforeunload', (event) => {
+    if (!session || Date.now() >= session.endsAt || hasRecentInternalNavigation()) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
 
   document.addEventListener('submit', (event) => {
     const form = event.target;
@@ -202,6 +244,7 @@
       return;
     }
     if (session) {
+      document.body.classList.add('lv-focus-active');
       renderBar();
       if (timer) clearInterval(timer);
       timer = setInterval(() => {

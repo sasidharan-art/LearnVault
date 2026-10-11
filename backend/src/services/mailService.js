@@ -180,8 +180,49 @@ async function sendPasswordResetOtp({
 }
 
 
+async function sendFocusViolationAlert({ email, fullName, violationCount, durationMinutes, alertEmail }) {
+    if (!smtpConfigured()) {
+        throw new Error("SMTP is not configured. Add SMTP settings to the backend hosting environment.");
+    }
+    const nodemailer = require("nodemailer");
+    const port = Number(process.env.SMTP_PORT);
+    const transportOptions = {
+        host: process.env.SMTP_HOST,
+        port,
+        secure: String(process.env.SMTP_SECURE || "").toLowerCase() === "true",
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+        connectionTimeout: 10000,
+        greetingTimeout: 10000,
+        socketTimeout: 15000
+    };
+    const safeName = String(fullName || "LearnVault student").replace(/[<>&"']/g, "");
+    const recipients = String(alertEmail || "").trim();
+    const message = {
+        from: process.env.SMTP_FROM,
+        to: email,
+        ...(recipients ? { cc: recipients } : {}),
+        subject: "LearnVault Focus Mode: three violations recorded",
+        text: [
+            `Hello ${safeName},`,
+            "",
+            `LearnVault recorded ${violationCount} Focus Mode violations during a ${durationMinutes}-minute focus session.`,
+            "The session was ended after the third violation. Internal navigation within LearnVault is allowed and should not count as a violation.",
+            "",
+            "If you believe this alert was triggered incorrectly, contact your faculty member or LearnVault support.",
+            "",
+            "LearnVault — Learn • Practice • Grow"
+        ].join("\n"),
+        html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;color:#172033"><h2 style="color:#5145cd">LearnVault Focus Mode</h2><p>Hello ${safeName},</p><p>LearnVault recorded <strong>${violationCount} Focus Mode violations</strong> during a ${durationMinutes}-minute focus session.</p><p>The session was ended after the third violation. Moving between pages within LearnVault is allowed and should not count as a violation.</p><p>If you believe this alert was triggered incorrectly, contact your faculty member or LearnVault support.</p><p style="color:#667085">LearnVault · Learn • Practice • Grow</p></div>`
+    };
+    const transporter = nodemailer.createTransport(transportOptions);
+    await transporter.sendMail(message);
+    return { delivered: true };
+}
+
+
 module.exports = {
     sendPasswordResetOtp,
+    sendFocusViolationAlert,
     smtpConfigured,
     devModeEnabled
 };
