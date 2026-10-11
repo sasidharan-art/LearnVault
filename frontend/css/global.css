@@ -18207,3 +18207,116 @@ body.admin-page .live-studio-control-grid {
         font-size: 18px !important;
     }
 }
+
+/* ================================================================
+   FINAL DASHBOARD GRID CORRECTION
+   The shared 12-column legacy rule collapsed nested dashboard columns
+   into single implicit columns. Keep the main and side columns explicit.
+================================================================ */
+body.student-page .commercial-dashboard-grid,
+body.faculty-page .commercial-dashboard-grid,
+body.admin-page .commercial-dashboard-grid,
+body.commercial-role-page .commercial-dashboard-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.65fr) !important;
+    align-items: start !important;
+    gap: 18px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    min-width: 0 !important;
+    margin: 0 auto 22px !important;
+    box-sizing: border-box !important;
+}
+
+body.student-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+body.faculty-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+body.admin-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+body.commercial-role-page .commercial-dashboard-grid > .commercial-dashboard-main-column {
+    grid-column: 1 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+body.student-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+body.faculty-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+body.admin-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+body.commercial-role-page .commercial-dashboard-grid > .commercial-dashboard-side-column {
+    grid-column: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+body.student-page .commercial-dashboard-main,
+body.faculty-page .commercial-dashboard-main,
+body.admin-page .commercial-dashboard-main,
+body.commercial-role-page .commercial-dashboard-main {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+}
+
+body.student-page .commercial-dashboard-hero,
+body.faculty-page .commercial-dashboard-hero,
+body.admin-page .commercial-dashboard-hero,
+body.commercial-role-page .commercial-dashboard-hero {
+    grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.85fr) !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+body.student-page .commercial-dashboard-main-column > *,
+body.faculty-page .commercial-dashboard-main-column > *,
+body.admin-page .commercial-dashboard-main-column > *,
+body.commercial-role-page .commercial-dashboard-main-column > *,
+body.student-page .commercial-dashboard-side-column > *,
+body.faculty-page .commercial-dashboard-side-column > *,
+body.admin-page .commercial-dashboard-side-column > *,
+body.commercial-role-page .commercial-dashboard-side-column > * {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 1180px) {
+    body.student-page .commercial-dashboard-grid,
+    body.faculty-page .commercial-dashboard-grid,
+    body.admin-page .commercial-dashboard-grid,
+    body.commercial-role-page .commercial-dashboard-grid,
+    body.student-page .commercial-dashboard-hero,
+    body.faculty-page .commercial-dashboard-hero,
+    body.admin-page .commercial-dashboard-hero,
+    body.commercial-role-page .commercial-dashboard-hero {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    body.student-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+    body.faculty-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+    body.admin-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+    body.commercial-role-page .commercial-dashboard-grid > .commercial-dashboard-main-column,
+    body.student-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+    body.faculty-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+    body.admin-page .commercial-dashboard-grid > .commercial-dashboard-side-column,
+    body.commercial-role-page .commercial-dashboard-grid > .commercial-dashboard-side-column {
+        grid-column: 1 !important;
+    }
+}
+
+@media (max-width: 620px) {
+    body.student-page .commercial-dashboard-main,
+    body.faculty-page .commercial-dashboard-main,
+    body.admin-page .commercial-dashboard-main,
+    body.commercial-role-page .commercial-dashboard-main {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+
+    body.student-page .commercial-dashboard-grid,
+    body.faculty-page .commercial-dashboard-grid,
+    body.admin-page .commercial-dashboard-grid,
+    body.commercial-role-page .commercial-dashboard-grid {
+        gap: 12px !important;
+    }
+}
