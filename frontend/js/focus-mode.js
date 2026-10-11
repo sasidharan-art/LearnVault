@@ -50,14 +50,10 @@
       .lv-focus-custom{display:flex;gap:8px;align-items:center;margin:10px 0 18px;flex-wrap:wrap}
       .lv-focus-custom input{width:90px;padding:10px;border-radius:9px;border:1px solid #5965a8;background:#0c1227;color:#fff}
       .lv-focus-start{width:100%;padding:13px;border:0;border-radius:11px;background:#625cff;color:#fff;font-weight:800;cursor:pointer}
-      .lv-focus-bar{position:fixed;top:0;left:0;right:0;z-index:100100;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:8px 14px;background:#11182f;color:#fff;border-bottom:1px solid rgba(130,145,255,.35);font-size:13px;box-sizing:border-box;min-height:42px}
-      body.lv-focus-active{padding-top:42px!important}
-      body.lv-focus-active header.topbar,body.lv-focus-active .topbar,body.lv-focus-active .site-header,body.lv-focus-active .student-header{position:sticky!important;top:42px!important;z-index:100000!important;visibility:visible!important;display:flex!important}
-      body.lv-focus-active .sidebar,body.lv-focus-active nav{scroll-margin-top:54px}
-      body.lv-focus-active{--lv-focus-header-offset:42px}
-      .lv-focus-bar strong{color:#aeb8ff}.lv-focus-end{border:0;border-radius:8px;padding:5px 9px;background:#2a345c;color:#fff;cursor:pointer}
-      .lv-focus-toast{position:fixed;top:55px;right:18px;z-index:99999;background:#8b1e3f;color:#fff;padding:11px 15px;border-radius:10px;font-weight:700;display:none;box-shadow:0 8px 25px rgba(0,0,0,.35);max-width:min(420px,calc(100vw - 36px))}
-      @media(max-width:520px){.lv-focus-bar{gap:7px;padding:7px;font-size:11px}.lv-focus-toast{left:12px;right:12px;top:52px}}
+      /* Focus runs silently in the background; no persistent timer banner. */
+      .lv-focus-toast{position:fixed;top:16px;right:18px;z-index:99999;background:#8b1e3f;color:#fff;padding:11px 15px;border-radius:10px;font-weight:700;display:none;box-shadow:0 8px 25px rgba(0,0,0,.20);max-width:min(420px,calc(100vw - 36px))}
+      .lv-focus-session-end{display:inline-flex;align-items:center;justify-content:center;margin:0 0 16px;padding:9px 13px;border:1px solid #d9d8ff;border-radius:10px;background:#fff;color:#4f46e5;font-weight:700;cursor:pointer}
+      @media(max-width:520px){.lv-focus-toast{left:12px;right:12px;top:12px}}
     `;
     document.head.appendChild(style);
   }
@@ -95,7 +91,7 @@
           body: JSON.stringify({ violationCount: session.violationCount, durationMinutes: session.durationMinutes })
         });
         if (!response.ok) throw new Error('Email alert could not be confirmed');
-        showToast('Three Focus Mode violations reached. An email alert was sent. Focus Mode has ended.');
+        showToast('Three Focus Mode violations reached. Focus Mode has ended.');
       } catch (error) {
         showToast('Three violations reached. Email alert could not be sent; check email settings.');
       }
@@ -104,15 +100,8 @@
   }
 
   function updateBar() {
-    const bar = document.getElementById('lvFocusBar');
-    if (!bar || !session) return;
-    const secondsLeft = Math.max(0, Math.ceil((session.endsAt - Date.now()) / 1000));
-    const minutes = Math.floor(secondsLeft / 60);
-    const seconds = secondsLeft % 60;
-    const clock = bar.querySelector('#lvFocusClock');
-    const count = bar.querySelector('#lvFocusViolationCount');
-    if (clock) clock.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} remaining`;
-    if (count) count.textContent = `Violations: ${session.violationCount || 0}`;
+    // The session countdown is intentionally silent; no timer banner is rendered.
+    if (session && Date.now() >= session.endsAt) finish(true);
   }
 
   function finish(completed) {
@@ -122,6 +111,7 @@
     document.getElementById('lvFocusBar')?.remove();
     document.body.classList.remove('lv-focus-active');
     session = null;
+    syncFocusCenterControl();
     if (completed) showToast('Focus session completed. Great work!');
   }
 
@@ -130,8 +120,8 @@
     session = { startedAt: now, endsAt: now + minutes * 60000, durationMinutes: minutes, violationCount: 0 };
     violationEmailSent = false;
     saveSession(session);
-    document.body.classList.add('lv-focus-active');
     renderBar();
+    syncFocusCenterControl();
     if (timer) clearInterval(timer);
     timer = setInterval(() => {
       if (!session) return;
@@ -147,17 +137,23 @@
   }
 
   function renderBar() {
-    let bar = document.getElementById('lvFocusBar');
-    if (!bar) {
-      bar = document.createElement('div');
-      bar.id = 'lvFocusBar';
-      bar.className = 'lv-focus-bar';
-      bar.innerHTML = '<strong>🔒 Focus Mode</strong><span id="lvFocusClock"></span><span id="lvFocusViolationCount"></span><button type="button" class="lv-focus-end" id="lvFocusEnd">End Focus</button>';
-      document.body.appendChild(bar);
-      document.body.classList.add('lv-focus-active');
-      bar.querySelector('#lvFocusEnd').addEventListener('click', () => finish(false));
+    // Keep Focus Mode active across navigation without displaying a timer bar.
+    document.getElementById('lvFocusBar')?.remove();
+    document.body.classList.remove('lv-focus-active');
+    const control = document.getElementById('lvFocusSessionEndControl');
+    if (control) control.hidden = !session;
+  }
+
+  function syncFocusCenterControl() {
+    const control = document.getElementById('lvFocusSessionEndControl');
+    if (control) {
+      control.hidden = !session;
+      const button = control.querySelector('button');
+      if (button && !button.dataset.bound) {
+        button.dataset.bound = '1';
+        button.addEventListener('click', () => finish(false));
+      }
     }
-    updateBar();
   }
 
   function showSetup() {
@@ -244,8 +240,8 @@
       return;
     }
     if (session) {
-      document.body.classList.add('lv-focus-active');
       renderBar();
+      syncFocusCenterControl();
       if (timer) clearInterval(timer);
       timer = setInterval(() => {
         if (!session) return;
@@ -258,6 +254,6 @@
   }
 
   injectStyles();
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', restore, { once: true });
-  else restore();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => { restore(); syncFocusCenterControl(); }, { once: true });
+  else { restore(); syncFocusCenterControl(); }
 })();

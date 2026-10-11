@@ -18320,3 +18320,291 @@ body.commercial-role-page .commercial-dashboard-side-column > * {
         gap: 12px !important;
     }
 }
+
+
+/* ================================================================
+   FINAL UI POLISH — HIDE FOCUS TIMER BANNER + NORMALIZE ROLE LAYOUT
+   The focus session continues in the background; no fixed bar or
+   artificial top padding is added to any page.
+================================================================ */
+body.student-page.lv-focus-active,
+body.faculty-page.lv-focus-active,
+body.admin-page.lv-focus-active,
+body.commercial-role-page.lv-focus-active {
+    padding-top: 0 !important;
+    --lv-focus-header-offset: 0px !important;
+}
+body.student-page #lvFocusBar,
+body.faculty-page #lvFocusBar,
+body.admin-page #lvFocusBar,
+body.commercial-role-page #lvFocusBar {
+    display: none !important;
+}
+
+@media (min-width: 901px) {
+    body.student-page .commercial-role-topbar,
+    body.faculty-page .commercial-role-topbar,
+    body.admin-page .commercial-role-topbar,
+    body.commercial-role-page .commercial-role-topbar,
+    body.student-page .topbar,
+    body.faculty-page .topbar,
+    body.admin-page .topbar,
+    body.commercial-role-page .topbar {
+        height: 82px !important;
+        min-height: 82px !important;
+        max-height: 82px !important;
+        padding: 8px 22px !important;
+        grid-template-columns: minmax(120px, 150px) minmax(220px, 1fr) max-content !important;
+        column-gap: 18px !important;
+        row-gap: 0 !important;
+        align-items: center !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+    }
+    body.student-page .mobile-nav-toggle,
+    body.faculty-page .mobile-nav-toggle,
+    body.admin-page .mobile-nav-toggle,
+    body.commercial-role-page .mobile-nav-toggle {
+        display: none !important;
+    }
+    body.student-page .commercial-role-topbar .brand-link,
+    body.faculty-page .commercial-role-topbar .brand-link,
+    body.admin-page .commercial-role-topbar .brand-link,
+    body.commercial-role-page .commercial-role-topbar .brand-link,
+    body.student-page .topbar .brand-link,
+    body.faculty-page .topbar .brand-link,
+    body.admin-page .topbar .brand-link,
+    body.commercial-role-page .topbar .brand-link {
+        grid-column: 1 !important;
+        min-width: 0 !important;
+        justify-self: start !important;
+    }
+    body.student-page .commercial-role-topbar .brand-logo,
+    body.faculty-page .commercial-role-topbar .brand-logo,
+    body.admin-page .commercial-role-topbar .brand-logo,
+    body.commercial-role-page .commercial-role-topbar .brand-logo,
+    body.student-page .topbar .brand-logo,
+    body.faculty-page .topbar .brand-logo,
+    body.admin-page .topbar .brand-logo,
+    body.commercial-role-page .topbar .brand-logo {
+        width: 126px !important;
+        height: 56px !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
+    body.student-page .commercial-role-topbar .top-search,
+    body.faculty-page .commercial-role-topbar .top-search,
+    body.admin-page .commercial-role-topbar .top-search,
+    body.commercial-role-page .commercial-role-topbar .top-search,
+    body.student-page .topbar .top-search,
+    body.faculty-page .topbar .top-search,
+    body.admin-page .topbar .top-search,
+    body.commercial-role-page .topbar .top-search {
+        grid-column: 2 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        justify-self: stretch !important;
+        margin: 0 !important;
+    }
+    body.student-page .commercial-role-topbar .top-actions,
+    body.faculty-page .commercial-role-topbar .top-actions,
+    body.admin-page .commercial-role-topbar .top-actions,
+    body.commercial-role-page .commercial-role-topbar .top-actions,
+    body.student-page .topbar .top-actions,
+    body.faculty-page .topbar .top-actions,
+    body.admin-page .topbar .top-actions,
+    body.commercial-role-page .topbar .top-actions {
+        grid-column: 3 !important;
+        width: max-content !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        justify-self: end !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+        margin: 0 !important;
+    }
+}
+
+body.student-page .commercial-dashboard-main,
+body.faculty-page .commercial-dashboard-main,
+body.admin-page .commercial-dashboard-main,
+body.commercial-role-page .commercial-dashboard-main,
+body.student-page .main.dashboard-main,
+body.faculty-page .main.dashboard-main,
+body.admin-page .main.dashboard-main,
+body.commercial-role-page .main.dashboard-main {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 26px clamp(20px, 2.2vw, 36px) 48px !important;
+    box-sizing: border-box !important;
+}
+body.student-page .commercial-dashboard-hero,
+body.faculty-page .commercial-dashboard-hero,
+body.admin-page .commercial-dashboard-hero,
+body.commercial-role-page .commercial-dashboard-hero {
+    width: 100% !important;
+    max-width: 1320px !important;
+    margin: 0 auto 24px !important;
+    gap: 22px !important;
+    align-items: stretch !important;
+}
+body.student-page .commercial-dashboard-hero-copy h1,
+body.faculty-page .commercial-dashboard-hero-copy h1,
+body.admin-page .commercial-dashboard-hero-copy h1,
+body.commercial-role-page .commercial-dashboard-hero-copy h1 {
+    font-size: clamp(2.15rem, 3.1vw, 3.5rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.045em !important;
+    max-width: 15ch !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    margin-top: 14px !important;
+    margin-bottom: 14px !important;
+}
+body.student-page .commercial-dashboard-grid,
+body.faculty-page .commercial-dashboard-grid,
+body.admin-page .commercial-dashboard-grid,
+body.commercial-role-page .commercial-dashboard-grid {
+    width: 100% !important;
+    max-width: 1320px !important;
+    margin: 0 auto 24px !important;
+    gap: 20px !important;
+}
+body.student-page .commercial-dashboard-panel,
+body.faculty-page .commercial-dashboard-panel,
+body.admin-page .commercial-dashboard-panel,
+body.commercial-role-page .commercial-dashboard-panel,
+body.student-page .commercial-dashboard-highlight,
+body.faculty-page .commercial-dashboard-highlight,
+body.admin-page .commercial-dashboard-highlight,
+body.commercial-role-page .commercial-dashboard-highlight {
+    min-width: 0 !important;
+    border-radius: 18px !important;
+    overflow-wrap: anywhere;
+}
+body.student-page .commercial-dashboard-actions,
+body.faculty-page .commercial-dashboard-actions,
+body.admin-page .commercial-dashboard-actions,
+body.commercial-role-page .commercial-dashboard-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+}
+body.student-page .commercial-dashboard-actions .button,
+body.faculty-page .commercial-dashboard-actions .button,
+body.admin-page .commercial-dashboard-actions .button,
+body.commercial-role-page .commercial-dashboard-actions .button {
+    min-width: 150px !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+}
+
+@media (max-width: 900px) {
+    body.student-page .commercial-role-topbar,
+    body.faculty-page .commercial-role-topbar,
+    body.admin-page .commercial-role-topbar,
+    body.commercial-role-page .commercial-role-topbar,
+    body.student-page .topbar,
+    body.faculty-page .topbar,
+    body.admin-page .topbar,
+    body.commercial-role-page .topbar {
+        height: 70px !important;
+        min-height: 70px !important;
+        max-height: 70px !important;
+        padding: 8px 12px !important;
+        grid-template-columns: 42px minmax(0, 1fr) max-content !important;
+        gap: 10px !important;
+    }
+    body.student-page .mobile-nav-toggle,
+    body.faculty-page .mobile-nav-toggle,
+    body.admin-page .mobile-nav-toggle,
+    body.commercial-role-page .mobile-nav-toggle {
+        display: inline-flex !important;
+        grid-column: 1 !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    body.student-page .commercial-role-topbar .brand-link,
+    body.faculty-page .commercial-role-topbar .brand-link,
+    body.admin-page .commercial-role-topbar .brand-link,
+    body.commercial-role-page .commercial-role-topbar .brand-link,
+    body.student-page .topbar .brand-link,
+    body.faculty-page .topbar .brand-link,
+    body.admin-page .topbar .brand-link,
+    body.commercial-role-page .topbar .brand-link {
+        grid-column: 2 !important;
+        justify-self: start !important;
+    }
+    body.student-page .commercial-role-topbar .top-search,
+    body.faculty-page .commercial-role-topbar .top-search,
+    body.admin-page .commercial-role-topbar .top-search,
+    body.commercial-role-page .commercial-role-topbar .top-search,
+    body.student-page .topbar .top-search,
+    body.faculty-page .topbar .top-search,
+    body.admin-page .topbar .top-search,
+    body.commercial-role-page .topbar .top-search { display: none !important; }
+    body.student-page .commercial-role-topbar .top-actions,
+    body.faculty-page .commercial-role-topbar .top-actions,
+    body.admin-page .commercial-role-topbar .top-actions,
+    body.commercial-role-page .commercial-role-topbar .top-actions,
+    body.student-page .topbar .top-actions,
+    body.faculty-page .topbar .top-actions,
+    body.admin-page .topbar .top-actions,
+    body.commercial-role-page .topbar .top-actions {
+        grid-column: 3 !important;
+        gap: 6px !important;
+    }
+    body.student-page .commercial-dashboard-main,
+    body.faculty-page .commercial-dashboard-main,
+    body.admin-page .commercial-dashboard-main,
+    body.commercial-role-page .commercial-dashboard-main,
+    body.student-page .main.dashboard-main,
+    body.faculty-page .main.dashboard-main,
+    body.admin-page .main.dashboard-main,
+    body.commercial-role-page .main.dashboard-main {
+        padding: 20px 16px 36px !important;
+    }
+    body.student-page .commercial-dashboard-hero,
+    body.faculty-page .commercial-dashboard-hero,
+    body.admin-page .commercial-dashboard-hero,
+    body.commercial-role-page .commercial-dashboard-hero,
+    body.student-page .commercial-dashboard-grid,
+    body.faculty-page .commercial-dashboard-grid,
+    body.admin-page .commercial-dashboard-grid,
+    body.commercial-role-page .commercial-dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+@media (max-width: 520px) {
+    body.student-page .commercial-role-topbar .brand-logo,
+    body.faculty-page .commercial-role-topbar .brand-logo,
+    body.admin-page .commercial-role-topbar .brand-logo,
+    body.commercial-role-page .commercial-role-topbar .brand-logo,
+    body.student-page .topbar .brand-logo,
+    body.faculty-page .topbar .brand-logo,
+    body.admin-page .topbar .brand-logo,
+    body.commercial-role-page .topbar .brand-logo {
+        width: 104px !important;
+        height: 48px !important;
+    }
+    body.student-page .commercial-dashboard-actions,
+    body.faculty-page .commercial-dashboard-actions,
+    body.admin-page .commercial-dashboard-actions,
+    body.commercial-role-page .commercial-dashboard-actions {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+    body.student-page .commercial-dashboard-actions .button,
+    body.faculty-page .commercial-dashboard-actions .button,
+    body.admin-page .commercial-dashboard-actions .button,
+    body.commercial-role-page .commercial-dashboard-actions .button {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}
